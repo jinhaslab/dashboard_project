@@ -4,8 +4,7 @@
 @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic');
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,900;1,400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100&display=swap')
-
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100&display=swap');
 
 * {
   -webkit-box-sizing: border-box;
@@ -26,22 +25,26 @@ p, div {
   font-family: 'Roboto', serif;
   font-size: 1rem;
 }
+
 li {
   font-family: 'Roboto', Sans-Serif;
-  font-size :0.9rem ;
+  font-size: 0.9rem;
   color: #4d4d4d;
 }
+
 h1 {
   font-family: 'Lato', sans-serif;
   font-size: 1.7rem;
 }
+
 h2 {
   font-family: 'Lato', sans-serif;
   font-size: 1.5rem;
 }
+
 h3 {
   font-family: 'Lato', sans-serif;
-  font-size: 1.2 rem;
+  font-size: 1.2rem;
 }
 
 code, kbd, pre, samp, .sourceLine, .sourceCode {
@@ -53,13 +56,16 @@ p.caption {
   color: #777;
   margin-top: 10px;
 }
-p code {
+
+p {
   white-space: inherit;
 }
+
 pre {
   word-break: normal;
   word-wrap: normal;
 }
+
 pre code {
   white-space: inherit;
 }
@@ -67,3 +73,5 @@ pre code {
 body {
   text-align: justify;
 }
+
+
