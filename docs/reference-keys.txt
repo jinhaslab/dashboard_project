@@ -5,6 +5,7 @@ thm:tri
 introduction
 prerequisite
 rstudio-in-cloud
+how-to-start-rstudio-cloud
 cross
 chapters-and-sub-chapters
 captioned-figures-and-tables
@@ -20,5 +21,3 @@ sharing-your-book
 publishing
 pages
 metadata-for-sharing
-how-to-start-rstudio-cloud
-steps-to-start-using-rstudio-cloud
