@@ -20,3 +20,5 @@ sharing-your-book
 publishing
 pages
 metadata-for-sharing
+how-to-start-rstudio-cloud
+steps-to-start-using-rstudio-cloud
