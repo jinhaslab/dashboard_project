@@ -4,13 +4,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 4 Flexdashboard Interactivity | Dashbord for Public Health with R</title>
+<title>Chapter 5 Flexdashboard Interactivity | Dashbord for Public Health with R</title>
 <meta name="author" content="jinha yoon">
 <meta name="generator" content="bookdown 0.32 with bs4_book()">
-<meta property="og:title" content="Chapter 4 Flexdashboard Interactivity | Dashbord for Public Health with R">
+<meta property="og:title" content="Chapter 5 Flexdashboard Interactivity | Dashbord for Public Health with R">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 4 Flexdashboard Interactivity | Dashbord for Public Health with R">
+<meta name="twitter:title" content="Chapter 5 Flexdashboard Interactivity | Dashbord for Public Health with R">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -68,12 +68,13 @@
 <li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
 <li class="book-part">I Basic Setting for Dashboard</li>
 <li><a class="" href="rstudio-setting-cloud.html"><span class="header-section-number">2</span> Rstudio setting (Cloud)</a></li>
-<li><a class="" href="flexdashboard.html"><span class="header-section-number">3</span> Flexdashboard</a></li>
-<li><a class="active" href="flexdashboard-interactivity.html"><span class="header-section-number">4</span> Flexdashboard Interactivity</a></li>
-<li><a class="" href="parts.html"><span class="header-section-number">5</span> Parts</a></li>
-<li><a class="" href="footnotes-and-citations.html"><span class="header-section-number">6</span> Footnotes and citations</a></li>
-<li><a class="" href="blocks.html"><span class="header-section-number">7</span> Blocks</a></li>
-<li><a class="" href="sharing-your-book.html"><span class="header-section-number">8</span> Sharing your book</a></li>
+<li><a class="" href="rstudio-chatgpt-addin.html"><span class="header-section-number">3</span> Rstudio ChatGPT addin</a></li>
+<li><a class="" href="flexdashboard.html"><span class="header-section-number">4</span> Flexdashboard</a></li>
+<li><a class="active" href="flexdashboard-interactivity.html"><span class="header-section-number">5</span> Flexdashboard Interactivity</a></li>
+<li><a class="" href="parts.html"><span class="header-section-number">6</span> Parts</a></li>
+<li><a class="" href="footnotes-and-citations.html"><span class="header-section-number">7</span> Footnotes and citations</a></li>
+<li><a class="" href="blocks.html"><span class="header-section-number">8</span> Blocks</a></li>
+<li><a class="" href="sharing-your-book.html"><span class="header-section-number">9</span> Sharing your book</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -82,22 +83,22 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="flexdashboard-interactivity" class="section level1" number="4">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="flexdashboard-interactivity" class="section level1" number="5">
 <h1>
-<span class="header-section-number">4</span> Flexdashboard Interactivity<a class="anchor" aria-label="anchor" href="#flexdashboard-interactivity"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5</span> Flexdashboard Interactivity<a class="anchor" aria-label="anchor" href="#flexdashboard-interactivity"><i class="fas fa-link"></i></a>
 </h1>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.7/holder.min.js"></script><!--
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/vs.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script>
 --><link rel="stylesheet" href="css/styles/vs.min.css">
 <script src="css/highlight.min.js"></script><script>hljs.initHighlightingOnLoad();</script><!-- zero md--><script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2/webcomponents-loader.min.js"></script><!-- Load the element definition --><script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@1/src/zero-md.min.js"></script><p>In this tutorial, you’ll learn how to bring your data to life by creating an interactive dashboard with R, Flexdashboard, and Shiny. We’ll start by setting up a simple Flexdashboard layout, then we’ll add interactive Shiny inputs and outputs. Finally, we’ll integrate your dashboard with real-world data to showcase your insights in a dynamic and visually appealing way. By the end of this tutorial, you’ll have a comprehensive understanding of how to create and publish interactive dashboards using the R. This tutorial is based on the official resources available at <a href="https://pkgs.rstudio.com/flexdashboard/articles/shiny.html" class="uri">https://pkgs.rstudio.com/flexdashboard/articles/shiny.html</a>.</p>
-<div id="integration-i" class="section level2" number="4.1">
+<div id="integration-i" class="section level2" number="5.1">
 <h2>
-<span class="header-section-number">4.1</span> Integration I<a class="anchor" aria-label="anchor" href="#integration-i"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.1</span> Integration I<a class="anchor" aria-label="anchor" href="#integration-i"><i class="fas fa-link"></i></a>
 </h2>
-<div id="sidebar" class="section level3" number="4.1.1">
+<div id="sidebar" class="section level3" number="5.1.1">
 <h3>
-<span class="header-section-number">4.1.1</span> sidebar<a class="anchor" aria-label="anchor" href="#sidebar"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.1.1</span> sidebar<a class="anchor" aria-label="anchor" href="#sidebar"><i class="fas fa-link"></i></a>
 </h3>
 <!-- Simply set the `src` attribute to your MD file and win -->
 <p><zero-md src="mdsource/shinysidebar1.md" style="display: none;"></zero-md></p>
@@ -108,52 +109,52 @@
 <p><img src="img/sidebar.gif" width="100%"><img></p>
 </div>
 </div>
-<div id="navigation-bar" class="section level2" number="4.2">
+<div id="navigation-bar" class="section level2" number="5.2">
 <h2>
-<span class="header-section-number">4.2</span> Navigation bar<a class="anchor" aria-label="anchor" href="#navigation-bar"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.2</span> Navigation bar<a class="anchor" aria-label="anchor" href="#navigation-bar"><i class="fas fa-link"></i></a>
 </h2>
 <zero-md src="mdsource/navigationbar.md" style="display: none;"></zero-md><pre style=" overflow: auto;">
 <div id="navigationbar" style="letter-spacing:1px;"></div>
 <script type="text/javascript">loadmd('navigationbar')</script></pre>
 <img src="img/navigation.gif" width="100%"><img><script src="https://gist.github.com/jinhaslab/3f8a7690e656ab0078c4762c3d694ce1.js"></script><script src="https://gist.github.com/jinhaslab/6e28a8308d0e7ec932a3eb194181011f.js"></script>
 </div>
-<div id="input-controls" class="section level2" number="4.3">
+<div id="input-controls" class="section level2" number="5.3">
 <h2>
-<span class="header-section-number">4.3</span> Input controls<a class="anchor" aria-label="anchor" href="#input-controls"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.3</span> Input controls<a class="anchor" aria-label="anchor" href="#input-controls"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="reactive-outputs" class="section level2" number="4.4">
+<div id="reactive-outputs" class="section level2" number="5.4">
 <h2>
-<span class="header-section-number">4.4</span> Reactive outputs<a class="anchor" aria-label="anchor" href="#reactive-outputs"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.4</span> Reactive outputs<a class="anchor" aria-label="anchor" href="#reactive-outputs"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="storytelling" class="section level2" number="4.5">
+<div id="storytelling" class="section level2" number="5.5">
 <h2>
-<span class="header-section-number">4.5</span> Storytelling<a class="anchor" aria-label="anchor" href="#storytelling"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.5</span> Storytelling<a class="anchor" aria-label="anchor" href="#storytelling"><i class="fas fa-link"></i></a>
 </h2>
-<div id="the-use-of-storyboards" class="section level3" number="4.5.1">
+<div id="the-use-of-storyboards" class="section level3" number="5.5.1">
 <h3>
-<span class="header-section-number">4.5.1</span> The use of storyboards<a class="anchor" aria-label="anchor" href="#the-use-of-storyboards"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.5.1</span> The use of storyboards<a class="anchor" aria-label="anchor" href="#the-use-of-storyboards"><i class="fas fa-link"></i></a>
 </h3>
 
 </div>
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="flexdashboard.html"><span class="header-section-number">3</span> Flexdashboard</a></div>
-<div class="next"><a href="parts.html"><span class="header-section-number">5</span> Parts</a></div>
+<div class="prev"><a href="flexdashboard.html"><span class="header-section-number">4</span> Flexdashboard</a></div>
+<div class="next"><a href="parts.html"><span class="header-section-number">6</span> Parts</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#flexdashboard-interactivity"><span class="header-section-number">4</span> Flexdashboard Interactivity</a></li>
+<li><a class="nav-link" href="#flexdashboard-interactivity"><span class="header-section-number">5</span> Flexdashboard Interactivity</a></li>
 <li>
-<a class="nav-link" href="#integration-i"><span class="header-section-number">4.1</span> Integration I</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#sidebar"><span class="header-section-number">4.1.1</span> sidebar</a></li></ul>
+<a class="nav-link" href="#integration-i"><span class="header-section-number">5.1</span> Integration I</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#sidebar"><span class="header-section-number">5.1.1</span> sidebar</a></li></ul>
 </li>
-<li><a class="nav-link" href="#navigation-bar"><span class="header-section-number">4.2</span> Navigation bar</a></li>
-<li><a class="nav-link" href="#input-controls"><span class="header-section-number">4.3</span> Input controls</a></li>
-<li><a class="nav-link" href="#reactive-outputs"><span class="header-section-number">4.4</span> Reactive outputs</a></li>
+<li><a class="nav-link" href="#navigation-bar"><span class="header-section-number">5.2</span> Navigation bar</a></li>
+<li><a class="nav-link" href="#input-controls"><span class="header-section-number">5.3</span> Input controls</a></li>
+<li><a class="nav-link" href="#reactive-outputs"><span class="header-section-number">5.4</span> Reactive outputs</a></li>
 <li>
-<a class="nav-link" href="#storytelling"><span class="header-section-number">4.5</span> Storytelling</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#the-use-of-storyboards"><span class="header-section-number">4.5.1</span> The use of storyboards</a></li></ul>
+<a class="nav-link" href="#storytelling"><span class="header-section-number">5.5</span> Storytelling</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#the-use-of-storyboards"><span class="header-section-number">5.5.1</span> The use of storyboards</a></li></ul>
 </li>
 </ul>
 
@@ -172,7 +173,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Dashbord for Public Health with R</strong>" was written by jinha yoon. It was last built on 2023-03-09.</p>
+    <p>"<strong>Dashbord for Public Health with R</strong>" was written by jinha yoon. It was last built on 2023-03-10.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

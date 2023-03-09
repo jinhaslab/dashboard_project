@@ -7,6 +7,10 @@ how-to-start-rstudio-cloud
 install-basic-r-packages
 how-to-install-r-packages
 basic-r-packages-for-dashboard
+rstudio-chatgpt-addin
+make-an-openai-api-key
+install-packages-of-michelnivard
+let-start
 flexdashboard
 layout-and-design
 rows-and-columns-layout
