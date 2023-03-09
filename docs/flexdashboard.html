@@ -41,9 +41,9 @@
     }
   </style>
 <link rel="stylesheet" href="style.css">
-<meta name="description" content="Flexdashboard is a package for creating interactive dashboards in R. It is built on top of the Shiny package, which allows you to turn your R code into a web application. Flexdashboard provides a...">
-<meta property="og:description" content="Flexdashboard is a package for creating interactive dashboards in R. It is built on top of the Shiny package, which allows you to turn your R code into a web application. Flexdashboard provides a...">
-<meta name="twitter:description" content="Flexdashboard is a package for creating interactive dashboards in R. It is built on top of the Shiny package, which allows you to turn your R code into a web application. Flexdashboard provides a...">
+<meta name="description" content="hljs.initHighlightingOnLoad();Flexdashboard is a package for creating interactive dashboards in R. It is built on top of the Shiny package, which allows you to turn your R code into a web...">
+<meta property="og:description" content="hljs.initHighlightingOnLoad();Flexdashboard is a package for creating interactive dashboards in R. It is built on top of the Shiny package, which allows you to turn your R code into a web...">
+<meta name="twitter:description" content="hljs.initHighlightingOnLoad();Flexdashboard is a package for creating interactive dashboards in R. It is built on top of the Shiny package, which allows you to turn your R code into a web...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -69,10 +69,11 @@
 <li class="book-part">I Basic Setting for Dashboard</li>
 <li><a class="" href="rstudio-setting-cloud.html"><span class="header-section-number">2</span> Rstudio setting (Cloud)</a></li>
 <li><a class="active" href="flexdashboard.html"><span class="header-section-number">3</span> Flexdashboard</a></li>
-<li><a class="" href="parts.html"><span class="header-section-number">4</span> Parts</a></li>
-<li><a class="" href="footnotes-and-citations.html"><span class="header-section-number">5</span> Footnotes and citations</a></li>
-<li><a class="" href="blocks.html"><span class="header-section-number">6</span> Blocks</a></li>
-<li><a class="" href="sharing-your-book.html"><span class="header-section-number">7</span> Sharing your book</a></li>
+<li><a class="" href="flexdashboard-interactivity.html"><span class="header-section-number">4</span> Flexdashboard Interactivity</a></li>
+<li><a class="" href="parts.html"><span class="header-section-number">5</span> Parts</a></li>
+<li><a class="" href="footnotes-and-citations.html"><span class="header-section-number">6</span> Footnotes and citations</a></li>
+<li><a class="" href="blocks.html"><span class="header-section-number">7</span> Blocks</a></li>
+<li><a class="" href="sharing-your-book.html"><span class="header-section-number">8</span> Sharing your book</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -85,16 +86,10 @@
 <h1>
 <span class="header-section-number">3</span> Flexdashboard<a class="anchor" aria-label="anchor" href="#flexdashboard"><i class="fas fa-link"></i></a>
 </h1>
-<p>Flexdashboard is a package for creating interactive dashboards in R. It is built on top of the Shiny package, which allows you to turn your R code into a web application. Flexdashboard provides a simple syntax for defining the structure of your dashboard and allows you to add various types of content such as text, plots, tables, and more.</p>
+<!-- Load holder style box -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.7/holder.min.js"></script><!-- Load vs style highlight--><link rel="stylesheet" href="css/styles/vs.min.css">
+<script src="css/highlight.min.js"></script><script>hljs.initHighlightingOnLoad();</script><!-- Load zero-md --><script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2/webcomponents-loader.min.js"></script><script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@1/src/zero-md.min.js"></script><!-- load markdown function --><script src="mdsource/loadmd.js"></script><p>Flexdashboard is a package for creating interactive dashboards in R. It is built on top of the Shiny package, which allows you to turn your R code into a web application. Flexdashboard provides a simple syntax for defining the structure of your dashboard and allows you to add various types of content such as text, plots, tables, and more.</p>
 <p>Here are some key features of Flexdashboard:</p>
-<p>Simple syntax: Flexdashboard provides a simple syntax for defining the structure of your dashboard, making it easy to get started.</p>
-<p>Interactive elements: Flexdashboard supports various types of interactive elements such as select inputs, sliders, and more.</p>
-<p>Responsive layout: Flexdashboard provides a responsive layout that automatically adjusts to the size of the screen, making it easy to view your dashboard on different devices.</p>
-<p>Customizable: Flexdashboard allows you to customize the appearance of your dashboard with CSS and HTML, giving you complete control over the look and feel of your dashboard.</p>
-<p>Integration with R: Flexdashboard is fully integrated with R, making it easy to create dynamic dashboards that can be updated automatically based on changes in your data.</p>
-<p>Publish online: You can publish your Flexdashboard online using platforms like ShinyApps, RStudio Connect, and more, allowing you to share your dashboard with others.</p>
-<p>In summary, Flexdashboard is a powerful tool for creating interactive dashboards in R. Whether you’re a data scientist, business analyst, or anyone else looking to present data in a clear and engaging way, Flexdashboard is a great choice.</p>
-<p>flexdashboard and its features are following.</p>
 <ol style="list-style-type: decimal">
 <li>Layout and Design</li>
 </ol>
@@ -137,110 +132,39 @@
 <span class="header-section-number">3.1.1</span> Rows and columns layout<a class="anchor" aria-label="anchor" href="#rows-and-columns-layout"><i class="fas fa-link"></i></a>
 </h3>
 <p>level 2 markdown headers (represented by —) are used to define columns within the dashboard. Each column contains one or more charts, which are stacked vertically within the column.</p>
-<pre><code><p style="font-size: 0.9em;">
----
-title: "Column Orientation"
-output: flexdashboard::flex_dashboard
----
-Column
--------------------------------------
-### Chart 1
-```{r}
-```
-Column
--------------------------------------
-### Chart 2-1
-```{r}
-```
-### Chart 2-2
-```{r}
-```
-### Chart 2-3
-```{r}
-```
-</p></code></pre>
-<div style="float: left; width:50%;">
-<div class="container">
-<img src="img/square1.png" style="height: 400px; width: 100%; display: block;"><div class="textover">
-Chart 1
+<div class="row">
+<div class="col-md-6">
+<script src="https://gist.github.com/jinhaslab/76fd4bbe731558d38c47cd3b1860e389.js"></script>
+</div>
+<div class="col-md-6 nopadding">
+<div height="422px" width="100%">
+<div style="float: left; width: 49%; height:200px">
+<div class="inline-figure"><img class="holder" data-src="holder.js/100px470?size=28&amp;text=Chart 1"></div>
+</div>
+<div style="margin-left: 51%; margin-down:10px; height:410px">
+<p><img class="holder" data-src="holder.js/100px150?size=28&amp;text=Chart 2"><img class="holder" data-src="holder.js/100px150?size=28&amp;text=Chart 3"><img class="holder" data-src="holder.js/100px150?size=28&amp;text=Chart 4"></p>
 </div>
 </div>
 </div>
-<div style="margin-left: 50%;">
-<div class="container">
-<img src="img/square1.png" style="height: 120px; width: 100%; display: block;margin-bottom:20px"><div class="textover">
-Chart 2-1
+</div>
+<p>We can display row-wise by specifying the orientation: rows option. Following show that layout defines two rows, the first of which has a single chart and the second of which has three charts:</p>
+<div class="row">
+<div class="col-md-6">
+<script src="https://gist.github.com/jinhaslab/97642a7c622f5625530d903a38f5df02.js"></script>
+</div>
+<div class="col-md-6 nopadding">
+<div height="550px" width="100%">
+<img class="holder" data-src="holder.js/100px227?size=28&amp;text=Chart 1"><div style="float: left; width: 32%;">
+<div class="inline-figure"><img class="holder" data-src="holder.js/100px227?size=14&amp;text=Chart 2"></div>
+</div>
+<div style="float: left; width: 32%; margin-left: 3%;">
+<div class="inline-figure"><img class="holder" data-src="holder.js/100px227?size=14&amp;text=Chart 3"></div>
+</div>
+<div style="width: 30%; margin-left: 70%;">
+<div class="inline-figure"><img class="holder" data-src="holder.js/100px227?size=14&amp;text=Chart 4"></div>
 </div>
 </div>
-<div class="container">
-<img src="img/square1.png" style="height: 120px; width: 100%; display: block;margin-bottom:20px"><div class="textover">
-Chart 2-2
 </div>
-</div>
-<div class="container">
-<img src="img/square1.png" style="height: 120px; width: 100%; display: block;"><div class="textover">
-Chart 2-3
-</div>
-</div>
-</div>
-<p>We can diplay row-wise by specifying the orientation: rows option. Following show that layout defines tow rows, the first of which has a single chart and the second of which has three charts:</p>
-<pre><code><p style="font-size: 0.9em;">
----
-title: "Row Orientation"
-output: 
-  flexdashboard::flex_dashboard:
-    orientation: rows
----
-Row
--------------------------------------
-### Chart 1
-```{r}
-```
-Row
--------------------------------------
-### Chart 2-1
-```{r}
-```
-### Chart 2-2
-```{r}
-```
-### Chart 2-3
-```{r}
-```
-</p></code></pre>
-<style>
-.container2 {
-  position: relative;
-  display: inline-block;
-  text-align: center;
-}
-
-.text2 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
-</style>
-<div class="container">
-<img src="img/square2.png" style="height: 200px; width: 100%; margin-bottom:10px"><div class="text2">
-Chart 1
-</div>
-</div>
-<div class="container2">
-<img src="img/square4.png" style="height: 200px; width: 90%;margin-left:10px"><div class="text2">
-Chart 2
-</div>
-</div>
-<div class="container2">
-<img src="img/square4.png" style="height: 200px; width: 90%;margin-left:10px"><div class="text2">
-Chart 3
-</div>
-</div>
-<div class="container2">
-<img src="img/square4.png" style="height: 200px; width: 90%;margin-left:10px"><div class="text2">
-Chart 4
 </div>
 </div>
 </div>
@@ -253,30 +177,14 @@ Chart 4
 <p>When vertical_layout: fill is used, charts will be resized to fill the entire height of the browser window, even if that means compressing the charts. This is the default behavior of flexdashboard.</p>
 <p>When vertical_layout: scroll is used, charts will be displayed at their natural height, and the user will have to scroll down to see all the charts. This is useful when you have many charts and don’t want them to be compressed.</p>
 <p>In the example , the YAML header of the flexdashboard file specified vertical_layout: scroll, which means the charts will be displayed at their natural height and the page will scroll as necessary to accommodate them. This way, all the charts will be displayed clearly, even if there are many of them.</p>
-<pre><code><p style="font-size: 0.9em;">
----
-title: "Chart Stack (Scrolling)"
-output: 
-  flexdashboard::flex_dashboard:
-    vertical_layout: scroll
----
-### Chart 1
-```{r}
-```
-### Chart 2
-```{r}
-```
-### Chart 3
-```{r}
-```
-### Chart 4
-```{r}
-```
-### Chart 5
-```{r}
-```
-</p></code></pre>
+<div class="row">
+
+<div class="col-md-12">
+<script src="https://gist.github.com/jinhaslab/50f7473f33db407943965a21dd6957e7.js"></script>
+</div>
+<div class="col-md-12">
 <div class="inline-figure"><img src="img/scrolling.gif" width="100%"></div>
+</div>
 </div>
 <div id="tabsets" class="section level3" number="3.1.3">
 <h3>
@@ -284,104 +192,26 @@ output:
 </h3>
 <p>In flexdashboard, you can use the tabset layout to display multiple components within a row or column as tabs. This allows users to switch between the components by clicking on the tab labels. This layout is especially useful when you have several components that provide related information, but only one component is primary and should be seen by all readers.</p>
 <div class="inline-figure"><img src="img/tabsets.gif"></div>
-<pre><code><p style="font-size: 0.9em;">
----
-title: "Chart Stack (Scrolling)"
-output: flexdashboard::flex_dashboard
----
-Column
-------------------------
-### Chart 1
-```{r}
-```
-Column {.tabset}
-------------------------
-### Chart 2
-```{r}
-```
-### Chart 3
-```{r}
-```
-### Chart 4
-```{r}
-```
-</p></code></pre>
+<script src="https://gist.github.com/jinhaslab/e6a76b4605bf00a8cc2405f680e62f13.js"></script>
 </div>
 <div id="scaling-of-size" class="section level3" number="3.1.4">
 <h3>
 <span class="header-section-number">3.1.4</span> Scaling of size<a class="anchor" aria-label="anchor" href="#scaling-of-size"><i class="fas fa-link"></i></a>
 </h3>
 <p>The data-width and data-height attributes in flexdashboard allow you to control the relative size of rows, columns, or individual charts. These attributes determine the relative size between charts laid out in the same dimension (horizontal or vertical). By using these attributes, you can customize the sizing behavior of your charts and adjust the size of the charts to suit the nature of the charts and the desired emphasis, visualization types, etc. This way, you can ensure that your charts are displayed at the appropriate size and with the desired level of detail, and that the focus of the dashboard is clear to users.</p>
-<pre><code><p style="font-size: 0.9em;">
----
-title: "Chart Sizing"
-output: 
-  flexdashboard::flex_dashboard:
-    orientation: rows
----
-Row {data-height=100}
--------------------------------------
-
-### Chart 1
-Chart 1 here
-
-Row {data-height=200}
--------------------------------------
-
-### Chart 2
-This is chart 2
-
-### Chart 3 
-This is chart 3
-</p></code></pre>
 <div class="inline-figure"><img src="img/chartsizing1.gif" width="100%"></div>
-<pre><code><p style="font-size: 0.9em;">
----
-title: "Chart Sizing"
-output: 
-  flexdashboard::flex_dashboard
----
-
-### Chart 1 {data-height=100}
-Chart 1 here
-
-### Chart 2 {data-height=150}
-This is chart 2
-
-### Chart 3 {data-height=200}
-This is chart 3
-</p></code></pre>
-<div class="inline-figure"><img src="img/chartsizing2.gif" width="100%"></div>
+<script src="https://gist.github.com/jinhaslab/659d496b30931cfc630a6b3049db83f9.js"></script><div class="inline-figure"><img src="img/chartsizing2.gif" width="100%"></div>
+<script src="https://gist.github.com/jinhaslab/cc0557fbd66e6346bf71e46f33a5c825.js"></script>
 </div>
 <div id="multiple-pages" class="section level3" number="3.1.5">
 <h3>
 <span class="header-section-number">3.1.5</span> Multiple pages<a class="anchor" aria-label="anchor" href="#multiple-pages"><i class="fas fa-link"></i></a>
 </h3>
-<pre><code><p style="font-size: 0.9em;">
----
-title: "Page Orientation"
-output: flexdashboard::flex_dashboard
----
-
-Page first
-=====================================
-### Chart 1
-
-### Chart 2
-
-Page second {data-orientation=rows}
-=====================================  
-### Chart 1
-  
-
-### Chart 2
-
-</p></code></pre>
-<p>The code snippet you provided is a simple example of how to create a flexdashboard with two pages. The first line defines the title of the dashboard as “Page Orientation” and the output format as a flexdashboard.</p>
+<div class="inline-figure"><img src="img/page1.gif" width="100%"></div>
+<script src="https://gist.github.com/jinhaslab/affc9d39daf9a6e8ab7ebf2f5fe147b2.js"></script><p>The code snippet you provided is a simple example of how to create a flexdashboard with two pages. The first line defines the title of the dashboard as “Page Orientation” and the output format as a flexdashboard.</p>
 <p>The first page is defined by the level 1 markdown header Page 1 (=====================================) and containing two charts.</p>
 <p>The second page is defined by the level 1 markdown header Page 2 (=====================================) and includes the attribute data-orientation=rows. This attribute specifies the orientation of the content within the page as rows, which means that the content will be arranged vertically in rows.</p>
 <p>In this simple example, the two pages of the dashboard are defined and their orientation is specified. The first page does not include any content, while the second page is set to display its content in rows.</p>
-<div class="inline-figure"><img src="img/page1.gif" width="100%"></div>
 </div>
 </div>
 <div id="visualization" class="section level2" number="3.2">
@@ -433,37 +263,8 @@ Page second {data-orientation=rows}
 </h3>
 <p>There are several ways to include tabular data within a flexdashboard, including using R functions such as <code>renderTable()</code> or <code>renderDataTable()</code>. These functions allow you to display data from R data frames or other sources as interactive tables within your dashboard. The tables can be sorted, filtered, and paginated, and users can also export the data to various formats, such as CSV or Excel.</p>
 <p>In addition to these R functions, you can also include tabular data within a flexdashboard using HTML tables. This allows you to control the exact layout and styling of your table, and to include custom features such as sorting and filtering.</p>
-<pre>
----
-title: "Tabular Data Example"
-output: 
-  flexdashboard::flex_dashboard:
-    vertical_layout: scroll
----
-
-```{r}
-library(shiny)
-library(DT)
-library(flexdashboard)
-```
-
-
-### Table 2
-
-```{r}
-knitr::kable(mtcars)
-```
-
-### Table 3
-
-```{r}
-DT::datatable(mtcars, options = list(
-  bPaginate = FALSE
-))
-```
-
-</pre>
 <div class="inline-figure"><img src="img/datatable123.gif" width="100%"></div>
+<script src="https://gist.github.com/jinhaslab/670929077fd85d4559c1da80b9ff0c86.js"></script>
 </div>
 <div id="valuebox-and-gauges" class="section level3" number="3.2.3">
 <h3>
@@ -472,132 +273,17 @@ DT::datatable(mtcars, options = list(
 <p>A value box is a simple, single value indicator in a flexdashboard. It’s used to display a single value in a compact format, often with a small accompanying icon or color.</p>
 <p>A gauge is a type of chart used to display a single value within a specified range. It’s used to represent a measurement or value that falls within a defined range, such as the level of a particular resource (e.g., water in a tank) or the progress toward a goal.</p>
 <p>In flexdashboard, both value boxes and gauges can be created using R code and the shiny package. Here is a simple example of how you could create a value box in flexdashboard:</p>
-<pre><code>
----
-title: "Value Box Example"
-output: 
-  flexdashboard::flex_dashboard:
-    orientation: rows
-runtime: shiny
----
-
-Row
------------------------------------------------------------------------
-### Value Box 1
-```{r}
-library(shiny)
-library(flexdashboard)
-valueBox(42, caption = "Errors", icon="fa-thumbs-down")
-```
-### Value Box 2
-```{r}
-valueBox(107, caption = "Trials", icon="fa-tag")
-```
-### Value Box 3
-```{r}
-valueBox(247, caption = "Connections", icon="fa-random")
-```
-
-</code></pre>
 <div class="inline-figure"><img src="img/valueboxes.png" width="100%"></div>
-<pre><code>
----
-title: "Gauge Example"
-output: 
-  flexdashboard::flex_dashboard:
-    orientation: rows
----
-
-Row
------------------------------------------------------------------------
-### First Rate
-```{r}
-library(flexdashboard)
-library(shiny)
-library(shinydashboard)
-rate = 10
-gauge(rate, min = 0, max = 100, symbol = '%', gaugeSectors(
-  success = c(80, 100), warning = c(40, 79), danger = c(0, 39)
-))
-```
-
-### Second Rate
-```{r}
-rate = 70
-gauge(rate, min = 0, max = 100, symbol = '%', gaugeSectors(
-  success = c(80, 100), warning = c(40, 79), danger = c(0, 39)
-))
-```
-
-### Third Rate
-```{r}
-valueBox(247, caption = "Connections", icon="fa-random")
-```
-
-</code></pre>
-<div class="inline-figure"><img src="img/gauge1.gif" width="100%"></div>
-<p>Note that the value argument in the valueBox function sets the value displayed in the box, the subtitle argument sets the text displayed beneath the value, and the icon argument sets the icon displayed next to the value.</p>
+<script src="https://gist.github.com/jinhaslab/80ec7ec5daae2b6b903a780b16fd4615.js"></script><div class="inline-figure"><img src="img/gauge1.gif" width="100%"></div>
+<script src="https://gist.github.com/jinhaslab/2fb94c16023545ae7c3f94cf968ba110.js"></script><p>Note that the value argument in the valueBox function sets the value displayed in the box, the subtitle argument sets the text displayed beneath the value, and the icon argument sets the icon displayed next to the value.</p>
 <p>In the gauge function, the value argument sets the value to be displayed on the gauge, the min and max arguments set the range of the gauge, the symbol argument sets the units for the value, and the gaugeSector argument sets the color and label of different sections of the gauge.</p>
-</div>
-</div>
-<div id="interactivity" class="section level2" number="3.3">
-<h2>
-<span class="header-section-number">3.3</span> Interactivity<a class="anchor" aria-label="anchor" href="#interactivity"><i class="fas fa-link"></i></a>
-</h2>
-<div id="integration-with-shiny" class="section level3" number="3.3.1">
-<h3>
-<span class="header-section-number">3.3.1</span> Integration with Shiny<a class="anchor" aria-label="anchor" href="#integration-with-shiny"><i class="fas fa-link"></i></a>
-</h3>
-</div>
-<div id="navigation-bar" class="section level3" number="3.3.2">
-<h3>
-<span class="header-section-number">3.3.2</span> Navigation bar<a class="anchor" aria-label="anchor" href="#navigation-bar"><i class="fas fa-link"></i></a>
-</h3>
-</div>
-<div id="input-controls" class="section level3" number="3.3.3">
-<h3>
-<span class="header-section-number">3.3.3</span> Input controls<a class="anchor" aria-label="anchor" href="#input-controls"><i class="fas fa-link"></i></a>
-</h3>
-</div>
-<div id="reactive-outputs" class="section level3" number="3.3.4">
-<h3>
-<span class="header-section-number">3.3.4</span> Reactive outputs<a class="anchor" aria-label="anchor" href="#reactive-outputs"><i class="fas fa-link"></i></a>
-</h3>
-</div>
-</div>
-<div id="storytelling" class="section level2" number="3.4">
-<h2>
-<span class="header-section-number">3.4</span> Storytelling<a class="anchor" aria-label="anchor" href="#storytelling"><i class="fas fa-link"></i></a>
-</h2>
-<div id="the-use-of-storyboards" class="section level3" number="3.4.1">
-<h3>
-<span class="header-section-number">3.4.1</span> The use of storyboards<a class="anchor" aria-label="anchor" href="#the-use-of-storyboards"><i class="fas fa-link"></i></a>
-</h3>
-<pre><code>
-
----
-title: "Column Orientation"
-output: flexdashboard::flex_dashboard
----
-    
-Column
--------------------------------------
-    
-### Chart 1
-    
-<p>```{r}
-```</p>
-
-</code></pre>
-<p>This is the basic structure of an HTML input element. The <input> tag is used to create various types of form controls, including text boxes, checkboxes, radio buttons, and more. The type attribute specifies the type of input control to be created, in this case a “text” input control.</p>
-<p><input type="text" name="username" value="" placeholder="Enter your name"></p>
 
 </div>
 </div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="rstudio-setting-cloud.html"><span class="header-section-number">2</span> Rstudio setting (Cloud)</a></div>
-<div class="next"><a href="parts.html"><span class="header-section-number">4</span> Parts</a></div>
+<div class="next"><a href="flexdashboard-interactivity.html"><span class="header-section-number">4</span> Flexdashboard Interactivity</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -618,17 +304,6 @@ Column
 <li><a class="nav-link" href="#valuebox-and-gauges"><span class="header-section-number">3.2.3</span> ValueBox and Gauges</a></li>
 </ul>
 </li>
-<li>
-<a class="nav-link" href="#interactivity"><span class="header-section-number">3.3</span> Interactivity</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#integration-with-shiny"><span class="header-section-number">3.3.1</span> Integration with Shiny</a></li>
-<li><a class="nav-link" href="#navigation-bar"><span class="header-section-number">3.3.2</span> Navigation bar</a></li>
-<li><a class="nav-link" href="#input-controls"><span class="header-section-number">3.3.3</span> Input controls</a></li>
-<li><a class="nav-link" href="#reactive-outputs"><span class="header-section-number">3.3.4</span> Reactive outputs</a></li>
-</ul>
-</li>
-<li>
-<a class="nav-link" href="#storytelling"><span class="header-section-number">3.4</span> Storytelling</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#the-use-of-storyboards"><span class="header-section-number">3.4.1</span> The use of storyboards</a></li></ul>
-</li>
 </ul>
 
       <div class="book-extra">
@@ -646,7 +321,7 @@ Column
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Dashbord for Public Health with R</strong>" was written by jinha yoon. It was last built on 2023-03-03.</p>
+    <p>"<strong>Dashbord for Public Health with R</strong>" was written by jinha yoon. It was last built on 2023-03-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

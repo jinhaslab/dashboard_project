@@ -18,8 +18,9 @@ visualization
 html-widgets
 data-tables
 valuebox-and-gauges
-interactivity
-integration-with-shiny
+flexdashboard-interactivity
+integration-i
+sidebar
 navigation-bar
 input-controls
 reactive-outputs
