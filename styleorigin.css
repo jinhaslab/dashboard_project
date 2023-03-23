@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Mono|PT+Sans+Narrow:400,700|PT+Serif:400,400i,700,700i');
+@import url('https://fonts.googleapis.com/css?family=Jua');
+@import url('https://fonts.googleapis.com/css?family=Comfortaa');
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime&family=Fira+Sans:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,900;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100&display=swap');
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: none;
+  -webkit-touch-callout: none;
+}
+
+.book .book-body .page-wrapper .page-inner section {
+  line-height: 2;
+  font-size: 2rem;
+}
+
+p, div {
+  font-family: 'Roboto', Sans-Serif;
+  font-size: 1rem;
+}
+
+li {
+  font-family: 'Roboto', Sans-Serif;
+  font-size: 0.9rem;
+  color: #4d4d4d;
+}
+
+h1 {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.7rem;
+}
+
+h2 {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.2rem;
+}
+
+code, kbd, pre, samp, .sourceLine, .sourceCode {
+  font-family: 'Fira+Sans', monospace;
+  font-size: 1em;
+}
+
+p.caption {
+  color: #777;
+  margin-top: 10px;
+}
+
+p {
+  white-space: inherit;
+}
+
+p code {
+  white-space: inherit;
+}
+
+pre {
+  word-break: normal;
+  word-wrap: normal;
+  position: relative;
+}
+
+pre code {
+  background-color: #f2f2f2;
+  border: none;
+  letter-spacing: 1px;
+}
+
+
+code.r {
+  background-color: transparent;
+}
+
+body {
+  text-align: justify;
+}
+
+.container {
+  position: relative;
+}
+
+
+.textover {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 30px;
+  font-weight: bold;
+  color: gray;
+  text-align: center;
+}
+
+
+.holder {
+  margin-bottom: 10px;
+  margin-left: 0px;
+
+}
+
+
+.hljs-name {
+    color: #008080;
+  }
+.hljs-keyword {
+    color: #008080;
+    font-weight: bold;
+  }
+.hljs-string {
+    color: #008080;
+  }
+.hljs-number {
+    color: #008080;
+  }
+
+code.hljs, pre code.hljs {
+  font-family: 'Fira+Sans',  sans-serif;
+  font-size: 1em;
+  letter-spacing: 1px;
+  
+}
