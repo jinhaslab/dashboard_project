@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 5 Reivew of R visualization for statistical results | Dashbord for Public Health with R</title>
+<meta name="author" content="jinha yoon">
+<meta name="generator" content="bookdown 0.33 with bs4_book()">
+<meta property="og:title" content="Chapter 5 Reivew of R visualization for statistical results | Dashbord for Public Health with R">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 5 Reivew of R visualization for statistical results | Dashbord for Public Health with R">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.1/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="style.css">
+<meta name="description" content="5.1 Basic plot with R In this chapter, we will cover the basics of plotting with GGPLOT2, including the principles of layering and aesthetics, and some of the most common plot types. We will also...">
+<meta property="og:description" content="5.1 Basic plot with R In this chapter, we will cover the basics of plotting with GGPLOT2, including the principles of layering and aesthetics, and some of the most common plot types. We will also...">
+<meta name="twitter:description" content="5.1 Basic plot with R In this chapter, we will cover the basics of plotting with GGPLOT2, including the principles of layering and aesthetics, and some of the most common plot types. We will also...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Dashbord for Public Health with R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li class="book-part">I Basic Setting for Dashboard</li>
+<li><a class="" href="rstudio-setting-cloud.html"><span class="header-section-number">2</span> Rstudio setting (Cloud)</a></li>
+<li><a class="" href="rstudio-chatgpt-addin.html"><span class="header-section-number">3</span> Rstudio ChatGPT addin</a></li>
+<li><a class="" href="flexdashboard.html"><span class="header-section-number">4</span> Flexdashboard</a></li>
+<li class="book-part">Review of Data visualization</li>
+<li><a class="active" href="reivew-of-r-visualization-for-statistical-results.html"><span class="header-section-number">5</span> Reivew of R visualization for statistical results</a></li>
+<li><a class="" href="hihih.html"><span class="header-section-number">6</span> hihih</a></li>
+<li><a class="" href="parts.html"><span class="header-section-number">7</span> Parts</a></li>
+<li><a class="" href="footnotes-and-citations.html"><span class="header-section-number">8</span> Footnotes and citations</a></li>
+<li><a class="" href="blocks.html"><span class="header-section-number">9</span> Blocks</a></li>
+<li><a class="" href="sharing-your-book.html"><span class="header-section-number">10</span> Sharing your book</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="reivew-of-r-visualization-for-statistical-results" class="section level1" number="5">
+<h1>
+<span class="header-section-number">5</span> Reivew of R visualization for statistical results<a class="anchor" aria-label="anchor" href="#reivew-of-r-visualization-for-statistical-results"><i class="fas fa-link"></i></a>
+</h1>
+<div id="basic-plot-with-r" class="section level2" number="5.1">
+<h2>
+<span class="header-section-number">5.1</span> Basic plot with R<a class="anchor" aria-label="anchor" href="#basic-plot-with-r"><i class="fas fa-link"></i></a>
+</h2>
+<p>In this chapter, we will cover the basics of plotting with GGPLOT2, including the principles of layering and aesthetics, and some of the most common plot types. We will also introduce some related libraries. At the end of the tutorial, you will have a working visualization example for Data Explorer.</p>
+</div>
+<div id="ggplot-basic" class="section level2" number="5.2">
+<h2>
+<span class="header-section-number">5.2</span> ggplot basic<a class="anchor" aria-label="anchor" href="#ggplot-basic"><i class="fas fa-link"></i></a>
+</h2>
+<p>The first step in using ggplot2 is to load the library and the data you want to use. In this case, you are loading the tidyverse library, which includes ggplot2, as well as other helpful packages for data manipulation and visualization. You are also loading the iris dataset, which is a widely used dataset for demonstrating basic data visualization techniques.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span></code></pre></div>
+<p>The main syntax for ggplot2 includes axis and layer. Let’s start from the beginning</p>
+<div id="axis" class="section level3" number="5.2.1">
+<h3>
+<span class="header-section-number">5.2.1</span> axis<a class="anchor" aria-label="anchor" href="#axis"><i class="fas fa-link"></i></a>
+</h3>
+<p>A 2-dimensional plot requires three components of data: x-axis, y-axis, and layer. First, we draw the x-axis and y-axis, then add information using the layer component</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># data what we used</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span>, y <span class="op">=</span> <span class="va">Sepal.Width</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="0301-DataVisualization_files/figure-html/unnamed-chunk-4-1.png" width="672"></div>
+<p>The code first loads the iris data set, which is a well-known data set in the R community that contains information about the sepal length and width of iris flowers of three different species.</p>
+<p>Next, the code uses the ggplot function from the ggplot2 library to create a scatter plot with Sepal.Length on the x-axis and Sepal.Width on the y-axis. The aes function is used to specify the aesthetics of the plot, in this case the x and y variables. The plot will show the relationship between the sepal length and width of the iris flowers.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span>, y <span class="op">=</span> <span class="va">Sepal.Width</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"sepal length"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"sepal width"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Iris flow and its characteristics"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure">
+<img src="0301-DataVisualization_files/figure-html/unnamed-chunk-5-1.png" width="672">
+The code then adds several modifications to the plot to make it more informative and presentable. The xlab function is used to add a label to the x-axis, and the ylab function is used to add a label to the y-axis. The ggtitle function is used to add a title to the plot.</div>
+<p>The final plot will show the relationship between sepal length and width of the iris flowers, with labeled axes and a title that provides context.</p>
+</div>
+<div id="layer-geom_x" class="section level3" number="5.2.2">
+<h3>
+<span class="header-section-number">5.2.2</span> layer, geom_x()<a class="anchor" aria-label="anchor" href="#layer-geom_x"><i class="fas fa-link"></i></a>
+</h3>
+<p>In ggplot2, layers are the components that you add to the plot to represent your data. The geom_ functions are used to specify the type of layer to add to the plot. For example, geom_point adds points to the plot, geom_line adds lines, geom_smooth adds a smoothing line, geom_histogram adds a histogram, geom_density adds a density plot, geom_boxplot adds a boxplot, and geom_bar adds bars.</p>
+<p>Each geom_ function takes the aesthetics specified in the aes function as input, and maps them to the x and y variables to create the layer. You can add multiple layers to a plot to represent multiple variables or to create more complex visualizations.</p>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr class="header">
+<th>geom_x()</th>
+<th>contents</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>geom_point()</td>
+<td>scatter plot</td>
+</tr>
+<tr class="even">
+<td>geom_line()</td>
+<td>line plot</td>
+</tr>
+<tr class="odd">
+<td>geom_smooth()</td>
+<td>prediction line</td>
+</tr>
+<tr class="even">
+<td>geom_histogram()</td>
+<td>histogram</td>
+</tr>
+<tr class="odd">
+<td>geom_density()</td>
+<td>density line</td>
+</tr>
+<tr class="even">
+<td>geom_boxplot()</td>
+<td>boxplot plot</td>
+</tr>
+<tr class="odd">
+<td>geom_bar()</td>
+<td>bar chart</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div id="geom_point" class="section level3" number="5.2.3">
+<h3>
+<span class="header-section-number">5.2.3</span> geom_point()<a class="anchor" aria-label="anchor" href="#geom_point"><i class="fas fa-link"></i></a>
+</h3>
+<p>The geom_point function is used to add a layer of points to the plot, representing the individual observations in the iris data set. The geom_point function takes the aesthetics specified in the aes function and maps them to the x and y variables to create the layer of points.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Sepal.Length</span>, y <span class="op">=</span> <span class="va">Sepal.Width</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="0301-DataVisualization_files/figure-html/unnamed-chunk-6-1.png" width="672"></div>
+<p>The xlab function is used to add a label to the x-axis, and the ylab function is used to add a label to the y-axis. The ggtitle function is used to add a title to the plot. These labels and title provide context and help to interpret the plot.</p>
+<p>The geom_point function is used to add a layer of points to the plot, representing the individual observations in the iris data set. The geom_point function takes the aesthetics specified in the aes function and maps them to the x and y variables to create the layer of points.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span>, y <span class="op">=</span> <span class="va">Sepal.Width</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Sepal length"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Sepal width"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">" Type of iris according to sepal lenght and width"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="0301-DataVisualization_files/figure-html/unnamed-chunk-7-1.png" width="672"></div>
+<p>The aes function is used to specify the aesthetics of the plot, including the x and y variables and the color variable, Species. This allows the plot to distinguish between the three different species of iris flowers in the data set and display each species with a different color.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span>, y <span class="op">=</span> <span class="va">Sepal.Width</span>, </span>
+<span>             color <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Sepal length"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Sepal width"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">" Type of iris according to sepal lenght and width"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="0301-DataVisualization_files/figure-html/unnamed-chunk-8-1.png" width="672"></div>
+</div>
+<div id="geom_smooth" class="section level3" number="5.2.4">
+<h3>
+<span class="header-section-number">5.2.4</span> geom_smooth()<a class="anchor" aria-label="anchor" href="#geom_smooth"><i class="fas fa-link"></i></a>
+</h3>
+<p>The geom_smooth function is used to add a layer of a smoothing line to the plot. This line provides a general representation of the relationship between the sepal length and width of the iris flowers, and helps to see any trends or patterns in the data.</p>
+<p>The geom_point function is used to add a layer of points to the plot, representing the individual observations in the iris data set. The geom_point function takes the aesthetics specified in the aes function and maps them to the x and y variables to create the layer of points.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co">#</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span>, y <span class="op">=</span> <span class="va">Sepal.Width</span>, </span>
+<span>             color <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Sepal length"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Sepal width"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">" Type of iris according to sepal lenght and width"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span><span class="op">)</span> </span></code></pre></div>
+<div class="inline-figure"><img src="0301-DataVisualization_files/figure-html/unnamed-chunk-9-1.png" width="672"></div>
+<p>The following code demonstrated example of adding a linear trend line as well as polynomial line.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span>, y <span class="op">=</span> <span class="va">Sepal.Width</span>, </span>
+<span>             color <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Sepal length"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Sepal width"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">" Type of iris according to sepal lenght and width"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">'lm'</span>, formula <span class="op">=</span> <span class="va">y</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html">poly</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">5</span><span class="op">)</span>, se <span class="op">=</span> <span class="cn">FALSE</span>, linetype <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span> <span class="co"># how abou se = TRUE</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">'lm'</span>, formula <span class="op">=</span> <span class="va">y</span> <span class="op">~</span> <span class="va">x</span>, se <span class="op">=</span> <span class="cn">FALSE</span>, linetype <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>  </span></code></pre></div>
+<div class="inline-figure">
+<img src="0301-DataVisualization_files/figure-html/unnamed-chunk-10-1.png" width="672">
+The first geom_smooth function adds a layer of a polynomial trend line to the plot, using a 5th degree polynomial regression model specified by the formula y ~ poly(x, 5). The argument se = FALSE is used to suppress the display of confidence intervals for the trend line, and the argument linetype = 1 is used to specify the line type for the polynomial trend line.</div>
+<p>The second geom_smooth function adds a layer of a linear trend line to the plot, using a simple linear regression model specified by the formula y ~ x. The argument se = FALSE is used to suppress the display of confidence intervals for the trend line, and the argument linetype = 2 is used to specify the line type for the linear trend line.</p>
+</div>
+<div id="faceting" class="section level3" number="5.2.5">
+<h3>
+<span class="header-section-number">5.2.5</span> faceting<a class="anchor" aria-label="anchor" href="#faceting"><i class="fas fa-link"></i></a>
+</h3>
+<p>This is achieved using the facet_wrap function, which allows you to display multiple panels in a single plot, each showing a different subset of the data.</p>
+<p>In this case, the facet_wrap function is used to create panels for each species of iris, using the Species variable as the grouping variable. The formula Species~. specifies that each panel should contain a separate plot for each species, with all the other variables in the data set (represented by .) included in each plot.
+The polynomial and linear trend lines are added to each panel in the same way as in the previous code. The labeled axes and title provide context and help to interpret each plot.</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span>, y <span class="op">=</span> <span class="va">Sepal.Width</span>, </span>
+<span>             color <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Sepal length"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Sepal width"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">" Type of iris according to sepal lenght and width"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">'lm'</span>, formula <span class="op">=</span> <span class="va">y</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html">poly</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">5</span><span class="op">)</span>, se <span class="op">=</span> <span class="cn">FALSE</span>, linetype <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">'lm'</span>, formula <span class="op">=</span> <span class="va">y</span> <span class="op">~</span> <span class="va">x</span>, se <span class="op">=</span> <span class="cn">FALSE</span>, linetype <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>  <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="va">Species</span><span class="op">~</span><span class="va">.</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="0301-DataVisualization_files/figure-html/layer%20point%205-1.png" width="672"></div>
+</div>
+<div id="geom_bar" class="section level3" number="5.2.6">
+<h3>
+<span class="header-section-number">5.2.6</span> geom_bar()<a class="anchor" aria-label="anchor" href="#geom_bar"><i class="fas fa-link"></i></a>
+</h3>
+<p>The code creates a barplot using the iris data set. The ggplot function is used to create a basic plot with the Species variable on the x-axis. The aes function maps the Species variable to the x axis and the fill aesthetic, which controls the fill color of the bars.</p>
+<p>The geom_bar function is used to add a layer of bars to the plot, representing the count of each species of iris in the data set. By default, geom_bar creates a barplot with bars representing the count of each unique value in the x variable.</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Species</span>,  </span>
+<span>             fill <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Type of iris"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Counts"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Number of iris according to its types."</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure">
+<img src="0301-DataVisualization_files/figure-html/geom_bar%201-1.png" width="672">
+The code creates a barplot using the iris data set, but only for observations with Sepal.Width equal to or greater than 3. The filter function is used to select only the observations that meet the specified condition, and the rest of the code is the same as in the previous example.</div>
+<p>The ggplot function is used to create a basic plot with the Species variable on the x-axis. The aes function maps the Species variable to the x axis and the fill aesthetic, which controls the fill color of the bars.</p>
+<p>The geom_bar function is used to add a layer of bars to the plot, representing the count of each species of iris in the filtered data set. By default, geom_bar creates a barplot with bars representing the count of each unique value in the x variable.</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Sepal.Width</span> <span class="op">&gt;</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Species</span>,  </span>
+<span>             fill <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Type of iris"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Counts"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Number of iris according to its types."</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="0301-DataVisualization_files/figure-html/geom_bar%202%20-1.png" width="672"></div>
+<p>The coord_polar function is used to change the coordinate system from a rectangular Cartesian system to a polar system, which is appropriate for creating pie charts. The geom_bar function is used to add a layer of bars to the plot, representing the count of each species of iris in the filtered data set. The width argument is used to set the width of the bars to 1, so that the bars represent proportions rather than counts.</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Sepal.Width</span> <span class="op">&gt;</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Species</span>,  </span>
+<span>             fill <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Type of iris"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Counts"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Number of iris according to its types."</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>width <span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_polar.html">coord_polar</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="0301-DataVisualization_files/figure-html/geom_bar%204-1.png" width="672"></div>
+</div>
+<div id="geom_density-geom_histogram" class="section level3" number="5.2.7">
+<h3>
+<span class="header-section-number">5.2.7</span> geom_density() , geom_histogram()<a class="anchor" aria-label="anchor" href="#geom_density-geom_histogram"><i class="fas fa-link"></i></a>
+</h3>
+<p>The ggplot function is used to create a basic plot with the Sepal.Length variable on the x-axis. The aes function maps the Sepal.Length variable to the x axis.</p>
+<p>The geom_histogram function is used to add a layer of a histogram to the plot, representing the distribution of Sepal.Length. The aes function inside the geom_histogram maps the y axis to the density, which is calculated using the ..density.. expression.</p>
+<p>The geom_density function is used to add a layer of a kernel density estimate to the plot, representing the estimated probability density function of the Sepal.Length variable.</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Sepal Length of Iris"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"density"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Distribution of Sepal Length "</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">..density..</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="0301-DataVisualization_files/figure-html/geom_density%201-1.png" width="672"></div>
+<p>The ggplot function is used to create a basic plot with the Sepal.Length variable on the x-axis. The aes function maps the Sepal.Length variable to the x axis and the Species variable to the fill color.</p>
+<p>The geom_histogram function is used to add a layer of histograms to the plot, representing the distributions of Sepal.Length for each species of iris. The aes function inside the geom_histogram maps the y axis to the density, which is calculated using the ..density.. expression. The alpha argument is used to set the transparency of the histograms, allowing the multiple histograms to be seen together.</p>
+<p>The geom_density function is used to add a layer of kernel density estimates to the plot, representing the estimated probability density functions of the Sepal.Length variable for each species of iris. The stat argument is set to “density” to specify that a density estimate should be plotted. The alpha argument is used to set the transparency of the density estimates, allowing the multiple density estimates to be seen together.</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span>, fill <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"sepal length of iris"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"density"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Distribution of sepal length of iris"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">..density..</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span>stat<span class="op">=</span><span class="st">"density"</span>, alpha <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure">
+<img src="0301-DataVisualization_files/figure-html/geom_density%202-1.png" width="672">
+The geom_histogram function is used to add a layer of histograms to the plot, representing the distributions of Sepal.Length for each species of iris. The aes function inside the geom_histogram maps the y axis to the density, which is calculated using the ..density.. expression. The alpha argument is used to set the transparency of the histograms, allowing the multiple histograms to be seen together.</div>
+<p>The geom_density function is used to add a layer of kernel density estimates to the plot, representing the estimated probability density functions of the Sepal.Length variable for each species of iris. The stat argument is set to “density” to specify that a density estimate should be plotted. The alpha argument is used to set the transparency of the density estimates, allowing the multiple density estimates to be seen together.</p>
+<p>The facet_wrap function is used to create panels of the plot, separated by species. The argument Species~. specifies that the panels should be created for each species, and the . symbol indicates that there is no faceting on the y axis.</p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span>, fill <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"sepal length of iris"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"density"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Distribution of sepal length of iris"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">..density..</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span>stat<span class="op">=</span><span class="st">"density"</span>, alpha <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="co"># my favorit theme</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="va">Species</span><span class="op">~</span><span class="va">.</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="0301-DataVisualization_files/figure-html/geom_density%203-1.png" width="672"></div>
+</div>
+<div id="geom_boxplot" class="section level3" number="5.2.8">
+<h3>
+<span class="header-section-number">5.2.8</span> geom_boxplot()<a class="anchor" aria-label="anchor" href="#geom_boxplot"><i class="fas fa-link"></i></a>
+</h3>
+<p>The geom_boxplot function is used to add a layer of boxplots to the plot, representing the distributions of Sepal.Width for each species of iris. The boxplot shows the median, quartiles, and outliers of the data, allowing for a quick visualization of the central tendency and spread of the data.</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Species</span>, y <span class="op">=</span> <span class="va">Sepal.Width</span>, </span>
+<span>             color <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="0301-DataVisualization_files/figure-html/geom_boxplot%201-1.png" width="672"></div>
+</div>
+<div id="d-plot" class="section level3" number="5.2.9">
+<h3>
+<span class="header-section-number">5.2.9</span> 3d plot<a class="anchor" aria-label="anchor" href="#d-plot"><i class="fas fa-link"></i></a>
+</h3>
+<p>The code creates a 3D scatter plot using the plot_ly function from the plotly library. The plot_ly function creates a basic plot with the Sepal.Length variable on the x-axis, the Petal.Length variable on the y-axis, and the Petal.Width variable on the z-axis.</p>
+<p>The color argument inside the plot_ly function maps the Species variable to the color of the markers, so that each species of iris is plotted with a different color.</p>
+<p>The type argument is set to “scatter3d”, which specifies that the plot should be a 3D scatter plot. The alpha argument sets the opacity of the markers, making them semi-transparent so that overlapping markers can be seen.</p>
+<p>The layout function is used to add a title to each axis, using the xaxis, yaxis, and zaxis arguments. The title argument inside each axis specifies the title of the corresponding axis.</p>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://plotly-r.com">plotly</a></span><span class="op">)</span></span>
+<span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/plotly/man/plot_ly.html">plot_ly</a></span><span class="op">(</span> </span>
+<span>        x <span class="op">=</span> <span class="op">~</span><span class="va">Sepal.Length</span>, y <span class="op">=</span> <span class="op">~</span><span class="va">Petal.Length</span>, z <span class="op">=</span> <span class="op">~</span><span class="va">Petal.Width</span>,  </span>
+<span>        color <span class="op">=</span> <span class="op">~</span><span class="va">Species</span>,  <span class="co"># Color separation by Species. </span></span>
+<span>        type <span class="op">=</span> <span class="st">"scatter3d"</span>,   <span class="co"># 3d plot</span></span>
+<span>        alpha <span class="op">=</span> <span class="fl">0.8</span></span>
+<span>        <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>  </span>
+<span>        <span class="fu">layout</span><span class="op">(</span></span>
+<span>               scene <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>xaxis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">'Sepal Length'</span><span class="op">)</span>, </span>
+<span>                            yaxis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">'Petal Length'</span><span class="op">)</span>,</span>
+<span>                            zaxis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">'Petal Width'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-0b8d475bb55cb33d563f" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-0b8d475bb55cb33d563f">{"x":{"visdat":{"1fbf5b789114":["function () ","plotlyVisDat"]},"cur_data":"1fbf5b789114","attrs":{"1fbf5b789114":{"x":{},"y":{},"z":{},"color":{},"alpha":0.8,"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"Sepal Length"},"yaxis":{"title":"Petal Length"},"zaxis":{"title":"Petal Width"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9,5.4,4.8,4.8,4.3,5.8,5.7,5.4,5.1,5.7,5.1,5.4,5.1,4.6,5.1,4.8,5,5,5.2,5.2,4.7,4.8,5.4,5.2,5.5,4.9,5,5.5,4.9,4.4,5.1,5,4.5,4.4,5,5.1,4.8,5.1,4.6,5.3,5],"y":[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5,1.5,1.6,1.4,1.1,1.2,1.5,1.3,1.4,1.7,1.5,1.7,1.5,1,1.7,1.9,1.6,1.6,1.5,1.4,1.6,1.6,1.5,1.5,1.4,1.5,1.2,1.3,1.4,1.3,1.5,1.3,1.3,1.3,1.6,1.9,1.4,1.6,1.4,1.5,1.4],"z":[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1,0.2,0.2,0.1,0.1,0.2,0.4,0.4,0.3,0.3,0.3,0.2,0.4,0.2,0.5,0.2,0.2,0.4,0.2,0.2,0.2,0.2,0.4,0.1,0.2,0.2,0.2,0.2,0.1,0.2,0.2,0.3,0.3,0.2,0.6,0.4,0.3,0.2,0.2,0.2,0.2],"type":"scatter3d","mode":"markers","name":"setosa","marker":{"color":"rgba(102,194,165,0.8)","line":{"color":"rgba(102,194,165,1)"}},"textfont":{"color":"rgba(102,194,165,0.8)"},"error_y":{"color":"rgba(102,194,165,0.8)"},"error_x":{"color":"rgba(102,194,165,0.8)"},"line":{"color":"rgba(102,194,165,0.8)"},"frame":null},{"x":[7,6.4,6.9,5.5,6.5,5.7,6.3,4.9,6.6,5.2,5,5.9,6,6.1,5.6,6.7,5.6,5.8,6.2,5.6,5.9,6.1,6.3,6.1,6.4,6.6,6.8,6.7,6,5.7,5.5,5.5,5.8,6,5.4,6,6.7,6.3,5.6,5.5,5.5,6.1,5.8,5,5.6,5.7,5.7,6.2,5.1,5.7],"y":[4.7,4.5,4.9,4,4.6,4.5,4.7,3.3,4.6,3.9,3.5,4.2,4,4.7,3.6,4.4,4.5,4.1,4.5,3.9,4.8,4,4.9,4.7,4.3,4.4,4.8,5,4.5,3.5,3.8,3.7,3.9,5.1,4.5,4.5,4.7,4.4,4.1,4,4.4,4.6,4,3.3,4.2,4.2,4.2,4.3,3,4.1],"z":[1.4,1.5,1.5,1.3,1.5,1.3,1.6,1,1.3,1.4,1,1.5,1,1.4,1.3,1.4,1.5,1,1.5,1.1,1.8,1.3,1.5,1.2,1.3,1.4,1.4,1.7,1.5,1,1.1,1,1.2,1.6,1.5,1.6,1.5,1.3,1.3,1.3,1.2,1.4,1.2,1,1.3,1.2,1.3,1.3,1.1,1.3],"type":"scatter3d","mode":"markers","name":"versicolor","marker":{"color":"rgba(252,141,98,0.8)","line":{"color":"rgba(252,141,98,1)"}},"textfont":{"color":"rgba(252,141,98,0.8)"},"error_y":{"color":"rgba(252,141,98,0.8)"},"error_x":{"color":"rgba(252,141,98,0.8)"},"line":{"color":"rgba(252,141,98,0.8)"},"frame":null},{"x":[6.3,5.8,7.1,6.3,6.5,7.6,4.9,7.3,6.7,7.2,6.5,6.4,6.8,5.7,5.8,6.4,6.5,7.7,7.7,6,6.9,5.6,7.7,6.3,6.7,7.2,6.2,6.1,6.4,7.2,7.4,7.9,6.4,6.3,6.1,7.7,6.3,6.4,6,6.9,6.7,6.9,5.8,6.8,6.7,6.7,6.3,6.5,6.2,5.9],"y":[6,5.1,5.9,5.6,5.8,6.6,4.5,6.3,5.8,6.1,5.1,5.3,5.5,5,5.1,5.3,5.5,6.7,6.9,5,5.7,4.9,6.7,4.9,5.7,6,4.8,4.9,5.6,5.8,6.1,6.4,5.6,5.1,5.6,6.1,5.6,5.5,4.8,5.4,5.6,5.1,5.1,5.9,5.7,5.2,5,5.2,5.4,5.1],"z":[2.5,1.9,2.1,1.8,2.2,2.1,1.7,1.8,1.8,2.5,2,1.9,2.1,2,2.4,2.3,1.8,2.2,2.3,1.5,2.3,2,2,1.8,2.1,1.8,1.8,1.8,2.1,1.6,1.9,2,2.2,1.5,1.4,2.3,2.4,1.8,1.8,2.1,2.4,2.3,1.9,2.3,2.5,2.3,1.9,2,2.3,1.8],"type":"scatter3d","mode":"markers","name":"virginica","marker":{"color":"rgba(141,160,203,0.8)","line":{"color":"rgba(141,160,203,1)"}},"textfont":{"color":"rgba(141,160,203,0.8)"},"error_y":{"color":"rgba(141,160,203,0.8)"},"error_x":{"color":"rgba(141,160,203,0.8)"},"line":{"color":"rgba(141,160,203,0.8)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="flexdashboard.html"><span class="header-section-number">4</span> Flexdashboard</a></div>
+<div class="next"><a href="hihih.html"><span class="header-section-number">6</span> hihih</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#reivew-of-r-visualization-for-statistical-results"><span class="header-section-number">5</span> Reivew of R visualization for statistical results</a></li>
+<li><a class="nav-link" href="#basic-plot-with-r"><span class="header-section-number">5.1</span> Basic plot with R</a></li>
+<li>
+<a class="nav-link" href="#ggplot-basic"><span class="header-section-number">5.2</span> ggplot basic</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#axis"><span class="header-section-number">5.2.1</span> axis</a></li>
+<li><a class="nav-link" href="#layer-geom_x"><span class="header-section-number">5.2.2</span> layer, geom_x()</a></li>
+<li><a class="nav-link" href="#geom_point"><span class="header-section-number">5.2.3</span> geom_point()</a></li>
+<li><a class="nav-link" href="#geom_smooth"><span class="header-section-number">5.2.4</span> geom_smooth()</a></li>
+<li><a class="nav-link" href="#faceting"><span class="header-section-number">5.2.5</span> faceting</a></li>
+<li><a class="nav-link" href="#geom_bar"><span class="header-section-number">5.2.6</span> geom_bar()</a></li>
+<li><a class="nav-link" href="#geom_density-geom_histogram"><span class="header-section-number">5.2.7</span> geom_density() , geom_histogram()</a></li>
+<li><a class="nav-link" href="#geom_boxplot"><span class="header-section-number">5.2.8</span> geom_boxplot()</a></li>
+<li><a class="nav-link" href="#d-plot"><span class="header-section-number">5.2.9</span> 3d plot</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/0301-DataVisualization.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/0301-DataVisualization.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Dashbord for Public Health with R</strong>" was written by jinha yoon. It was last built on 2023-03-23.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
