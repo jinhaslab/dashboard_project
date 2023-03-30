@@ -1,7 +1,7 @@
 --- 
 title: "Dashbord for Public Health with R"
 author: "jinha yoon"
-date: "2023-03-24"
+date: "2023-03-30"
 
 documentclass: book
 bibliography:

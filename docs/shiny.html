@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 6 Shiny | Dashbord for Public Health with R</title>
+<meta name="author" content="jinha yoon">
+<meta name="generator" content="bookdown 0.33 with bs4_book()">
+<meta property="og:title" content="Chapter 6 Shiny | Dashbord for Public Health with R">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 6 Shiny | Dashbord for Public Health with R">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.1/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="style.css">
+<meta name="description" content="6.1 KWCS data preparation Prior to start about shiny, I will review the tabf code. That code will download the kwcsData6th.rds file from the GitHub repository and save it as data/kwcs6th.rds on...">
+<meta property="og:description" content="6.1 KWCS data preparation Prior to start about shiny, I will review the tabf code. That code will download the kwcsData6th.rds file from the GitHub repository and save it as data/kwcs6th.rds on...">
+<meta name="twitter:description" content="6.1 KWCS data preparation Prior to start about shiny, I will review the tabf code. That code will download the kwcsData6th.rds file from the GitHub repository and save it as data/kwcs6th.rds on...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Dashbord for Public Health with R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li class="book-part">I Basic Setting for Dashboard</li>
+<li><a class="" href="rstudio-setting-cloud.html"><span class="header-section-number">2</span> Rstudio setting (Cloud)</a></li>
+<li><a class="" href="rstudio-chatgpt-addin.html"><span class="header-section-number">3</span> Rstudio ChatGPT addin</a></li>
+<li><a class="" href="flexdashboard.html"><span class="header-section-number">4</span> Flexdashboard</a></li>
+<li class="book-part">Review of Data visualization</li>
+<li><a class="" href="reivew-of-r-visualization-for-statistical-results.html"><span class="header-section-number">5</span> Reivew of R visualization for statistical results</a></li>
+<li><a class="active" href="shiny.html"><span class="header-section-number">6</span> Shiny</a></li>
+<li><a class="" href="parts.html"><span class="header-section-number">7</span> Parts</a></li>
+<li><a class="" href="footnotes-and-citations.html"><span class="header-section-number">8</span> Footnotes and citations</a></li>
+<li><a class="" href="blocks.html"><span class="header-section-number">9</span> Blocks</a></li>
+<li><a class="" href="sharing-your-book.html"><span class="header-section-number">10</span> Sharing your book</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="shiny" class="section level1" number="6">
+<h1>
+<span class="header-section-number">6</span> Shiny<a class="anchor" aria-label="anchor" href="#shiny"><i class="fas fa-link"></i></a>
+</h1>
+<div id="kwcs-data-preparation" class="section level2" number="6.1">
+<h2>
+<span class="header-section-number">6.1</span> KWCS data preparation<a class="anchor" aria-label="anchor" href="#kwcs-data-preparation"><i class="fas fa-link"></i></a>
+</h2>
+<p>Prior to start about shiny, I will review the tabf code.
+That code will download the kwcsData6th.rds file from the GitHub repository and save it as data/kwcs6th.rds on your local machine. Then, it will use the readRDS function to load the data into R as an object named dat1.
+After you have loaded the data into R, you can start exploring and analyzing it. You can use the str function to inspect the structure of the data and the head function to see the first few rows of the data.</p>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">"tidyverse"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://gforge.se/packages/">"htmlTable"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"htmlTable"</span><span class="op">)</span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://broom.tidymodels.org/">"broom"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"broom"</span><span class="op">)</span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://devtools.r-lib.org/">"devtools"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/">devtools</a></span><span class="op">)</span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st">"tabf"</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"jinhaslab/tabf"</span>, force <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">tabf</span><span class="op">)</span></span>
+<span><span class="co"># data download</span></span>
+<span><span class="va">url</span> <span class="op">=</span><span class="st">"https://github.com/jinhaslab/opendata/raw/3006e12f54bd2abd3cd1aac9cda807ef8e614a42/kwcs/kwcsData6th.rds"</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="va">url</span>, <span class="st">"data/kwcs6th.rds"</span><span class="op">)</span></span>
+<span><span class="va">dat1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"data/kwcs6th.rds"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="va">dat1</span> <span class="op">=</span> <span class="va">dat1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="st">"sleepgp"</span>, <span class="st">"wwa1gp"</span>, <span class="st">"shortReturn"</span>,<span class="st">"shiftWork"</span> , <span class="st">"njob"</span>, <span class="st">"sexgp"</span>,  <span class="st">"edugp"</span>, <span class="st">"empgp"</span>, <span class="st">"AGE"</span>,<span class="st">"satisfaction"</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://larmarange.github.io/labelled/">labelled</a></span><span class="op">)</span></span>
+<span><span class="va">dat1</span> <span class="op">=</span> <span class="fu"><a href="http://larmarange.github.io/labelled/reference/remove_labels.html">remove_labels</a></span><span class="op">(</span><span class="va">dat1</span><span class="op">)</span> </span></code></pre></div>
+<p>This code uses the %&gt;% operator from the dplyr package to filter the columns of the dat1 data frame. The select function is used to specify the columns to keep in the filtered data frame.</p>
+<p>The selected columns are:</p>
+<ul>
+<li>variables
+<ul>
+<li>“sleepgp”: Sleep status group</li>
+<li>“wwa1gp”: Weekly working hours group</li>
+<li>“shortReturn”: Whether the respondent has a short return time from work or not</li>
+<li>“shiftWork”: Whether the respondent works shifts or not</li>
+<li>“njob”: Number of jobs</li>
+<li>“sexgp”: Sex group</li>
+<li>“edugp”: Education level group</li>
+<li>“empgp”: Employment group</li>
+<li>“AGE”: Age</li>
+<li>“satisfaction”: Work satisfaction</li>
+</ul>
+</li>
+</ul>
+<p>After the data frame has been filtered, only the specified columns will remain in the data frame, and all other columns will be dropped. This can be useful for simplifying your data set and focusing your analysis on specific variables.</p>
+</div>
+<div id="remind-table-1-for-kwcs" class="section level2" number="6.2">
+<h2>
+<span class="header-section-number">6.2</span> remind Table 1 for KWCS<a class="anchor" aria-label="anchor" href="#remind-table-1-for-kwcs"><i class="fas fa-link"></i></a>
+</h2>
+<p>This is code to generate a table using the tabf function to compute frequencies and percentages for categorical variables, and means and standard deviations for continuous variables. The table is formatted using the htmlTable function, which creates an HTML table.</p>
+<p>The setNames function is used to set the names for the columns of the table, and the c function is used to concatenate different variables.</p>
+<p>The cgroup argument in the htmlTable function is used to group the columns of the table. The n.cgroup argument specifies the number of columns in each group. The tfoot argument adds a table footer, and the rnames argument specifies that the table should not include row names.</p>
+<p>Finally, the caption argument specifies the table caption, and the css.table argument sets the font family for the table.</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="va">stratas</span>  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"sleepgp"</span><span class="op">)</span></span>
+<span><span class="va">catVars</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"wwa1gp"</span>, <span class="st">"shortReturn"</span>,<span class="st">"shiftWork"</span> , <span class="st">"njob"</span>, <span class="st">"sexgp"</span>,  <span class="st">"edugp"</span>, <span class="st">"empgp"</span><span class="op">)</span></span>
+<span><span class="va">conVars</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AGE"</span>,<span class="st">"satisfaction"</span><span class="op">)</span></span>
+<span><span class="va">tab1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tabf/man/tabf.html">tabf</a></span><span class="op">(</span>dat1<span class="op">=</span><span class="va">dat1</span>, stratas <span class="op">=</span> <span class="va">stratas</span>, catVars <span class="op">=</span> <span class="va">catVars</span>, conVars <span class="op">=</span> <span class="va">conVars</span><span class="op">)</span></span>
+<span><span class="va">tab1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/htmlTable.html">htmlTable</a></span><span class="op">(</span>align <span class="op">=</span><span class="st">"l"</span><span class="op">)</span> </span></code></pre></div>
+<div class="inline-table"><table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
+<thead><tr>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey;">
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+variables
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+values
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+0.non distrubance
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+1.sleep disturbance
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+p.value
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align: left;">
+1
+</td>
+<td style="text-align: left;">
+AGE
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+46.8±12.4
+</td>
+<td style="text-align: left;">
+49.7±11.9
+</td>
+<td style="text-align: left;">
+&lt;0.001
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+2
+</td>
+<td style="text-align: left;">
+wwa1gp
+</td>
+<td style="text-align: left;">
+Never
+</td>
+<td style="text-align: left;">
+12222 (94.7%)
+</td>
+<td style="text-align: left;">
+684 (5.3%)
+</td>
+<td style="text-align: left;">
+&lt;0.001
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+3
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+Rarely
+</td>
+<td style="text-align: left;">
+12316 (94.5%)
+</td>
+<td style="text-align: left;">
+714 (5.5%)
+</td>
+<td style="text-align: left;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+4
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+Sometimes
+</td>
+<td style="text-align: left;">
+9112 (90.3%)
+</td>
+<td style="text-align: left;">
+981 (9.7%)
+</td>
+<td style="text-align: left;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+5
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+Often
+</td>
+<td style="text-align: left;">
+3456 (82.8%)
+</td>
+<td style="text-align: left;">
+717 (17.2%)
+</td>
+<td style="text-align: left;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+6
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+Always
+</td>
+<td style="text-align: left;">
+634 (70.0%)
+</td>
+<td style="text-align: left;">
+272 (30.0%)
+</td>
+<td style="text-align: left;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+7
+</td>
+<td style="text-align: left;">
+satisfaction
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+2.1±0.5
+</td>
+<td style="text-align: left;">
+2.4±0.6
+</td>
+<td style="text-align: left;">
+&lt;0.001
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+8
+</td>
+<td style="text-align: left;">
+shortReturn
+</td>
+<td style="text-align: left;">
+non short return
+</td>
+<td style="text-align: left;">
+36183 (92.5%)
+</td>
+<td style="text-align: left;">
+2927 (7.5%)
+</td>
+<td style="text-align: left;">
+&lt;0.001
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+9
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+short return
+</td>
+<td style="text-align: left;">
+1557 (77.9%)
+</td>
+<td style="text-align: left;">
+441 (22.1%)
+</td>
+<td style="text-align: left;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+10
+</td>
+<td style="text-align: left;">
+shiftWork
+</td>
+<td style="text-align: left;">
+non shift work
+</td>
+<td style="text-align: left;">
+35056 (91.9%)
+</td>
+<td style="text-align: left;">
+3073 (8.1%)
+</td>
+<td style="text-align: left;">
+&lt;0.001
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+11
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+shift work
+</td>
+<td style="text-align: left;">
+2684 (90.1%)
+</td>
+<td style="text-align: left;">
+295 (9.9%)
+</td>
+<td style="text-align: left;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+12
+</td>
+<td style="text-align: left;">
+njob
+</td>
+<td style="text-align: left;">
+one-job
+</td>
+<td style="text-align: left;">
+37471 (91.9%)
+</td>
+<td style="text-align: left;">
+3317 (8.1%)
+</td>
+<td style="text-align: left;">
+&lt;0.001
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+13
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+njob
+</td>
+<td style="text-align: left;">
+269 (84.1%)
+</td>
+<td style="text-align: left;">
+51 (15.9%)
+</td>
+<td style="text-align: left;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+14
+</td>
+<td style="text-align: left;">
+sexgp
+</td>
+<td style="text-align: left;">
+Men
+</td>
+<td style="text-align: left;">
+17892 (93.1%)
+</td>
+<td style="text-align: left;">
+1327 (6.9%)
+</td>
+<td style="text-align: left;">
+&lt;0.001
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+15
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+Women
+</td>
+<td style="text-align: left;">
+19848 (90.7%)
+</td>
+<td style="text-align: left;">
+2041 (9.3%)
+</td>
+<td style="text-align: left;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+16
+</td>
+<td style="text-align: left;">
+edugp
+</td>
+<td style="text-align: left;">
+university or more
+</td>
+<td style="text-align: left;">
+19597 (92.9%)
+</td>
+<td style="text-align: left;">
+1502 (7.1%)
+</td>
+<td style="text-align: left;">
+&lt;0.001
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+17
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+high school
+</td>
+<td style="text-align: left;">
+14943 (91.9%)
+</td>
+<td style="text-align: left;">
+1318 (8.1%)
+</td>
+<td style="text-align: left;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+18
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+middle school or below
+</td>
+<td style="text-align: left;">
+3200 (85.4%)
+</td>
+<td style="text-align: left;">
+548 (14.6%)
+</td>
+<td style="text-align: left;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+19
+</td>
+<td style="text-align: left;">
+empgp
+</td>
+<td style="text-align: left;">
+paid-worker
+</td>
+<td style="text-align: left;">
+25786 (92.4%)
+</td>
+<td style="text-align: left;">
+2122 (7.6%)
+</td>
+<td style="text-align: left;">
+&lt;0.001
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+20
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+employer/self-employer
+</td>
+<td style="text-align: left;">
+2539 (91.7%)
+</td>
+<td style="text-align: left;">
+229 (8.3%)
+</td>
+<td style="text-align: left;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+21
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+own-account worker
+</td>
+<td style="text-align: left;">
+8359 (90.5%)
+</td>
+<td style="text-align: left;">
+880 (9.5%)
+</td>
+<td style="text-align: left;">
+</td>
+</tr>
+<tr>
+<td style="border-bottom: 2px solid grey; text-align: left;">
+22
+</td>
+<td style="border-bottom: 2px solid grey; text-align: left;">
+</td>
+<td style="border-bottom: 2px solid grey; text-align: left;">
+unpaind family work
+</td>
+<td style="border-bottom: 2px solid grey; text-align: left;">
+1056 (88.5%)
+</td>
+<td style="border-bottom: 2px solid grey; text-align: left;">
+137 (11.5%)
+</td>
+<td style="border-bottom: 2px solid grey; text-align: left;">
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div id="introduction-shiny" class="section level2" number="6.3">
+<h2>
+<span class="header-section-number">6.3</span> Introduction shiny<a class="anchor" aria-label="anchor" href="#introduction-shiny"><i class="fas fa-link"></i></a>
+</h2>
+<p>R Shiny is a web application framework for R programming language that provides an interactive and simple way for data analysis and visualization. The official documentation for Shiny can be found at <a href="https://shiny.rstudio.com/" class="uri">https://shiny.rstudio.com/</a> and provides comprehensive information on using Shiny for web application development. <br>
+At this moment, I just introduced Shiny using KWCS data.</p>
+<p>Let install shiny</p>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://shiny.rstudio.com/">"shiny"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="va">shiny</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/">shiny</a></span><span class="op">)</span></span></code></pre></div>
+<div id="basic-structure-of-shiny" class="section level3" number="6.3.1">
+<h3>
+<span class="header-section-number">6.3.1</span> basic structure of shiny<a class="anchor" aria-label="anchor" href="#basic-structure-of-shiny"><i class="fas fa-link"></i></a>
+</h3>
+<p>This code defines the UI and server components of a Shiny app and then runs the app using the shinyApp() function.</p>
+<p>In the ui component, you define the user interface of the app using R code. This typically includes elements like input controls (e.g. sliders, text boxes, dropdown menus) and output displays (e.g. plots, tables, text).</p>
+<p>In the server component, you define the server-side logic of the app. This code processes user inputs, performs calculations, and generates output for the UI to display. In the server function, you typically define reactive expressions and use Shiny’s reactive programming features to create dynamic behavior in the app.</p>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/">shiny</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Define UI</span></span>
+<span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html">fluidPage</a></span><span class="op">(</span></span>
+<span>  <span class="co"># User interface components go here</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Define server</span></span>
+<span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Server-side logic and output generation go here</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Run the app</span></span>
+<span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/shinyApp.html">shinyApp</a></span><span class="op">(</span>ui <span class="op">=</span> <span class="va">ui</span>, server <span class="op">=</span> <span class="va">server</span><span class="op">)</span></span></code></pre></div>
+<blockquote>
+<p>seperate file of shiny</p>
+</blockquote>
+<p>you can separate the UI, server, and global code into separate files in a Shiny app. This can make your code easier to organize and maintain, especially for larger apps.</p>
+<p>Here’s an example of how you can structure your code into separate files:</p>
+<ol style="list-style-type: decimal">
+<li>ui.R: This file contains the code for the user interface of the app.</li>
+</ol>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/">shiny</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Define UI</span></span>
+<span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html">fluidPage</a></span><span class="op">(</span></span>
+<span>  <span class="co"># User interface components go here</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>server.R: This file contains the server-side logic and output generation of the app.</li>
+</ol>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/">shiny</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Define server</span></span>
+<span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Server-side logic and output generation go here</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>global.R: This file contains any global code that needs to be shared across the app, such as data loading or library imports.</li>
+</ol>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Global code goes here</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="va">dat1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"data/kwcs6th.rds"</span><span class="op">)</span></span></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>run the app</li>
+</ol>
+<div class="inline-figure"><img src="img/shinybasic1.png" width="100%"></div>
+</div>
+</div>
+<div id="input-and-ouput" class="section level2" number="6.4">
+<h2>
+<span class="header-section-number">6.4</span> Input and ouput<a class="anchor" aria-label="anchor" href="#input-and-ouput"><i class="fas fa-link"></i></a>
+</h2>
+<p>The first code chunk defines the user interface (UI) for a Shiny app. The UI consists of a text input box labeled “What is your outcome?” with a default value of “Sleep problem”, and a verbatim text output labeled “myoutput”.</p>
+<p>The second code chunk defines the server-side logic for the Shiny app. Specifically, it creates a reactive expression that renders the text entered in the input box as the output.</p>
+<p>The third code chunk loads a data file named “kwcs6th.rds” as a data frame called “dat1” using the readRDS() function from the tidyverse package.</p>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html">fluidPage</a></span><span class="op">(</span></span>
+<span>  <span class="co"># Create input text box</span></span>
+<span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/textInput.html">textInput</a></span><span class="op">(</span><span class="st">"myquestion"</span>, <span class="st">"What is your outcome:"</span>, value <span class="op">=</span> <span class="st">"Sleep problem"</span><span class="op">)</span>,</span>
+<span>  </span>
+<span>  <span class="co"># Create output</span></span>
+<span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/textOutput.html">verbatimTextOutput</a></span><span class="op">(</span><span class="st">"myoutput"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Define server</span></span>
+<span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Define reactive expression for output</span></span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">myoutput</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/renderPrint.html">renderPrint</a></span><span class="op">(</span><span class="op">{</span></span>
+<span>    <span class="va">input</span><span class="op">$</span><span class="va">myquestion</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="va">dat1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"data/kwcs6th.rds"</span><span class="op">)</span></span>
+<span><span class="va">dat1</span> <span class="op">=</span> <span class="va">dat1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="st">"sleepgp"</span>, <span class="st">"wwa1gp"</span>, <span class="st">"shortReturn"</span>,<span class="st">"shiftWork"</span> , <span class="st">"njob"</span>, <span class="st">"sexgp"</span>,  <span class="st">"edugp"</span>, <span class="st">"empgp"</span>, <span class="st">"AGE"</span>,<span class="st">"satisfaction"</span><span class="op">)</span></span>
+<span><span class="va">gg</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dat1</span><span class="op">)</span></span></code></pre></div>
+<blockquote>
+<p>Input and server feedback</p>
+</blockquote>
+<p>This code creates a dropdown menu for selecting the strata variable, and a table output object named “tableoutput1”.</p>
+<p>The server function subsets the data to the selected strata variable using the input$strata variable and creates a table of the frequency of each category in the selected variable. The addmargins() function is used to add a row and column to the table with the totals.</p>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html">fluidPage</a></span><span class="op">(</span></span>
+<span></span>
+<span>  <span class="co"># Create output</span></span>
+<span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/selectInput.html">selectInput</a></span><span class="op">(</span><span class="st">"smry"</span>, <span class="st">"Select variables of summary:"</span>, choices <span class="op">=</span> <span class="va">gg</span>, selected <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"sleepgp"</span><span class="op">)</span><span class="op">)</span>, </span>
+<span> </span>
+<span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/renderTable.html">tableOutput</a></span><span class="op">(</span><span class="st">"tableoutput1"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Define reactive expression for output</span></span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">myoutput</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/renderPrint.html">renderPrint</a></span><span class="op">(</span><span class="op">{</span></span>
+<span>    <span class="va">input</span><span class="op">$</span><span class="va">myquestion</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span>  <span class="va">selected_smry</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/reactive.html">reactive</a></span><span class="op">(</span><span class="op">{</span><span class="va">input</span><span class="op">$</span><span class="va">smry</span><span class="op">}</span><span class="op">)</span></span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">tableoutput1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/renderTable.html">renderTable</a></span><span class="op">(</span><span class="op">{</span></span>
+<span>    <span class="va">dat1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html">all_of</a></span><span class="op">(</span><span class="fu">selected_smry</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/stats/addmargins.html">addmargins</a></span><span class="op">(</span><span class="op">)</span> </span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="va">dat1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"data/kwcs6th.rds"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">dat1</span> <span class="op">=</span> <span class="va">dat1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="st">"sleepgp"</span>, <span class="st">"wwa1gp"</span>, <span class="st">"shortReturn"</span>,<span class="st">"shiftWork"</span> , <span class="st">"njob"</span>, <span class="st">"sexgp"</span>,  <span class="st">"edugp"</span>, <span class="st">"empgp"</span>, <span class="st">"AGE"</span>,<span class="st">"satisfaction"</span><span class="op">)</span></span>
+<span><span class="va">gg</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dat1</span><span class="op">)</span></span></code></pre></div>
+<p>if the selected variable is numeric, the table() function may not be the most suitable way to summarize the data. Instead, you can use the summarize() function from the tidyverse package to calculate the mean and standard deviation of the selected variable.</p>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Define reactive expression for output</span></span>
+<span></span>
+<span>  <span class="va">selected_smry</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/reactive.html">reactive</a></span><span class="op">(</span><span class="op">{</span><span class="va">input</span><span class="op">$</span><span class="va">smry</span><span class="op">}</span><span class="op">)</span></span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">tableoutput1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/renderTable.html">renderTable</a></span><span class="op">(</span><span class="op">{</span></span>
+<span>    </span>
+<span>    <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">dat1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="fu">selected_smry</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>      <span class="va">dat1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="fu">selected_smry</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>                         sd<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="fu">selected_smry</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>      <span class="va">dat1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html">all_of</a></span><span class="op">(</span><span class="fu">selected_smry</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/stats/addmargins.html">addmargins</a></span><span class="op">(</span><span class="op">)</span> </span>
+<span>    <span class="op">}</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<blockquote>
+<p>Tab pannel</p>
+</blockquote>
+<p>The code defines the user interface (UI) for a Shiny app that contains a tabsetPanel with two tabPanels named “Summary Table” and “Table 1”. The UI includes two tabs, but neither tab has any content or input widgets</p>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html">fluidPage</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/tabsetPanel.html">tabsetPanel</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/tabPanel.html">tabPanel</a></span><span class="op">(</span><span class="st">"Summary Table"</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/tabPanel.html">tabPanel</a></span><span class="op">(</span><span class="st">"Table 1"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>Now, the “Summary Table” tabPanel includes a selectInput widget called “smry” and a tableOutput widget called “tableoutput1”, which are defined as outputs for the server function.</p>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html">fluidPage</a></span><span class="op">(</span></span>
+<span>  </span>
+<span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/tabsetPanel.html">tabsetPanel</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/tabPanel.html">tabPanel</a></span><span class="op">(</span><span class="st">"Summary Table"</span>,</span>
+<span>  </span>
+<span>  <span class="co"># Create output</span></span>
+<span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/selectInput.html">selectInput</a></span><span class="op">(</span><span class="st">"smry"</span>, <span class="st">"Select variables of summary:"</span>, choices <span class="op">=</span> <span class="va">gg</span>, selected <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"sleepgp"</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>  </span>
+<span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/renderTable.html">tableOutput</a></span><span class="op">(</span><span class="st">"tableoutput1"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span><span class="op">)</span>, </span>
+<span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/tabPanel.html">tabPanel</a></span><span class="op">(</span><span class="st">"Table 1"</span><span class="op">)</span></span>
+<span>  </span>
+<span>  </span>
+<span><span class="op">)</span></span></code></pre></div>
+<blockquote>
+<p>Multiple input and Table 1</p>
+</blockquote>
+<p>Remind following code of Table 1. We will use following code in shiny</p>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">stratas</span>  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"sleepgp"</span><span class="op">)</span></span>
+<span><span class="va">catVars</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"wwa1gp"</span>, <span class="st">"shortReturn"</span>,<span class="st">"shiftWork"</span> , <span class="st">"njob"</span>, <span class="st">"sexgp"</span>,  <span class="st">"edugp"</span>, <span class="st">"empgp"</span><span class="op">)</span></span>
+<span><span class="va">conVars</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AGE"</span>,<span class="st">"satisfaction"</span><span class="op">)</span></span>
+<span><span class="va">tab1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tabf/man/tabf.html">tabf</a></span><span class="op">(</span>dat1<span class="op">=</span><span class="va">dat1</span>, stratas <span class="op">=</span> <span class="va">stratas</span>, catVars <span class="op">=</span> <span class="va">catVars</span>, conVars <span class="op">=</span> <span class="va">conVars</span><span class="op">)</span></span>
+<span><span class="va">tab1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/htmlTable.html">htmlTable</a></span><span class="op">(</span>align <span class="op">=</span><span class="st">"l"</span><span class="op">)</span> </span></code></pre></div>
+<div class="inline-table"><table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
+<thead><tr>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey;">
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+variables
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+values
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+0.non distrubance
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+1.sleep disturbance
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+p.value
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align: left;">
+1
+</td>
+<td style="text-align: left;">
+AGE
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+46.8±12.4
+</td>
+<td style="text-align: left;">
+49.7±11.9
+</td>
+<td style="text-align: left;">
+&lt;0.001
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+2
+</td>
+<td style="text-align: left;">
+wwa1gp
+</td>
+<td style="text-align: left;">
+Never
+</td>
+<td style="text-align: left;">
+12222 (94.7%)
+</td>
+<td style="text-align: left;">
+684 (5.3%)
+</td>
+<td style="text-align: left;">
+&lt;0.001
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+3
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+Rarely
+</td>
+<td style="text-align: left;">
+12316 (94.5%)
+</td>
+<td style="text-align: left;">
+714 (5.5%)
+</td>
+<td style="text-align: left;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+4
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+Sometimes
+</td>
+<td style="text-align: left;">
+9112 (90.3%)
+</td>
+<td style="text-align: left;">
+981 (9.7%)
+</td>
+<td style="text-align: left;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+5
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+Often
+</td>
+<td style="text-align: left;">
+3456 (82.8%)
+</td>
+<td style="text-align: left;">
+717 (17.2%)
+</td>
+<td style="text-align: left;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+6
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+Always
+</td>
+<td style="text-align: left;">
+634 (70.0%)
+</td>
+<td style="text-align: left;">
+272 (30.0%)
+</td>
+<td style="text-align: left;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+7
+</td>
+<td style="text-align: left;">
+satisfaction
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+2.1±0.5
+</td>
+<td style="text-align: left;">
+2.4±0.6
+</td>
+<td style="text-align: left;">
+&lt;0.001
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+8
+</td>
+<td style="text-align: left;">
+shortReturn
+</td>
+<td style="text-align: left;">
+non short return
+</td>
+<td style="text-align: left;">
+36183 (92.5%)
+</td>
+<td style="text-align: left;">
+2927 (7.5%)
+</td>
+<td style="text-align: left;">
+&lt;0.001
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+9
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+short return
+</td>
+<td style="text-align: left;">
+1557 (77.9%)
+</td>
+<td style="text-align: left;">
+441 (22.1%)
+</td>
+<td style="text-align: left;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+10
+</td>
+<td style="text-align: left;">
+shiftWork
+</td>
+<td style="text-align: left;">
+non shift work
+</td>
+<td style="text-align: left;">
+35056 (91.9%)
+</td>
+<td style="text-align: left;">
+3073 (8.1%)
+</td>
+<td style="text-align: left;">
+&lt;0.001
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+11
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+shift work
+</td>
+<td style="text-align: left;">
+2684 (90.1%)
+</td>
+<td style="text-align: left;">
+295 (9.9%)
+</td>
+<td style="text-align: left;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+12
+</td>
+<td style="text-align: left;">
+njob
+</td>
+<td style="text-align: left;">
+one-job
+</td>
+<td style="text-align: left;">
+37471 (91.9%)
+</td>
+<td style="text-align: left;">
+3317 (8.1%)
+</td>
+<td style="text-align: left;">
+&lt;0.001
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+13
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+njob
+</td>
+<td style="text-align: left;">
+269 (84.1%)
+</td>
+<td style="text-align: left;">
+51 (15.9%)
+</td>
+<td style="text-align: left;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+14
+</td>
+<td style="text-align: left;">
+sexgp
+</td>
+<td style="text-align: left;">
+Men
+</td>
+<td style="text-align: left;">
+17892 (93.1%)
+</td>
+<td style="text-align: left;">
+1327 (6.9%)
+</td>
+<td style="text-align: left;">
+&lt;0.001
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+15
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+Women
+</td>
+<td style="text-align: left;">
+19848 (90.7%)
+</td>
+<td style="text-align: left;">
+2041 (9.3%)
+</td>
+<td style="text-align: left;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+16
+</td>
+<td style="text-align: left;">
+edugp
+</td>
+<td style="text-align: left;">
+university or more
+</td>
+<td style="text-align: left;">
+19597 (92.9%)
+</td>
+<td style="text-align: left;">
+1502 (7.1%)
+</td>
+<td style="text-align: left;">
+&lt;0.001
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+17
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+high school
+</td>
+<td style="text-align: left;">
+14943 (91.9%)
+</td>
+<td style="text-align: left;">
+1318 (8.1%)
+</td>
+<td style="text-align: left;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+18
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+middle school or below
+</td>
+<td style="text-align: left;">
+3200 (85.4%)
+</td>
+<td style="text-align: left;">
+548 (14.6%)
+</td>
+<td style="text-align: left;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+19
+</td>
+<td style="text-align: left;">
+empgp
+</td>
+<td style="text-align: left;">
+paid-worker
+</td>
+<td style="text-align: left;">
+25786 (92.4%)
+</td>
+<td style="text-align: left;">
+2122 (7.6%)
+</td>
+<td style="text-align: left;">
+&lt;0.001
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+20
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+employer/self-employer
+</td>
+<td style="text-align: left;">
+2539 (91.7%)
+</td>
+<td style="text-align: left;">
+229 (8.3%)
+</td>
+<td style="text-align: left;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+21
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+own-account worker
+</td>
+<td style="text-align: left;">
+8359 (90.5%)
+</td>
+<td style="text-align: left;">
+880 (9.5%)
+</td>
+<td style="text-align: left;">
+</td>
+</tr>
+<tr>
+<td style="border-bottom: 2px solid grey; text-align: left;">
+22
+</td>
+<td style="border-bottom: 2px solid grey; text-align: left;">
+</td>
+<td style="border-bottom: 2px solid grey; text-align: left;">
+unpaind family work
+</td>
+<td style="border-bottom: 2px solid grey; text-align: left;">
+1056 (88.5%)
+</td>
+<td style="border-bottom: 2px solid grey; text-align: left;">
+137 (11.5%)
+</td>
+<td style="border-bottom: 2px solid grey; text-align: left;">
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>for ui</p>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html">fluidPage</a></span><span class="op">(</span></span>
+<span>  </span>
+<span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/tabsetPanel.html">tabsetPanel</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/tabPanel.html">tabPanel</a></span><span class="op">(</span><span class="st">"Summary Table"</span>,</span>
+<span>             </span>
+<span>             <span class="co"># Create output</span></span>
+<span>             <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/selectInput.html">selectInput</a></span><span class="op">(</span><span class="st">"smry"</span>, <span class="st">"Select variables of summary:"</span>, </span>
+<span>                         choices <span class="op">=</span> <span class="va">gg</span>, selected <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"sleepgp"</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>             </span>
+<span>             <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/renderTable.html">tableOutput</a></span><span class="op">(</span><span class="st">"tableoutput1"</span><span class="op">)</span></span>
+<span>    <span class="op">)</span>, </span>
+<span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/tabPanel.html">tabPanel</a></span><span class="op">(</span><span class="st">"Table 1"</span>, </span>
+<span>             </span>
+<span>             <span class="co"># Create dropdown for strata variables</span></span>
+<span>             <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/selectInput.html">selectInput</a></span><span class="op">(</span><span class="st">"stratas"</span>, <span class="st">"Select strata variable(s):"</span>, </span>
+<span>                         choices <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"None"</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dat1</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>                         selected <span class="op">=</span> <span class="st">"sleepgp"</span>, multiple <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
+<span>             </span>
+<span>             <span class="co"># Create dropdown for categorical variables</span></span>
+<span>             <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/selectInput.html">selectInput</a></span><span class="op">(</span><span class="st">"catVars"</span>, <span class="st">"Select categorical variable(s):"</span>, </span>
+<span>                         choices <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"None"</span><span class="op">)</span>, </span>
+<span>                         selected <span class="op">=</span> <span class="st">"wwa1gp"</span>, multiple <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>             </span>
+<span>             <span class="co"># Create dropdown for continuous variables</span></span>
+<span>             <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/selectInput.html">selectInput</a></span><span class="op">(</span><span class="st">"conVars"</span>, <span class="st">"Select continuous variable(s):"</span>, </span>
+<span>                         choices <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"None"</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dat1</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">dat1</span>, <span class="va">is.numeric</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>, </span>
+<span>                         selected <span class="op">=</span> <span class="st">"AGE"</span>, multiple <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>             </span>
+<span>             <span class="co"># Output table for Table 1</span></span>
+<span>             <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/htmlOutput.html">uiOutput</a></span><span class="op">(</span><span class="st">"table1"</span><span class="op">)</span></span>
+<span>             </span>
+<span>    <span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>for server</p>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Define reactive expression for output</span></span>
+<span>  </span>
+<span>  <span class="va">selected_smry</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/reactive.html">reactive</a></span><span class="op">(</span><span class="op">{</span><span class="va">input</span><span class="op">$</span><span class="va">smry</span><span class="op">}</span><span class="op">)</span></span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">tableoutput1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/renderTable.html">renderTable</a></span><span class="op">(</span><span class="op">{</span></span>
+<span>    </span>
+<span>    <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">dat1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="fu">selected_smry</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>      <span class="va">dat1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="fu">selected_smry</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>                         sd<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="fu">selected_smry</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>      <span class="va">dat1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html">all_of</a></span><span class="op">(</span><span class="fu">selected_smry</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/stats/addmargins.html">addmargins</a></span><span class="op">(</span><span class="op">)</span> </span>
+<span>    <span class="op">}</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span>  </span>
+<span>  </span>
+<span>  <span class="va">catVars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/reactive.html">reactive</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">catVars</span><span class="op">)</span></span>
+<span>  <span class="va">conVars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/reactive.html">reactive</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">conVars</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="va">selectedstrata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/reactive.html">reactive</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">stratas</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/observe.html">observe</a></span><span class="op">(</span><span class="op">{</span></span>
+<span>    <span class="va">char</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dat1</span><span class="op">)</span><span class="op">[</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">dat1</span>, <span class="va">is.character</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
+<span>    <span class="va">choices</span> <span class="op">&lt;-</span> <span class="va">char</span><span class="op">[</span><span class="va">char</span><span class="op">!=</span><span class="fu">selectedstrata</span><span class="op">(</span><span class="op">)</span><span class="op">]</span></span>
+<span>     <span class="fu">updatePickerInput</span><span class="op">(</span><span class="va">session</span>, <span class="st">"catVars"</span>, choices <span class="op">=</span> <span class="va">choices</span>, selected <span class="op">=</span> <span class="st">"None"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span>  </span>
+<span>  </span>
+<span>  <span class="va">tab1</span> <span class="op">=</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/reactive.html">reactive</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/tabf/man/tabf.html">tabf</a></span><span class="op">(</span>dat1<span class="op">=</span><span class="va">dat1</span>, stratas <span class="op">=</span> <span class="fu">selectedstrata</span><span class="op">(</span><span class="op">)</span>, catVars <span class="op">=</span> <span class="fu">catVars</span><span class="op">(</span><span class="op">)</span>, conVars <span class="op">=</span> <span class="fu">conVars</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>   <span class="va">output</span><span class="op">$</span><span class="va">table1</span> <span class="op">=</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/renderUI.html">renderUI</a></span><span class="op">(</span><span class="fu">tab1</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/htmlTable.html">htmlTable</a></span><span class="op">(</span>align <span class="op">=</span><span class="st">"l"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="op">}</span></span></code></pre></div>
+<blockquote>
+<p>SidebarLayout</p>
+</blockquote>
+<p>for ui</p>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html">fluidPage</a></span><span class="op">(</span></span>
+<span>  </span>
+<span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/tabsetPanel.html">tabsetPanel</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/tabPanel.html">tabPanel</a></span><span class="op">(</span><span class="st">"Summary Table"</span>,</span>
+<span>             <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/sidebarLayout.html">sidebarLayout</a></span><span class="op">(</span>     </span>
+<span>               <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/sidebarLayout.html">sidebarPanel</a></span><span class="op">(</span></span>
+<span>             </span>
+<span>             <span class="co"># Create output</span></span>
+<span>             <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/selectInput.html">selectInput</a></span><span class="op">(</span><span class="st">"smry"</span>, <span class="st">"Select variables of summary:"</span>, choices <span class="op">=</span> <span class="va">gg</span>, selected <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"sleepgp"</span><span class="op">)</span><span class="op">)</span></span>
+<span>             <span class="op">)</span>, </span>
+<span>             </span>
+<span>            <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/sidebarLayout.html">mainPanel</a></span><span class="op">(</span></span>
+<span>              <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/renderTable.html">tableOutput</a></span><span class="op">(</span><span class="st">"tableoutput1"</span><span class="op">)</span></span>
+<span>              <span class="op">)</span></span>
+<span>    <span class="op">)</span><span class="op">)</span>, </span>
+<span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/tabPanel.html">tabPanel</a></span><span class="op">(</span><span class="st">"Table 1"</span>, </span>
+<span>             <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/sidebarLayout.html">sidebarLayout</a></span><span class="op">(</span></span>
+<span>               <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/sidebarLayout.html">sidebarPanel</a></span><span class="op">(</span></span>
+<span>             <span class="co"># Create dropdown for strata variables</span></span>
+<span>             <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/selectInput.html">selectInput</a></span><span class="op">(</span><span class="st">"stratas"</span>, <span class="st">"Select strata variable(s):"</span>, </span>
+<span>                         choices <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"None"</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dat1</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>                         selected <span class="op">=</span> <span class="st">"sleepgp"</span>, multiple <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
+<span>             </span>
+<span>             <span class="co"># Create dropdown for categorical variables</span></span>
+<span>             <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/selectInput.html">selectInput</a></span><span class="op">(</span><span class="st">"catVars"</span>, <span class="st">"Select categorical variable(s):"</span>, </span>
+<span>                         choices <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"None"</span><span class="op">)</span>, </span>
+<span>                         selected <span class="op">=</span> <span class="st">"wwa1gp"</span>, multiple <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>             </span>
+<span>             <span class="co"># Create dropdown for continuous variables</span></span>
+<span>             <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/selectInput.html">selectInput</a></span><span class="op">(</span><span class="st">"conVars"</span>, <span class="st">"Select continuous variable(s):"</span>, </span>
+<span>                         choices <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"None"</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dat1</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">dat1</span>, <span class="va">is.numeric</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>, </span>
+<span>                         selected <span class="op">=</span> <span class="st">"AGE"</span>, multiple <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>             <span class="op">)</span>,</span>
+<span>             </span>
+<span>             <span class="co"># Output table for Table 1</span></span>
+<span>             <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/sidebarLayout.html">mainPanel</a></span><span class="op">(</span></span>
+<span>               <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/htmlOutput.html">uiOutput</a></span><span class="op">(</span><span class="st">"table1"</span><span class="op">)</span></span>
+<span>             <span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="picker-input-and-more" class="section level2" number="6.5">
+<h2>
+<span class="header-section-number">6.5</span> Picker Input and more<a class="anchor" aria-label="anchor" href="#picker-input-and-more"><i class="fas fa-link"></i></a>
+</h2>
+<p>in global</p>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/dreamRs/shinyWidgets">"shinyWidgets"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"shinyWidgets"</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dreamRs/shinyWidgets">shinyWidgets</a></span><span class="op">)</span></span></code></pre></div>
+<p>ui</p>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html">fluidPage</a></span><span class="op">(</span></span>
+<span>  </span>
+<span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/tabsetPanel.html">tabsetPanel</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/tabPanel.html">tabPanel</a></span><span class="op">(</span><span class="st">"Summary Table"</span>,</span>
+<span>             <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/sidebarLayout.html">sidebarLayout</a></span><span class="op">(</span>     </span>
+<span>               <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/sidebarLayout.html">sidebarPanel</a></span><span class="op">(</span></span>
+<span>             </span>
+<span>             <span class="co"># Create output</span></span>
+<span>             <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/selectInput.html">selectInput</a></span><span class="op">(</span><span class="st">"smry"</span>, <span class="st">"Select variables of summary:"</span>, choices <span class="op">=</span> <span class="va">gg</span>, selected <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"sleepgp"</span><span class="op">)</span><span class="op">)</span></span>
+<span>             <span class="op">)</span>, </span>
+<span>             </span>
+<span>            <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/sidebarLayout.html">mainPanel</a></span><span class="op">(</span></span>
+<span>              <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/renderTable.html">tableOutput</a></span><span class="op">(</span><span class="st">"tableoutput1"</span><span class="op">)</span></span>
+<span>              <span class="op">)</span></span>
+<span>    <span class="op">)</span><span class="op">)</span>, </span>
+<span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/tabPanel.html">tabPanel</a></span><span class="op">(</span><span class="st">"Table 1"</span>, </span>
+<span>             <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/sidebarLayout.html">sidebarLayout</a></span><span class="op">(</span></span>
+<span>               <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/sidebarLayout.html">sidebarPanel</a></span><span class="op">(</span></span>
+<span>             <span class="co"># Create dropdown for strata variables</span></span>
+<span>                 <span class="fu"><a href="https://dreamrs.github.io/shinyWidgets/reference/pickerInput.html">pickerInput</a></span><span class="op">(</span><span class="st">"stratas"</span>, <span class="st">"Select strata variable(s):"</span>, </span>
+<span>                         choices <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"None"</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dat1</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>                         selected <span class="op">=</span> <span class="st">"sleepgp"</span>, multiple <span class="op">=</span> <span class="cn">FALSE</span>, </span>
+<span>                         options <span class="op">=</span> <span class="va">myPickerOptions</span></span>
+<span>                         <span class="op">)</span>,</span>
+<span>             </span>
+<span>             <span class="co"># Create dropdown for categorical variables</span></span>
+<span>             <span class="fu"><a href="https://dreamrs.github.io/shinyWidgets/reference/pickerInput.html">pickerInput</a></span><span class="op">(</span><span class="st">"catVars"</span>, <span class="st">"Select categorical variable(s):"</span>, </span>
+<span>                         choices <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"None"</span><span class="op">)</span>, </span>
+<span>                         selected <span class="op">=</span> <span class="st">"wwa1gp"</span>, multiple <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>                         options <span class="op">=</span> <span class="va">myPickerOptions</span><span class="op">)</span>,</span>
+<span>             </span>
+<span>             <span class="co"># Create dropdown for continuous variables</span></span>
+<span>             <span class="fu"><a href="https://dreamrs.github.io/shinyWidgets/reference/pickerInput.html">pickerInput</a></span><span class="op">(</span><span class="st">"conVars"</span>, <span class="st">"Select continuous variable(s):"</span>, </span>
+<span>                         choices <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"None"</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dat1</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">dat1</span>, <span class="va">is.numeric</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>, </span>
+<span>                         selected <span class="op">=</span> <span class="st">"AGE"</span>, multiple <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>                         options <span class="op">=</span> <span class="va">myPickerOptions</span><span class="op">)</span></span>
+<span>             <span class="op">)</span>,</span>
+<span>             </span>
+<span>             <span class="co"># Output table for Table 1</span></span>
+<span>             <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/sidebarLayout.html">mainPanel</a></span><span class="op">(</span></span>
+<span>               <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/htmlOutput.html">uiOutput</a></span><span class="op">(</span><span class="st">"table1"</span><span class="op">)</span></span>
+<span>             <span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>server</p>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Define reactive expression for output</span></span>
+<span>  </span>
+<span>  <span class="va">selected_smry</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/reactive.html">reactive</a></span><span class="op">(</span><span class="op">{</span><span class="va">input</span><span class="op">$</span><span class="va">smry</span><span class="op">}</span><span class="op">)</span></span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">tableoutput1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/renderTable.html">renderTable</a></span><span class="op">(</span><span class="op">{</span></span>
+<span>    </span>
+<span>    <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">dat1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="fu">selected_smry</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>      <span class="va">dat1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="fu">selected_smry</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>                         sd<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="fu">selected_smry</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>      <span class="va">dat1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html">all_of</a></span><span class="op">(</span><span class="fu">selected_smry</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/stats/addmargins.html">addmargins</a></span><span class="op">(</span><span class="op">)</span> </span>
+<span>    <span class="op">}</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span>  </span>
+<span>  </span>
+<span>  <span class="va">catVars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/reactive.html">reactive</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">catVars</span><span class="op">)</span></span>
+<span>  <span class="va">conVars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/reactive.html">reactive</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">conVars</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="va">selectedstrata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/reactive.html">reactive</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">stratas</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/observe.html">observe</a></span><span class="op">(</span><span class="op">{</span></span>
+<span>    <span class="va">char</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dat1</span><span class="op">)</span><span class="op">[</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">dat1</span>, <span class="va">is.character</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
+<span>    <span class="va">choices</span> <span class="op">&lt;-</span> <span class="va">char</span><span class="op">[</span><span class="va">char</span><span class="op">!=</span><span class="fu">selectedstrata</span><span class="op">(</span><span class="op">)</span><span class="op">]</span></span>
+<span>     <span class="fu"><a href="https://dreamrs.github.io/shinyWidgets/reference/updatePickerInput.html">updatePickerInput</a></span><span class="op">(</span><span class="va">session</span>, <span class="st">"catVars"</span>, choices <span class="op">=</span> <span class="va">choices</span>, selected <span class="op">=</span> <span class="st">"None"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span>  </span>
+<span>  </span>
+<span>  <span class="va">tab1</span> <span class="op">=</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/reactive.html">reactive</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/tabf/man/tabf.html">tabf</a></span><span class="op">(</span>dat1<span class="op">=</span><span class="va">dat1</span>, stratas <span class="op">=</span> <span class="fu">selectedstrata</span><span class="op">(</span><span class="op">)</span>, catVars <span class="op">=</span> <span class="fu">catVars</span><span class="op">(</span><span class="op">)</span>, conVars <span class="op">=</span> <span class="fu">conVars</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>   <span class="va">output</span><span class="op">$</span><span class="va">table1</span> <span class="op">=</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/renderUI.html">renderUI</a></span><span class="op">(</span><span class="fu">tab1</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/htmlTable.html">htmlTable</a></span><span class="op">(</span>align <span class="op">=</span><span class="st">"l"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="op">}</span></span></code></pre></div>
+<p>global</p>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="va">dat1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"data/kwcs6th.rds"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://larmarange.github.io/labelled/">labelled</a></span><span class="op">)</span></span>
+<span><span class="va">dat1</span> <span class="op">=</span> <span class="va">dat1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="st">"sleepgp"</span>, <span class="st">"wwa1gp"</span>, <span class="st">"shortReturn"</span>,<span class="st">"shiftWork"</span> , <span class="st">"njob"</span>, <span class="st">"sexgp"</span>,  <span class="st">"edugp"</span>, <span class="st">"empgp"</span>, <span class="st">"AGE"</span>,<span class="st">"satisfaction"</span><span class="op">)</span></span>
+<span><span class="va">dat1</span> <span class="op">=</span> <span class="fu"><a href="http://larmarange.github.io/labelled/reference/remove_labels.html">remove_labels</a></span><span class="op">(</span><span class="va">dat1</span><span class="op">)</span> </span>
+<span></span>
+<span></span>
+<span><span class="va">gg</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dat1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://devtools.r-lib.org/">"devtools"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/">devtools</a></span><span class="op">)</span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st">"tabf"</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"jinhaslab/tabf"</span>, force <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">tabf</span><span class="op">)</span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">"tidyverse"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://gforge.se/packages/">"htmlTable"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"htmlTable"</span><span class="op">)</span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://broom.tidymodels.org/">"broom"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"broom"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/dreamRs/shinyWidgets">"shinyWidgets"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"shinyWidgets"</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dreamRs/shinyWidgets">shinyWidgets</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">myPickerOptions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>  `actions-box` <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  `live-search` <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  `selected-text-format` <span class="op">=</span> <span class="st">"count &gt; 2"</span>,</span>
+<span>  search <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="logistic-regression-model" class="section level2" number="6.6">
+<h2>
+<span class="header-section-number">6.6</span> Logistic Regression model<a class="anchor" aria-label="anchor" href="#logistic-regression-model"><i class="fas fa-link"></i></a>
+</h2>
+<p>for ui</p>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html">fluidPage</a></span><span class="op">(</span></span>
+<span>  </span>
+<span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/tabsetPanel.html">tabsetPanel</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/tabPanel.html">tabPanel</a></span><span class="op">(</span><span class="st">"Summary Table"</span>,</span>
+<span>             <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/sidebarLayout.html">sidebarLayout</a></span><span class="op">(</span>     </span>
+<span>               <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/sidebarLayout.html">sidebarPanel</a></span><span class="op">(</span></span>
+<span>             </span>
+<span>             <span class="co"># Create output ----------------</span></span>
+<span>             <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/selectInput.html">selectInput</a></span><span class="op">(</span><span class="st">"smry"</span>, <span class="st">"Select variables of summary:"</span>, choices <span class="op">=</span> <span class="va">gg</span>, selected <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"sleepgp"</span><span class="op">)</span><span class="op">)</span></span>
+<span>             <span class="op">)</span>, </span>
+<span>             </span>
+<span>            <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/sidebarLayout.html">mainPanel</a></span><span class="op">(</span></span>
+<span>              <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/renderTable.html">tableOutput</a></span><span class="op">(</span><span class="st">"tableoutput1"</span><span class="op">)</span></span>
+<span>              <span class="op">)</span></span>
+<span>    <span class="op">)</span><span class="op">)</span>, </span>
+<span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/tabPanel.html">tabPanel</a></span><span class="op">(</span><span class="st">"Table 1"</span>, </span>
+<span>             <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/sidebarLayout.html">sidebarLayout</a></span><span class="op">(</span></span>
+<span>               <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/sidebarLayout.html">sidebarPanel</a></span><span class="op">(</span></span>
+<span>             <span class="co"># Create dropdown for strata variables</span></span>
+<span>                 <span class="fu"><a href="https://dreamrs.github.io/shinyWidgets/reference/pickerInput.html">pickerInput</a></span><span class="op">(</span><span class="st">"stratas"</span>, <span class="st">"Select strata variable(s):"</span>, </span>
+<span>                         choices <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"None"</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dat1</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>                         selected <span class="op">=</span> <span class="st">"sleepgp"</span>, multiple <span class="op">=</span> <span class="cn">FALSE</span>, </span>
+<span>                         options <span class="op">=</span> <span class="va">myPickerOptions</span></span>
+<span>                         <span class="op">)</span>,</span>
+<span>             </span>
+<span>             <span class="co"># Create dropdown for categorical variables</span></span>
+<span>             <span class="fu"><a href="https://dreamrs.github.io/shinyWidgets/reference/pickerInput.html">pickerInput</a></span><span class="op">(</span><span class="st">"catVars"</span>, <span class="st">"Select categorical variable(s):"</span>, </span>
+<span>                         choices <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"None"</span><span class="op">)</span>, </span>
+<span>                         selected <span class="op">=</span> <span class="st">"None"</span>, multiple <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>                         options <span class="op">=</span> <span class="va">myPickerOptions</span><span class="op">)</span>,</span>
+<span>             </span>
+<span>             <span class="co"># Create dropdown for continuous variables</span></span>
+<span>             <span class="fu"><a href="https://dreamrs.github.io/shinyWidgets/reference/pickerInput.html">pickerInput</a></span><span class="op">(</span><span class="st">"conVars"</span>, <span class="st">"Select continuous variable(s):"</span>, </span>
+<span>                         choices <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dat1</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">dat1</span>, <span class="va">is.numeric</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>, </span>
+<span>                         selected <span class="op">=</span> <span class="st">"None"</span>, multiple <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>                         options <span class="op">=</span> <span class="va">myPickerOptions</span><span class="op">)</span></span>
+<span>             <span class="op">)</span>,</span>
+<span>             </span>
+<span>             <span class="co"># Output table for Table 1</span></span>
+<span>             <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/sidebarLayout.html">mainPanel</a></span><span class="op">(</span></span>
+<span>               <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/htmlOutput.html">uiOutput</a></span><span class="op">(</span><span class="st">"table1"</span><span class="op">)</span></span>
+<span>             <span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="op">)</span>, </span>
+<span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/tabPanel.html">tabPanel</a></span><span class="op">(</span><span class="st">"Logistic Model"</span>,</span>
+<span>             <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/sidebarLayout.html">sidebarLayout</a></span><span class="op">(</span></span>
+<span>               <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/sidebarLayout.html">sidebarPanel</a></span><span class="op">(</span>  </span>
+<span>                 <span class="fu"><a href="https://dreamrs.github.io/shinyWidgets/reference/pickerInput.html">pickerInput</a></span><span class="op">(</span><span class="st">"Dependent"</span>, <span class="st">"Dependent Variable: "</span>, </span>
+<span>                             choices <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"None"</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dat1</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>                             selected <span class="op">=</span> <span class="st">"sleepgp"</span>, multiple <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span>                 ,</span>
+<span>                 <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/htmlOutput.html">uiOutput</a></span><span class="op">(</span><span class="st">"RefsChoice"</span><span class="op">)</span>,</span>
+<span>                 <span class="fu"><a href="https://dreamrs.github.io/shinyWidgets/reference/pickerInput.html">pickerInput</a></span><span class="op">(</span><span class="st">"Independent"</span>, <span class="st">"Independent Variable: "</span>, </span>
+<span>                             choices <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"None"</span><span class="op">)</span>, </span>
+<span>                             selected <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"wwa1gp"</span><span class="op">)</span>, multiple <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                             options <span class="op">=</span> <span class="va">myPickerOptions</span><span class="op">)</span></span>
+<span>                 ,</span>
+<span>                 <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/actionButton.html">actionButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"submit"</span>, label <span class="op">=</span><span class="st">"Analysis Start"</span><span class="op">)</span>,</span>
+<span>                 </span>
+<span>               <span class="op">)</span>,</span>
+<span>               <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/sidebarLayout.html">mainPanel</a></span><span class="op">(</span><span class="va">tags</span><span class="op">$</span><span class="fu">h3</span><span class="op">(</span><span class="st">"model formular"</span><span class="op">)</span>,</span>
+<span>                         <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/htmlOutput.html">htmlOutput</a></span><span class="op">(</span><span class="st">"formular"</span><span class="op">)</span>, </span>
+<span>                         <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/htmlOutput.html">htmlOutput</a></span><span class="op">(</span><span class="st">"mod1"</span><span class="op">)</span><span class="op">)</span></span>
+<span>             <span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="reivew-of-r-visualization-for-statistical-results.html"><span class="header-section-number">5</span> Reivew of R visualization for statistical results</a></div>
+<div class="next"><a href="parts.html"><span class="header-section-number">7</span> Parts</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#shiny"><span class="header-section-number">6</span> Shiny</a></li>
+<li><a class="nav-link" href="#kwcs-data-preparation"><span class="header-section-number">6.1</span> KWCS data preparation</a></li>
+<li><a class="nav-link" href="#remind-table-1-for-kwcs"><span class="header-section-number">6.2</span> remind Table 1 for KWCS</a></li>
+<li>
+<a class="nav-link" href="#introduction-shiny"><span class="header-section-number">6.3</span> Introduction shiny</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#basic-structure-of-shiny"><span class="header-section-number">6.3.1</span> basic structure of shiny</a></li></ul>
+</li>
+<li><a class="nav-link" href="#input-and-ouput"><span class="header-section-number">6.4</span> Input and ouput</a></li>
+<li><a class="nav-link" href="#picker-input-and-more"><span class="header-section-number">6.5</span> Picker Input and more</a></li>
+<li><a class="nav-link" href="#logistic-regression-model"><span class="header-section-number">6.6</span> Logistic Regression model</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/0401-shiny.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/0401-shiny.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Dashbord for Public Health with R</strong>" was written by jinha yoon. It was last built on 2023-03-30.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
