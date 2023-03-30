@@ -488,6 +488,14 @@ server <- function(input, output) {
 }
 ```
  
+<img src="img/shiny1gif.gif" width="100%">
+
+This code shows a basic example of a Shiny app, and you can build on this foundation to create more complex apps with additional features.
+For example, you could add more input widgets to allow the user to select different subsets of data or change the analysis parameters, or you could add more output elements to display different types of visualizations or summary statistics.
+
+
+
+
 
 
 
