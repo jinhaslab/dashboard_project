@@ -5,8 +5,6 @@
 ## KWCS data preparation
 Prior to start about shiny, I will review the tabf code.
 That code will download the kwcsData6th.rds file from the GitHub repository and save it as data/kwcs6th.rds on your local machine. Then, it will use the readRDS function to load the data into R as an object named dat1.
-After you have loaded the data into R, you can start exploring and analyzing it. You can use the str function to inspect the structure of the data and the head function to see the first few rows of the data.
-
 
 
 ```r
@@ -55,13 +53,8 @@ After the data frame has been filtered, only the specified columns will remain i
 
 ## remind Table 1 for KWCS
 
-This is code to generate a table using the tabf function to compute frequencies and percentages for categorical variables, and means and standard deviations for continuous variables. The table is formatted using the htmlTable function, which creates an HTML table.
 
-The setNames function is used to set the names for the columns of the table, and the c function is used to concatenate different variables.
-
-The cgroup argument in the htmlTable function is used to group the columns of the table. The n.cgroup argument specifies the number of columns in each group. The tfoot argument adds a table footer, and the rnames argument specifies that the table should not include row names.
-
-Finally, the caption argument specifies the table caption, and the css.table argument sets the font family for the table.
+Code is specifying that the variables should be stratified by the single variable "sleepgp", and that the categorical variables are "wwa1gp", "shortReturn", "shiftWork", "njob", "sexgp", "edugp", and "empgp", while the continuous variables are "AGE" and "satisfaction". The function "tabf" is likely a custom function that generates the Table 1 summary based on these inputs. Finally, the "htmlTable" function is being used to output the results in an HTML table format, which can be easily viewed in a web browser or other software that can render HTML tables.
 
 
 ```r
@@ -508,197 +501,8 @@ tab1 = tabf(dat1=dat1, stratas = stratas, catVars = catVars, conVars = conVars)
 tab1 %>% htmlTable(align ="l") 
 ```
 
-<table class='gmisc_table' style='border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;' >
-<thead>
-<tr><th style='border-bottom: 1px solid grey; border-top: 2px solid grey;'></th>
-<th style='font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>variables</th>
-<th style='font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>values</th>
-<th style='font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>0.non distrubance</th>
-<th style='font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>1.sleep disturbance</th>
-<th style='font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;'>p.value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style='text-align: left;'>1</td>
-<td style='text-align: left;'>AGE</td>
-<td style='text-align: left;'></td>
-<td style='text-align: left;'>46.8±12.4</td>
-<td style='text-align: left;'>49.7±11.9</td>
-<td style='text-align: left;'><0.001</td>
-</tr>
-<tr>
-<td style='text-align: left;'>2</td>
-<td style='text-align: left;'>wwa1gp</td>
-<td style='text-align: left;'>Never</td>
-<td style='text-align: left;'>12222 (94.7%)</td>
-<td style='text-align: left;'>684 (5.3%)</td>
-<td style='text-align: left;'><0.001</td>
-</tr>
-<tr>
-<td style='text-align: left;'>3</td>
-<td style='text-align: left;'></td>
-<td style='text-align: left;'>Rarely</td>
-<td style='text-align: left;'>12316 (94.5%)</td>
-<td style='text-align: left;'>714 (5.5%)</td>
-<td style='text-align: left;'></td>
-</tr>
-<tr>
-<td style='text-align: left;'>4</td>
-<td style='text-align: left;'></td>
-<td style='text-align: left;'>Sometimes</td>
-<td style='text-align: left;'>9112 (90.3%)</td>
-<td style='text-align: left;'>981 (9.7%)</td>
-<td style='text-align: left;'></td>
-</tr>
-<tr>
-<td style='text-align: left;'>5</td>
-<td style='text-align: left;'></td>
-<td style='text-align: left;'>Often</td>
-<td style='text-align: left;'>3456 (82.8%)</td>
-<td style='text-align: left;'>717 (17.2%)</td>
-<td style='text-align: left;'></td>
-</tr>
-<tr>
-<td style='text-align: left;'>6</td>
-<td style='text-align: left;'></td>
-<td style='text-align: left;'>Always</td>
-<td style='text-align: left;'>634 (70.0%)</td>
-<td style='text-align: left;'>272 (30.0%)</td>
-<td style='text-align: left;'></td>
-</tr>
-<tr>
-<td style='text-align: left;'>7</td>
-<td style='text-align: left;'>satisfaction</td>
-<td style='text-align: left;'></td>
-<td style='text-align: left;'>2.1±0.5</td>
-<td style='text-align: left;'>2.4±0.6</td>
-<td style='text-align: left;'><0.001</td>
-</tr>
-<tr>
-<td style='text-align: left;'>8</td>
-<td style='text-align: left;'>shortReturn</td>
-<td style='text-align: left;'>non short return</td>
-<td style='text-align: left;'>36183 (92.5%)</td>
-<td style='text-align: left;'>2927 (7.5%)</td>
-<td style='text-align: left;'><0.001</td>
-</tr>
-<tr>
-<td style='text-align: left;'>9</td>
-<td style='text-align: left;'></td>
-<td style='text-align: left;'>short return</td>
-<td style='text-align: left;'>1557 (77.9%)</td>
-<td style='text-align: left;'>441 (22.1%)</td>
-<td style='text-align: left;'></td>
-</tr>
-<tr>
-<td style='text-align: left;'>10</td>
-<td style='text-align: left;'>shiftWork</td>
-<td style='text-align: left;'>non shift work</td>
-<td style='text-align: left;'>35056 (91.9%)</td>
-<td style='text-align: left;'>3073 (8.1%)</td>
-<td style='text-align: left;'><0.001</td>
-</tr>
-<tr>
-<td style='text-align: left;'>11</td>
-<td style='text-align: left;'></td>
-<td style='text-align: left;'>shift work</td>
-<td style='text-align: left;'>2684 (90.1%)</td>
-<td style='text-align: left;'>295 (9.9%)</td>
-<td style='text-align: left;'></td>
-</tr>
-<tr>
-<td style='text-align: left;'>12</td>
-<td style='text-align: left;'>njob</td>
-<td style='text-align: left;'>one-job</td>
-<td style='text-align: left;'>37471 (91.9%)</td>
-<td style='text-align: left;'>3317 (8.1%)</td>
-<td style='text-align: left;'><0.001</td>
-</tr>
-<tr>
-<td style='text-align: left;'>13</td>
-<td style='text-align: left;'></td>
-<td style='text-align: left;'>njob</td>
-<td style='text-align: left;'>269 (84.1%)</td>
-<td style='text-align: left;'>51 (15.9%)</td>
-<td style='text-align: left;'></td>
-</tr>
-<tr>
-<td style='text-align: left;'>14</td>
-<td style='text-align: left;'>sexgp</td>
-<td style='text-align: left;'>Men</td>
-<td style='text-align: left;'>17892 (93.1%)</td>
-<td style='text-align: left;'>1327 (6.9%)</td>
-<td style='text-align: left;'><0.001</td>
-</tr>
-<tr>
-<td style='text-align: left;'>15</td>
-<td style='text-align: left;'></td>
-<td style='text-align: left;'>Women</td>
-<td style='text-align: left;'>19848 (90.7%)</td>
-<td style='text-align: left;'>2041 (9.3%)</td>
-<td style='text-align: left;'></td>
-</tr>
-<tr>
-<td style='text-align: left;'>16</td>
-<td style='text-align: left;'>edugp</td>
-<td style='text-align: left;'>university or more</td>
-<td style='text-align: left;'>19597 (92.9%)</td>
-<td style='text-align: left;'>1502 (7.1%)</td>
-<td style='text-align: left;'><0.001</td>
-</tr>
-<tr>
-<td style='text-align: left;'>17</td>
-<td style='text-align: left;'></td>
-<td style='text-align: left;'>high school</td>
-<td style='text-align: left;'>14943 (91.9%)</td>
-<td style='text-align: left;'>1318 (8.1%)</td>
-<td style='text-align: left;'></td>
-</tr>
-<tr>
-<td style='text-align: left;'>18</td>
-<td style='text-align: left;'></td>
-<td style='text-align: left;'>middle school or below</td>
-<td style='text-align: left;'>3200 (85.4%)</td>
-<td style='text-align: left;'>548 (14.6%)</td>
-<td style='text-align: left;'></td>
-</tr>
-<tr>
-<td style='text-align: left;'>19</td>
-<td style='text-align: left;'>empgp</td>
-<td style='text-align: left;'>paid-worker</td>
-<td style='text-align: left;'>25786 (92.4%)</td>
-<td style='text-align: left;'>2122 (7.6%)</td>
-<td style='text-align: left;'><0.001</td>
-</tr>
-<tr>
-<td style='text-align: left;'>20</td>
-<td style='text-align: left;'></td>
-<td style='text-align: left;'>employer/self-employer</td>
-<td style='text-align: left;'>2539 (91.7%)</td>
-<td style='text-align: left;'>229 (8.3%)</td>
-<td style='text-align: left;'></td>
-</tr>
-<tr>
-<td style='text-align: left;'>21</td>
-<td style='text-align: left;'></td>
-<td style='text-align: left;'>own-account worker</td>
-<td style='text-align: left;'>8359 (90.5%)</td>
-<td style='text-align: left;'>880 (9.5%)</td>
-<td style='text-align: left;'></td>
-</tr>
-<tr>
-<td style='border-bottom: 2px solid grey; text-align: left;'>22</td>
-<td style='border-bottom: 2px solid grey; text-align: left;'></td>
-<td style='border-bottom: 2px solid grey; text-align: left;'>unpaind family work</td>
-<td style='border-bottom: 2px solid grey; text-align: left;'>1056 (88.5%)</td>
-<td style='border-bottom: 2px solid grey; text-align: left;'>137 (11.5%)</td>
-<td style='border-bottom: 2px solid grey; text-align: left;'></td>
-</tr>
-</tbody>
-</table>
-
-for ui
+for ui, this app has two tabs: one for the Summary Table and one for the Table 1 summary. In the Summary Table tab, the user can select one or more variables from a dropdown menu called "smry", and the app generates a summary table that shows summary statistics for the selected variables. F
+In the Table 1 tab, the user can select a strata variable from a dropdown menu called "stratas", one or more categorical variables from a dropdown menu called "catVars", and one or more continuous variables from a dropdown menu called "conVars". The app then generates a Table 1 summary for the selected variables stratified by the selected strata variable. 
 
 ```r
 ui <- fluidPage(
@@ -737,7 +541,7 @@ ui <- fluidPage(
 ```
 
 
-for server
+The server component of the app includes reactive expressions that update the dropdown menus dynamically based on the user's selections, as well as the "tabf" function that generates the Table 1 summary based on the selected variables and strata variable. The resulting Table 1 summary is output in an HTML table format using the "htmlTable" function from the "htmlTable" package.
 
 
 ```r
@@ -777,7 +581,8 @@ server <- function(input, output, session) {
 
 > SidebarLayout
 
-for ui
+In the Summary Table tab, the sidebarLayout function is used to create a layout with a sidebar panel and a main panel. The selectInput function for the "smry" variable is placed in the sidebar panel, and the tableOutput function is placed in the main panel. This allows the user to select the variables to summarize in the sidebar, while the resulting table is displayed in the main panel.
+
 
 ```r
 ui <- fluidPage(
@@ -827,7 +632,8 @@ ui <- fluidPage(
 
 ## Picker Input and more
 
-in global
+Yes, you can add the installation and library loading code for the shinyWidgets package in the global environment of your Shiny app.
+
 
 ```r
 if(!require("shinyWidgets")) install.packages("shinyWidgets")
@@ -835,7 +641,7 @@ library(shinyWidgets)
 
 ```
 
-ui
+The pickerInput function creates a dropdown menu with checkboxes for selecting multiple continuous variables. The choices argument specifies the available options for selection, and selected specifies the default selections. The options argument specifies the options for the picker input widget. Here, we've used pickerOptions to enable an actions box that allows the user to select/deselect all options at once.
 
 ```r
 ui <- fluidPage(
@@ -885,7 +691,14 @@ ui <- fluidPage(
 ```
 
 
-server
+The updatePickerInput function is used to dynamically update the dropdown menu options for categorical variables based on the selected strata variable.
+
+The function takes several arguments:
+
+session: the Shiny session object
+inputId: the ID of the pickerInput widget to update
+choices: a character vector of new choices for the pickerInput widget
+selected: a character vector of selected choices for the pickerInput widget
 
 
 ```r
@@ -923,7 +736,7 @@ server <- function(input, output, session) {
 ```
 
 
-global
+In global, We have also defined the myPickerOptions list, which is used to customize the options for the pickerInput widget.
 
 
 ```r
@@ -962,7 +775,8 @@ myPickerOptions <- list(
 
 ## Logistic Regression model
 
-for ui
+We have created three pickerInput widgets to select the dependent variable, independent variable(s), and reference categories for categorical variables. The options argument for the pickerInput widgets is set to myPickerOptions, which customizes the appearance of the dropdown menus.
+We have also created an action button with label "Analysis Start" that the user can click to run the logistic regression model.
 
 
 ```r
@@ -1034,4 +848,134 @@ ui <- fluidPage(
 )
 
 ```
+
+
+In server setting, 
+First, We define the reactive expression RC, which gets the unique values of the dependent variable to use as the reference value for the logistic regression model. We then create an output called RefsChoice that uses a pickerInput widget to allow the user to select the reference category for categorical variables.
+
+Next, We define the reactive expression SelectedDependent which retrieves the value of the dependent variable selected by the user. We then create an observer that updates the choices available for the independent variable dropdown based on the selected dependent variable.
+
+We create two output elements: formular and mod1. The formular output generates a string that displays the logistic regression model formula based on the user's input. The mod1 output uses the glm function to fit a logistic regression model and generate the summary output using oddsTabf.
+
+
+```r
+server <- function(input, output, session) {
+  # Define reactive expression for output
+  
+  selected_smry <- reactive({input$smry})
+  output$tableoutput1 <- renderTable({
+    
+    if(is.numeric(dat1 %>% pull(selected_smry()))){
+      dat1 %>% summarize(mean=mean(!!sym(selected_smry())), 
+                         sd=sd(!!sym(selected_smry())))
+    } else {
+      dat1 %>% select(all_of(selected_smry())) %>% table() %>% 
+        addmargins() 
+    }
+  })
+  
+  
+  catVars <- reactive(input$catVars)
+  conVars <- reactive(input$conVars)
+  
+  selectedstrata <- reactive(input$stratas)
+  observe({
+    char = names(dat1)[(sapply(dat1, is.character))]
+    choices <- char[char!=selectedstrata()]
+     updatePickerInput(session, "catVars", choices = choices, selected = "None")
+  })
+  
+tab1 = reactive({
+  if (is.null(catVars())) {
+    tabf(dat1=dat1, stratas = selectedstrata(), conVars = conVars())
+  } else if (is.null(conVars())) {
+    tabf(dat1=dat1, stratas = selectedstrata(), catVars = catVars())
+  } else {
+    tabf(dat1=dat1, stratas = selectedstrata(), catVars = catVars(), conVars = conVars())
+  }
+})
+
+output$table1 = renderUI({
+  validate(need(catVars(), "Select variables"))
+  tab1() %>% htmlTable(align ="l")
+})
+
+
+
+
+   
+   
+   # logistic regression
+   ## reference value
+   RC <-  reactive({ validate(
+                     need(input$Dependent, "Dependent variable") )
+                     dat1 %>% select(input$Dependent) %>% unique() %>% pull(.)
+                     })
+   
+   output$RefsChoice <- renderUI({
+                     pickerInput("Refs", "Odds for:",
+                     list(`odds for` = RC()))
+                      })
+   ## independent variable
+   SelectedDependent <- reactive(input$Dependent)
+   observe({
+     char2 = names(dat1)
+     choices2 <- char2[char2!=SelectedDependent()]
+     updatePickerInput(session, "Independent", choices = choices2, selected = c("None"), 
+                                            options = myPickerOptions)
+   })
+   output$formular <- renderUI({
+     form <- HTML(sprintf("<h3> %s == '%s' <br/> ~ %s </h3>",input$Dependent, input$Refs  ,paste0(input$Independent, collapse=" + ")))
+   })
+   
+   output$mod1  <- renderUI({
+     validate( need(input$Independent, "Select independent variable") )
+     f1 <- sprintf("%s == '%s' ~ %s ",
+                   input$Dependent, input$Refs  ,
+                   paste0(input$Independent, collapse=" + "))
+     mod1 <- glm(data=dat1,family=binomial(), as.formula(f1))
+      oddsTabf(mod1)
+   })
+   
+  
+}
+```
+
+The global is same as we made. 
+
+
+```r
+library(tidyverse)
+dat1 = readRDS("data/kwcs6th.rds")
+
+library(labelled)
+dat1 = dat1 %>%
+  select("sleepgp", "wwa1gp", "shortReturn","shiftWork" , "njob", "sexgp",  "edugp", "empgp", "AGE","satisfaction")
+dat1 = remove_labels(dat1) 
+
+
+gg = names(dat1) %>% as.list()
+
+
+if(!require("devtools")) install.packages("devtools")
+library(devtools)
+if(!require("tabf")) install_github("jinhaslab/tabf", force = TRUE)
+library(tabf)
+if(!require("tidyverse")) install.packages("tidyverse")
+if(!require("htmlTable")) install.packages("htmlTable")
+if(!require("broom")) install.packages("broom")
+
+if(!require("shinyWidgets")) install.packages("shinyWidgets")
+library(shinyWidgets)
+
+myPickerOptions <- list(
+  `actions-box` = TRUE,
+  `live-search` = TRUE,
+  `selected-text-format` = "count > 2",
+  search = TRUE
+)
+
+```
+
+
 
