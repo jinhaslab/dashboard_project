@@ -1,3 +1,4 @@
+# (PART\*) Interractive dashboard {-}
 # Shiny
 
 
@@ -341,6 +342,44 @@ dat1 = readRDS("data/kwcs6th.rds")
 4. run the app
 
 <img src="img/shinybasic1.png" width="100%">
+
+
+## communication between ui, server
+
+The user interface section of a Shiny app receives user input variables and sends them to the server section for processing. The server section accepts the input variables from the user interface, applies the necessary processing and rendering steps, generates output variables, and sends them back to the user interface. Finally, the user interface receives the output variables from the server section and displays them to the user
+
+<img src="img/shinyinputoutput1.png" width="100%">
+
+User input: The user interacts with input widgets defined in the user interface section of the app. These input widgets can take a variety of forms, such as text boxes, sliders, and buttons.
+
+Input variables: When the user interacts with an input widget, an input variable is generated. This variable contains the data entered by the user, such as the text typed into a text box or the value selected from a dropdown menu.
+
+Sending inputs to the server: The user interface section sends the input variables to the server section of the app. This happens automatically and in real-time, using reactive programming techniques.
+
+Processing input variables: The server section receives the input variables from the user interface and processes them as needed. This might involve performing calculations, filtering data, or running complex algorithms.
+
+Rendering output: Once the input variables have been processed, the server section generates output variables. These variables contain the data that will be displayed to the user, such as a plot, a table, or a text string. The server section also applies any necessary formatting or styling to the output variables.
+
+Sending outputs to the user interface: The server section sends the output variables back to the user interface section of the app. Again, this happens automatically and in real-time, using reactive programming techniques.
+
+Displaying outputs to the user: The user interface section receives the output variables from the server section and displays them to the user. This might involve rendering the output as a plot, table, or text string, depending on the specific output format of the app. The output elements in the user interface are reactive, meaning they update in real-time as the input variables are changed by the user.
+
+## shiny UI structures
+<img src="img/shinystructure1.png" width="100%">
+
+Now, we discuss an overview of the structure of the user interface (UI) section in Shiny, specifically focusing on the use of sidebarPanel, mainPanel, tabsetPanel, inputWidgets, and actionButton.
+
+sidebarLayout(): Creates a two-panel layout with a sidebar on the left and a main panel on the right.
+
+sidebarPanel(): Defines the content for the sidebar panel, which typically contains input widgets, such as sliders, dropdown menus, or text input boxes.
+
+mainPanel(): Defines the content for the main panel, which typically contains output elements, such as tables, plots, or text output.
+
+tabsetPanel(): Organizes the UI into multiple tabs, with different content displayed in each tab.
+
+actionButton(): Creates a button widget that the user can click to trigger an action in the app.
+
+
 
 ## Input and ouput
 

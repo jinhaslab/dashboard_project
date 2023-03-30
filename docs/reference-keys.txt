@@ -39,6 +39,8 @@ kwcs-data-preparation
 remind-table-1-for-kwcs
 introduction-shiny
 basic-structure-of-shiny
+communication-between-ui-server
+shiny-ui-structures
 input-and-ouput
 picker-input-and-more
 logistic-regression-model

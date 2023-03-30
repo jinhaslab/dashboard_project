@@ -74,6 +74,7 @@
 <li><a class="" href="flexdashboard.html"><span class="header-section-number">4</span> Flexdashboard</a></li>
 <li class="book-part">Review of Data visualization</li>
 <li><a class="" href="reivew-of-r-visualization-for-statistical-results.html"><span class="header-section-number">5</span> Reivew of R visualization for statistical results</a></li>
+<li class="book-part">Interractive dashboard</li>
 <li><a class="active" href="shiny.html"><span class="header-section-number">6</span> Shiny</a></li>
 <li><a class="" href="parts.html"><span class="header-section-number">7</span> Parts</a></li>
 <li><a class="" href="footnotes-and-citations.html"><span class="header-section-number">8</span> Footnotes and citations</a></li>
@@ -654,9 +655,35 @@ At this moment, I just introduced Shiny using KWCS data.</p>
 <div class="inline-figure"><img src="img/shinybasic1.png" width="100%"></div>
 </div>
 </div>
-<div id="input-and-ouput" class="section level2" number="6.4">
+<div id="communication-between-ui-server" class="section level2" number="6.4">
 <h2>
-<span class="header-section-number">6.4</span> Input and ouput<a class="anchor" aria-label="anchor" href="#input-and-ouput"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.4</span> communication between ui, server<a class="anchor" aria-label="anchor" href="#communication-between-ui-server"><i class="fas fa-link"></i></a>
+</h2>
+<p>The user interface section of a Shiny app receives user input variables and sends them to the server section for processing. The server section accepts the input variables from the user interface, applies the necessary processing and rendering steps, generates output variables, and sends them back to the user interface. Finally, the user interface receives the output variables from the server section and displays them to the user</p>
+<div class="inline-figure"><img src="img/shinyinputoutput1.png" width="100%"></div>
+<p>User input: The user interacts with input widgets defined in the user interface section of the app. These input widgets can take a variety of forms, such as text boxes, sliders, and buttons.</p>
+<p>Input variables: When the user interacts with an input widget, an input variable is generated. This variable contains the data entered by the user, such as the text typed into a text box or the value selected from a dropdown menu.</p>
+<p>Sending inputs to the server: The user interface section sends the input variables to the server section of the app. This happens automatically and in real-time, using reactive programming techniques.</p>
+<p>Processing input variables: The server section receives the input variables from the user interface and processes them as needed. This might involve performing calculations, filtering data, or running complex algorithms.</p>
+<p>Rendering output: Once the input variables have been processed, the server section generates output variables. These variables contain the data that will be displayed to the user, such as a plot, a table, or a text string. The server section also applies any necessary formatting or styling to the output variables.</p>
+<p>Sending outputs to the user interface: The server section sends the output variables back to the user interface section of the app. Again, this happens automatically and in real-time, using reactive programming techniques.</p>
+<p>Displaying outputs to the user: The user interface section receives the output variables from the server section and displays them to the user. This might involve rendering the output as a plot, table, or text string, depending on the specific output format of the app. The output elements in the user interface are reactive, meaning they update in real-time as the input variables are changed by the user.</p>
+</div>
+<div id="shiny-ui-structures" class="section level2" number="6.5">
+<h2>
+<span class="header-section-number">6.5</span> shiny UI structures<a class="anchor" aria-label="anchor" href="#shiny-ui-structures"><i class="fas fa-link"></i></a>
+</h2>
+<div class="inline-figure"><img src="img/shinystructure1.png" width="100%"></div>
+<p>Now, we discuss an overview of the structure of the user interface (UI) section in Shiny, specifically focusing on the use of sidebarPanel, mainPanel, tabsetPanel, inputWidgets, and actionButton.</p>
+<p>sidebarLayout(): Creates a two-panel layout with a sidebar on the left and a main panel on the right.</p>
+<p>sidebarPanel(): Defines the content for the sidebar panel, which typically contains input widgets, such as sliders, dropdown menus, or text input boxes.</p>
+<p>mainPanel(): Defines the content for the main panel, which typically contains output elements, such as tables, plots, or text output.</p>
+<p>tabsetPanel(): Organizes the UI into multiple tabs, with different content displayed in each tab.</p>
+<p>actionButton(): Creates a button widget that the user can click to trigger an action in the app.</p>
+</div>
+<div id="input-and-ouput" class="section level2" number="6.6">
+<h2>
+<span class="header-section-number">6.6</span> Input and ouput<a class="anchor" aria-label="anchor" href="#input-and-ouput"><i class="fas fa-link"></i></a>
 </h2>
 <p>The first code chunk defines the user interface (UI) for a Shiny app. The UI consists of a text input box labeled “What is your outcome?” with a default value of “Sleep problem”, and a verbatim text output labeled “myoutput”.</p>
 <p>The second code chunk defines the server-side logic for the Shiny app. Specifically, it creates a reactive expression that renders the text entered in the input box as the output.</p>
@@ -884,9 +911,9 @@ In the Table 1 tab, the user can select a strata variable from a dropdown menu c
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="picker-input-and-more" class="section level2" number="6.5">
+<div id="picker-input-and-more" class="section level2" number="6.7">
 <h2>
-<span class="header-section-number">6.5</span> Picker Input and more<a class="anchor" aria-label="anchor" href="#picker-input-and-more"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.7</span> Picker Input and more<a class="anchor" aria-label="anchor" href="#picker-input-and-more"><i class="fas fa-link"></i></a>
 </h2>
 <p>Yes, you can add the installation and library loading code for the shinyWidgets package in the global environment of your Shiny app.</p>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
@@ -1008,9 +1035,9 @@ selected: a character vector of selected choices for the pickerInput widget</p>
 <span>  search <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="logistic-regression-model" class="section level2" number="6.6">
+<div id="logistic-regression-model" class="section level2" number="6.8">
 <h2>
-<span class="header-section-number">6.6</span> Logistic Regression model<a class="anchor" aria-label="anchor" href="#logistic-regression-model"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.8</span> Logistic Regression model<a class="anchor" aria-label="anchor" href="#logistic-regression-model"><i class="fas fa-link"></i></a>
 </h2>
 <p>We have created three pickerInput widgets to select the dependent variable, independent variable(s), and reference categories for categorical variables. The options argument for the pickerInput widgets is set to myPickerOptions, which customizes the appearance of the dropdown menus.
 We have also created an action button with label “Analysis Start” that the user can click to run the logistic regression model.</p>
@@ -1212,9 +1239,11 @@ First, We define the reactive expression RC, which gets the unique values of the
 <li>
 <a class="nav-link" href="#introduction-shiny"><span class="header-section-number">6.3</span> Introduction shiny</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#basic-structure-of-shiny"><span class="header-section-number">6.3.1</span> basic structure of shiny</a></li></ul>
 </li>
-<li><a class="nav-link" href="#input-and-ouput"><span class="header-section-number">6.4</span> Input and ouput</a></li>
-<li><a class="nav-link" href="#picker-input-and-more"><span class="header-section-number">6.5</span> Picker Input and more</a></li>
-<li><a class="nav-link" href="#logistic-regression-model"><span class="header-section-number">6.6</span> Logistic Regression model</a></li>
+<li><a class="nav-link" href="#communication-between-ui-server"><span class="header-section-number">6.4</span> communication between ui, server</a></li>
+<li><a class="nav-link" href="#shiny-ui-structures"><span class="header-section-number">6.5</span> shiny UI structures</a></li>
+<li><a class="nav-link" href="#input-and-ouput"><span class="header-section-number">6.6</span> Input and ouput</a></li>
+<li><a class="nav-link" href="#picker-input-and-more"><span class="header-section-number">6.7</span> Picker Input and more</a></li>
+<li><a class="nav-link" href="#logistic-regression-model"><span class="header-section-number">6.8</span> Logistic Regression model</a></li>
 </ul>
 
       <div class="book-extra">
