@@ -495,10 +495,30 @@ For example, you could add more input widgets to allow the user to select differ
 
 
 
+### outputs from input
+
+ It's important to use the correct typeOutput function in the user interface section for the type of output being displayed in the app, depending on which type of render function is used to generate the output in the server section.
+
+For example, renderPlot() generates a plot output and should be paired with plotOutput() in the UI section, while renderTable() generates a table output and should be paired with tableOutput(). It's also worth noting that renderText() can only handle character strings, while renderPrint() can handle any printed output.
+
+Data tables are a special type of table output that allow users to page through the data or sort it, and are displayed using dataTableOutput().
+important examples are shown below
+
+&rarr;
+
+| Server rendering | assignment | UI Output function     |
+|------------------|-------------|------------------------|
+| `renderText()` | `output$prediction` | `textOutput("prediction")` |
+| `renderPrint()` | `output$model` | `textOutput("model")` |
+| `renderPlot()` | `output$plot1` | `plotOutput("plot1")` |
+| `renderTable()` | `output$table1` | `tableOutput("table1")` |
+| `renderDataTable()` | `output$dt` | `dataTableOutput("dt")` |
 
 
 
 
+
+### Tab pannels
 
 > Tab pannel
 

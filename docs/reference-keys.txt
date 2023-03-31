@@ -42,6 +42,8 @@ basic-structure-of-shiny
 communication-between-ui-server
 shiny-ui-structures
 input-and-ouput
+outputs-from-input
+tab-pannels
 picker-input-and-more
 logistic-regression-model
 parts
