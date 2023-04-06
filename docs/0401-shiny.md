@@ -504,7 +504,6 @@ For example, renderPlot() generates a plot output and should be paired with plot
 Data tables are a special type of table output that allow users to page through the data or sort it, and are displayed using dataTableOutput().
 important examples are shown below
 
-&rarr;
 
 | Server rendering | assignment | UI Output function     |
 |------------------|-------------|------------------------|
@@ -513,8 +512,6 @@ important examples are shown below
 | `renderPlot()` | `output$plot1` | `plotOutput("plot1")` |
 | `renderTable()` | `output$table1` | `tableOutput("table1")` |
 | `renderDataTable()` | `output$dt` | `dataTableOutput("dt")` |
-
-
 
 
 
@@ -534,7 +531,12 @@ ui <- fluidPage(
 )
 ```
 
+<img src="img/tab1.gif">
+
+
 Now, the "Summary Table" tabPanel includes a selectInput widget called "smry" and a tableOutput widget called "tableoutput1", which are defined as outputs for the server function.
+
+<img src="img/tab2.gif">
 
 
 ```r
@@ -650,6 +652,8 @@ server <- function(input, output, session) {
 
 In the Summary Table tab, the sidebarLayout function is used to create a layout with a sidebar panel and a main panel. The selectInput function for the "smry" variable is placed in the sidebar panel, and the tableOutput function is placed in the main panel. This allows the user to select the variables to summarize in the sidebar, while the resulting table is displayed in the main panel.
 
+<img src="img/tab4.gif">
+
 
 ```r
 ui <- fluidPage(
@@ -707,6 +711,8 @@ if(!require("shinyWidgets")) install.packages("shinyWidgets")
 library(shinyWidgets)
 
 ```
+
+<img src="img/pickerinput.gif">
 
 The pickerInput function creates a dropdown menu with checkboxes for selecting multiple continuous variables. The choices argument specifies the available options for selection, and selected specifies the default selections. The options argument specifies the options for the picker input widget. Here, we've used pickerOptions to enable an actions box that allows the user to select/deselect all options at once.
 
@@ -995,14 +1001,16 @@ output$table1 = renderUI({
      form <- HTML(sprintf("<h3> %s == '%s' <br/> ~ %s </h3>",input$Dependent, input$Refs  ,paste0(input$Independent, collapse=" + ")))
    })
    
-   output$mod1  <- renderUI({
-     validate( need(input$Independent, "Select independent variable") )
-     f1 <- sprintf("%s == '%s' ~ %s ",
-                   input$Dependent, input$Refs  ,
-                   paste0(input$Independent, collapse=" + "))
-     mod1 <- glm(data=dat1,family=binomial(), as.formula(f1))
+  observeEvent(input$submit, {
+    output$mod1 <- renderUI({
+      validate(need(input$Independent, "Select independent variable"))
+      f1 <- sprintf("%s == '%s' ~ %s ",
+                    input$Dependent, input$Refs,
+                    paste0(input$Independent, collapse=" + "))
+      mod1 <- glm(data=dat1, family=binomial(), as.formula(f1))
       oddsTabf(mod1)
-   })
+    })
+  })
    
   
 }
@@ -1043,6 +1051,37 @@ myPickerOptions <- list(
 )
 
 ```
+
+
+## Quiz 
+
+Make a new tab of logistic plot model. Make a app displaying ggplot output of odds ratio with 95% confidence interval. You can use following code of OR and 95% CI plot.  You should modify the code, and add that into server, and modify the UI, too. Good Luck!
+
+<img src="img/logisticplot.gif" width="90%">
+
+> for ggplot of OR with 95%CI
+
+
+```r
+mod1 = dat1 %>%
+  glm(data=.,family="binomial",formula = sleepgp == "1.sleep disturbance"  
+      ~ wwa1gp)
+
+oddf0(mod1) %>%
+  ggplot(aes(y=values, x = or)) +
+  theme_classic() +
+  geom_errorbarh(aes(xmin = ll, xmax = ul), height = 0.09, color = "#666666", size=0.5) +
+  geom_point(shape = 15, size = 2, color = "#444444")  +
+  geom_vline(xintercept = 1, color = "#FF0000", linetype = "dashed", cex =0.5, alpha = 0.5) +
+  ylab("") +
+  xlab("Odds Ratio and 95% Confidence Interval") +
+  theme(text = element_text(family ="Times"))
+
+```
+
+if you want to know about such ggplot code go to <a href="https://jinhaslab.github.io/dspubs_tutorbook/statistical-plot-with-ggplot2.html#odds-ratio-and-95-confidence-interval"> Here </a>
+
+
 
 
 

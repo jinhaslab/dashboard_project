@@ -46,6 +46,7 @@ outputs-from-input
 tab-pannels
 picker-input-and-more
 logistic-regression-model
+quiz
 parts
 footnotes-and-citations
 footnotes
