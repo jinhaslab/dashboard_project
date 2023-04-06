@@ -712,7 +712,7 @@ library(shinyWidgets)
 
 ```
 
-<img src="img/pickerinput.gif">
+<img src="img/pickerinput.gif" width="100%">
 
 The pickerInput function creates a dropdown menu with checkboxes for selecting multiple continuous variables. The choices argument specifies the available options for selection, and selected specifies the default selections. The options argument specifies the options for the picker input widget. Here, we've used pickerOptions to enable an actions box that allows the user to select/deselect all options at once.
 
@@ -766,12 +766,15 @@ ui <- fluidPage(
 
 The updatePickerInput function is used to dynamically update the dropdown menu options for categorical variables based on the selected strata variable.
 
+<img src="img/pickertalk.png" width="100%">
+
 The function takes several arguments:
 
 session: the Shiny session object
 inputId: the ID of the pickerInput widget to update
 choices: a character vector of new choices for the pickerInput widget
 selected: a character vector of selected choices for the pickerInput widget
+
 
 
 ```r
@@ -1015,6 +1018,26 @@ output$table1 = renderUI({
   
 }
 ```
+
+Let's focuse on `observeEvent` function
+
+```r
+  observeEvent(input$submit, {
+    output$mod1 <- renderUI({
+      validate(need(input$Independent, "Select independent variable"))
+      f1 <- sprintf("%s == '%s' ~ %s ",
+                    input$Dependent, input$Refs,
+                    paste0(input$Independent, collapse=" + "))
+      mod1 <- glm(data=dat1, family=binomial(), as.formula(f1))
+      oddsTabf(mod1)
+    })
+  })
+```
+The `observeEvent` function listens for a click on the "Analysis Start" button (`input$submit`) and then executes the logistic regression code within the `output$mod1` render function to generate the odds ratio table. Once the table is generated, it will be displayed on the UI. 
+
+<img src="img/obsesrveEvent.png" width="100%">
+
+
 
 The global is same as we made. 
 

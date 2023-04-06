@@ -908,7 +908,7 @@ In the Table 1 tab, the user can select a strata variable from a dropdown menu c
 <span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/observe.html">observe</a></span><span class="op">(</span><span class="op">{</span></span>
 <span>    <span class="va">char</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dat1</span><span class="op">)</span><span class="op">[</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">dat1</span>, <span class="va">is.character</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
 <span>    <span class="va">choices</span> <span class="op">&lt;-</span> <span class="va">char</span><span class="op">[</span><span class="va">char</span><span class="op">!=</span><span class="fu">selectedstrata</span><span class="op">(</span><span class="op">)</span><span class="op">]</span></span>
-<span>     <span class="fu">updatePickerInput</span><span class="op">(</span><span class="va">session</span>, <span class="st">"catVars"</span>, choices <span class="op">=</span> <span class="va">choices</span>, selected <span class="op">=</span> <span class="st">"None"</span><span class="op">)</span></span>
+<span>     <span class="fu"><a href="https://dreamrs.github.io/shinyWidgets/reference/updatePickerInput.html">updatePickerInput</a></span><span class="op">(</span><span class="va">session</span>, <span class="st">"catVars"</span>, choices <span class="op">=</span> <span class="va">choices</span>, selected <span class="op">=</span> <span class="st">"None"</span><span class="op">)</span></span>
 <span>  <span class="op">}</span><span class="op">)</span></span>
 <span>  </span>
 <span>  </span>
@@ -973,7 +973,7 @@ In the Table 1 tab, the user can select a strata variable from a dropdown menu c
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/dreamRs/shinyWidgets">"shinyWidgets"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"shinyWidgets"</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dreamRs/shinyWidgets">shinyWidgets</a></span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="img/pickerinput.gif"></div>
+<div class="inline-figure"><img src="img/pickerinput.gif" width="100%"></div>
 <p>The pickerInput function creates a dropdown menu with checkboxes for selecting multiple continuous variables. The choices argument specifies the available options for selection, and selected specifies the default selections. The options argument specifies the options for the picker input widget. Here, we’ve used pickerOptions to enable an actions box that allows the user to select/deselect all options at once.</p>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html">fluidPage</a></span><span class="op">(</span></span>
@@ -1021,6 +1021,7 @@ In the Table 1 tab, the user can select a strata variable from a dropdown menu c
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>The updatePickerInput function is used to dynamically update the dropdown menu options for categorical variables based on the selected strata variable.</p>
+<div class="inline-figure"><img src="img/pickertalk.png" width="100%"></div>
 <p>The function takes several arguments:</p>
 <p>session: the Shiny session object
 inputId: the ID of the pickerInput widget to update
@@ -1250,8 +1251,22 @@ First, We define the reactive expression RC, which gets the unique values of the
 <span>   </span>
 <span>  </span>
 <span><span class="op">}</span></span></code></pre></div>
-<p>The global is same as we made.</p>
+<p>Let’s focuse on <code>observeEvent</code> function</p>
 <div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/observeEvent.html">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">submit</span>, <span class="op">{</span></span>
+<span>    <span class="va">output</span><span class="op">$</span><span class="va">mod1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/renderUI.html">renderUI</a></span><span class="op">(</span><span class="op">{</span></span>
+<span>      <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/validate.html">validate</a></span><span class="op">(</span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/validate.html">need</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">Independent</span>, <span class="st">"Select independent variable"</span><span class="op">)</span><span class="op">)</span></span>
+<span>      <span class="va">f1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"%s == '%s' ~ %s "</span>,</span>
+<span>                    <span class="va">input</span><span class="op">$</span><span class="va">Dependent</span>, <span class="va">input</span><span class="op">$</span><span class="va">Refs</span>,</span>
+<span>                    <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">Independent</span>, collapse<span class="op">=</span><span class="st">" + "</span><span class="op">)</span><span class="op">)</span></span>
+<span>      <span class="va">mod1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">dat1</span>, family<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/family.html">binomial</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/formula.html">as.formula</a></span><span class="op">(</span><span class="va">f1</span><span class="op">)</span><span class="op">)</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/pkg/tabf/man/oddsTabf.html">oddsTabf</a></span><span class="op">(</span><span class="va">mod1</span><span class="op">)</span></span>
+<span>    <span class="op">}</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span></code></pre></div>
+<p>The <code>observeEvent</code> function listens for a click on the “Analysis Start” button (<code>input$submit</code>) and then executes the logistic regression code within the <code>output$mod1</code> render function to generate the odds ratio table. Once the table is generated, it will be displayed on the UI.</p>
+<div class="inline-figure"><img src="img/obsesrveEvent.png" width="100%"></div>
+<p>The global is same as we made.</p>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="va">dat1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"data/kwcs6th.rds"</span><span class="op">)</span></span>
 <span></span>
@@ -1291,7 +1306,7 @@ First, We define the reactive expression RC, which gets the unique values of the
 <blockquote>
 <p>for ggplot of OR with 95%CI</p>
 </blockquote>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mod1</span> <span class="op">=</span> <span class="va">dat1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">.</span>,family<span class="op">=</span><span class="st">"binomial"</span>,formula <span class="op">=</span> <span class="va">sleepgp</span> <span class="op">==</span> <span class="st">"1.sleep disturbance"</span>  </span>
 <span>      <span class="op">~</span> <span class="va">wwa1gp</span><span class="op">)</span></span>
