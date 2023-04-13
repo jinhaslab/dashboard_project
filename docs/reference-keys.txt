@@ -22,6 +22,18 @@ visualization
 html-widgets
 data-tables
 valuebox-and-gauges
+flexdashboard-with-datatable
+download-dictionary
+first-setting-of-flexdashboard
+button-options
+data-table-height-and-window-height
+create-data-table
+make-dashboard-for-questionnaire-and-dictonary
+storyboard-for-dictionary
+making-function-of-data-table
+add-storyboard-for-selecting-variable-type
+put-it-togather
+quiz
 reivew-of-r-visualization-for-statistical-results
 basic-plot-with-r
 ggplot-basic
@@ -46,7 +58,7 @@ outputs-from-input
 tab-pannels
 picker-input-and-more
 logistic-regression-model
-quiz
+quiz-1
 parts
 footnotes-and-citations
 footnotes

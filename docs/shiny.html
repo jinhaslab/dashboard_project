@@ -4,18 +4,24 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 6 Shiny | Dashbord for Public Health with R</title>
+<title>Chapter 7 Shiny | Dashbord for Public Health with R</title>
 <meta name="author" content="jinha yoon">
 <meta name="generator" content="bookdown 0.33 with bs4_book()">
-<meta property="og:title" content="Chapter 6 Shiny | Dashbord for Public Health with R">
+<meta property="og:title" content="Chapter 7 Shiny | Dashbord for Public Health with R">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 6 Shiny | Dashbord for Public Health with R">
+<meta name="twitter:title" content="Chapter 7 Shiny | Dashbord for Public Health with R">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.1/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
-<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.1/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.27/datatables.js"></script><link href="libs/dt-core-1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="libs/dt-core-1.12.1/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="libs/dt-core-1.12.1/js/jquery.dataTables.min.js"></script><script src="libs/jszip-1.12.1/jszip.min.js"></script><link href="libs/dt-ext-buttons-1.12.1/css/buttons.dataTables.min.css" rel="stylesheet">
+<script src="libs/dt-ext-buttons-1.12.1/js/dataTables.buttons.min.js"></script><script src="libs/dt-ext-buttons-1.12.1/js/buttons.html5.min.js"></script><script src="libs/dt-ext-buttons-1.12.1/js/buttons.colVis.min.js"></script><script src="libs/dt-ext-buttons-1.12.1/js/buttons.print.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet">
+<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet">
+<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><script src="libs/plotly-binding-4.10.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
 <script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -43,9 +49,9 @@
     }
   </style>
 <link rel="stylesheet" href="style.css">
-<meta name="description" content="6.1 KWCS data preparation Prior to start about shiny, I will review the tabf code. That code will download the kwcsData6th.rds file from the GitHub repository and save it as data/kwcs6th.rds on...">
-<meta property="og:description" content="6.1 KWCS data preparation Prior to start about shiny, I will review the tabf code. That code will download the kwcsData6th.rds file from the GitHub repository and save it as data/kwcs6th.rds on...">
-<meta name="twitter:description" content="6.1 KWCS data preparation Prior to start about shiny, I will review the tabf code. That code will download the kwcsData6th.rds file from the GitHub repository and save it as data/kwcs6th.rds on...">
+<meta name="description" content="7.1 KWCS data preparation Prior to start about shiny, I will review the tabf code. That code will download the kwcsData6th.rds file from the GitHub repository and save it as data/kwcs6th.rds on...">
+<meta property="og:description" content="7.1 KWCS data preparation Prior to start about shiny, I will review the tabf code. That code will download the kwcsData6th.rds file from the GitHub repository and save it as data/kwcs6th.rds on...">
+<meta name="twitter:description" content="7.1 KWCS data preparation Prior to start about shiny, I will review the tabf code. That code will download the kwcsData6th.rds file from the GitHub repository and save it as data/kwcs6th.rds on...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -72,14 +78,15 @@
 <li><a class="" href="rstudio-setting-cloud.html"><span class="header-section-number">2</span> Rstudio setting (Cloud)</a></li>
 <li><a class="" href="rstudio-chatgpt-addin.html"><span class="header-section-number">3</span> Rstudio ChatGPT addin</a></li>
 <li><a class="" href="flexdashboard.html"><span class="header-section-number">4</span> Flexdashboard</a></li>
+<li><a class="" href="flexdashboard-with-datatable.html"><span class="header-section-number">5</span> Flexdashboard with DataTable</a></li>
 <li class="book-part">Review of Data visualization</li>
-<li><a class="" href="reivew-of-r-visualization-for-statistical-results.html"><span class="header-section-number">5</span> Reivew of R visualization for statistical results</a></li>
+<li><a class="" href="reivew-of-r-visualization-for-statistical-results.html"><span class="header-section-number">6</span> Reivew of R visualization for statistical results</a></li>
 <li class="book-part">Interractive dashboard</li>
-<li><a class="active" href="shiny.html"><span class="header-section-number">6</span> Shiny</a></li>
-<li><a class="" href="parts.html"><span class="header-section-number">7</span> Parts</a></li>
-<li><a class="" href="footnotes-and-citations.html"><span class="header-section-number">8</span> Footnotes and citations</a></li>
-<li><a class="" href="blocks.html"><span class="header-section-number">9</span> Blocks</a></li>
-<li><a class="" href="sharing-your-book.html"><span class="header-section-number">10</span> Sharing your book</a></li>
+<li><a class="active" href="shiny.html"><span class="header-section-number">7</span> Shiny</a></li>
+<li><a class="" href="parts.html"><span class="header-section-number">8</span> Parts</a></li>
+<li><a class="" href="footnotes-and-citations.html"><span class="header-section-number">9</span> Footnotes and citations</a></li>
+<li><a class="" href="blocks.html"><span class="header-section-number">10</span> Blocks</a></li>
+<li><a class="" href="sharing-your-book.html"><span class="header-section-number">11</span> Sharing your book</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -88,17 +95,17 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="shiny" class="section level1" number="6">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="shiny" class="section level1" number="7">
 <h1>
-<span class="header-section-number">6</span> Shiny<a class="anchor" aria-label="anchor" href="#shiny"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7</span> Shiny<a class="anchor" aria-label="anchor" href="#shiny"><i class="fas fa-link"></i></a>
 </h1>
-<div id="kwcs-data-preparation" class="section level2" number="6.1">
+<div id="kwcs-data-preparation" class="section level2" number="7.1">
 <h2>
-<span class="header-section-number">6.1</span> KWCS data preparation<a class="anchor" aria-label="anchor" href="#kwcs-data-preparation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.1</span> KWCS data preparation<a class="anchor" aria-label="anchor" href="#kwcs-data-preparation"><i class="fas fa-link"></i></a>
 </h2>
 <p>Prior to start about shiny, I will review the tabf code.
 That code will download the kwcsData6th.rds file from the GitHub repository and save it as data/kwcs6th.rds on your local machine. Then, it will use the readRDS function to load the data into R as an object named dat1.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">"tidyverse"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></span>
 <span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://gforge.se/packages/">"htmlTable"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"htmlTable"</span><span class="op">)</span></span>
@@ -111,7 +118,7 @@ That code will download the kwcsData6th.rds file from the GitHub repository and 
 <span><span class="va">url</span> <span class="op">=</span><span class="st">"https://github.com/jinhaslab/opendata/raw/3006e12f54bd2abd3cd1aac9cda807ef8e614a42/kwcs/kwcsData6th.rds"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="va">url</span>, <span class="st">"data/kwcs6th.rds"</span><span class="op">)</span></span>
 <span><span class="va">dat1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"data/kwcs6th.rds"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">dat1</span> <span class="op">=</span> <span class="va">dat1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="st">"sleepgp"</span>, <span class="st">"wwa1gp"</span>, <span class="st">"shortReturn"</span>,<span class="st">"shiftWork"</span> , <span class="st">"njob"</span>, <span class="st">"sexgp"</span>,  <span class="st">"edugp"</span>, <span class="st">"empgp"</span>, <span class="st">"AGE"</span>,<span class="st">"satisfaction"</span><span class="op">)</span></span>
@@ -137,12 +144,12 @@ That code will download the kwcsData6th.rds file from the GitHub repository and 
 </ul>
 <p>After the data frame has been filtered, only the specified columns will remain in the data frame, and all other columns will be dropped. This can be useful for simplifying your data set and focusing your analysis on specific variables.</p>
 </div>
-<div id="remind-table-1-for-kwcs" class="section level2" number="6.2">
+<div id="remind-table-1-for-kwcs" class="section level2" number="7.2">
 <h2>
-<span class="header-section-number">6.2</span> remind Table 1 for KWCS<a class="anchor" aria-label="anchor" href="#remind-table-1-for-kwcs"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2</span> remind Table 1 for KWCS<a class="anchor" aria-label="anchor" href="#remind-table-1-for-kwcs"><i class="fas fa-link"></i></a>
 </h2>
 <p>Code is specifying that the variables should be stratified by the single variable “sleepgp”, and that the categorical variables are “wwa1gp”, “shortReturn”, “shiftWork”, “njob”, “sexgp”, “edugp”, and “empgp”, while the continuous variables are “AGE” and “satisfaction”. The function “tabf” is likely a custom function that generates the Table 1 summary based on these inputs. Finally, the “htmlTable” function is being used to output the results in an HTML table format, which can be easily viewed in a web browser or other software that can render HTML tables.</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">stratas</span>  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"sleepgp"</span><span class="op">)</span></span>
 <span><span class="va">catVars</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"wwa1gp"</span>, <span class="st">"shortReturn"</span>,<span class="st">"shiftWork"</span> , <span class="st">"njob"</span>, <span class="st">"sexgp"</span>,  <span class="st">"edugp"</span>, <span class="st">"empgp"</span><span class="op">)</span></span>
@@ -585,24 +592,24 @@ unpaind family work
 </tbody>
 </table></div>
 </div>
-<div id="introduction-shiny" class="section level2" number="6.3">
+<div id="introduction-shiny" class="section level2" number="7.3">
 <h2>
-<span class="header-section-number">6.3</span> Introduction shiny<a class="anchor" aria-label="anchor" href="#introduction-shiny"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.3</span> Introduction shiny<a class="anchor" aria-label="anchor" href="#introduction-shiny"><i class="fas fa-link"></i></a>
 </h2>
 <p>R Shiny is a web application framework for R programming language that provides an interactive and simple way for data analysis and visualization. The official documentation for Shiny can be found at <a href="https://shiny.rstudio.com/" class="uri">https://shiny.rstudio.com/</a> and provides comprehensive information on using Shiny for web application development. <br>
 At this moment, I just introduced Shiny using KWCS data.</p>
 <p>Let install shiny</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://shiny.rstudio.com/">"shiny"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="va">shiny</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/">shiny</a></span><span class="op">)</span></span></code></pre></div>
-<div id="basic-structure-of-shiny" class="section level3" number="6.3.1">
+<div id="basic-structure-of-shiny" class="section level3" number="7.3.1">
 <h3>
-<span class="header-section-number">6.3.1</span> basic structure of shiny<a class="anchor" aria-label="anchor" href="#basic-structure-of-shiny"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.3.1</span> basic structure of shiny<a class="anchor" aria-label="anchor" href="#basic-structure-of-shiny"><i class="fas fa-link"></i></a>
 </h3>
 <p>This code defines the UI and server components of a Shiny app and then runs the app using the shinyApp() function.</p>
 <p>In the ui component, you define the user interface of the app using R code. This typically includes elements like input controls (e.g. sliders, text boxes, dropdown menus) and output displays (e.g. plots, tables, text).</p>
 <p>In the server component, you define the server-side logic of the app. This code processes user inputs, performs calculations, and generates output for the UI to display. In the server function, you typically define reactive expressions and use Shiny’s reactive programming features to create dynamic behavior in the app.</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/">shiny</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Define UI</span></span>
@@ -625,7 +632,7 @@ At this moment, I just introduced Shiny using KWCS data.</p>
 <ol style="list-style-type: decimal">
 <li>ui.R: This file contains the code for the user interface of the app.</li>
 </ol>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/">shiny</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Define UI</span></span>
@@ -635,7 +642,7 @@ At this moment, I just introduced Shiny using KWCS data.</p>
 <ol start="2" style="list-style-type: decimal">
 <li>server.R: This file contains the server-side logic and output generation of the app.</li>
 </ol>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/">shiny</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Define server</span></span>
@@ -645,7 +652,7 @@ At this moment, I just introduced Shiny using KWCS data.</p>
 <ol start="3" style="list-style-type: decimal">
 <li>global.R: This file contains any global code that needs to be shared across the app, such as data loading or library imports.</li>
 </ol>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Global code goes here</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="va">dat1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"data/kwcs6th.rds"</span><span class="op">)</span></span></code></pre></div>
@@ -655,9 +662,9 @@ At this moment, I just introduced Shiny using KWCS data.</p>
 <div class="inline-figure"><img src="img/shinybasic1.png" width="100%"></div>
 </div>
 </div>
-<div id="communication-between-ui-server" class="section level2" number="6.4">
+<div id="communication-between-ui-server" class="section level2" number="7.4">
 <h2>
-<span class="header-section-number">6.4</span> communication between ui, server<a class="anchor" aria-label="anchor" href="#communication-between-ui-server"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.4</span> communication between ui, server<a class="anchor" aria-label="anchor" href="#communication-between-ui-server"><i class="fas fa-link"></i></a>
 </h2>
 <p>The user interface section of a Shiny app receives user input variables and sends them to the server section for processing. The server section accepts the input variables from the user interface, applies the necessary processing and rendering steps, generates output variables, and sends them back to the user interface. Finally, the user interface receives the output variables from the server section and displays them to the user</p>
 <div class="inline-figure"><img src="img/shinyinputoutput1.png" width="100%"></div>
@@ -669,9 +676,9 @@ At this moment, I just introduced Shiny using KWCS data.</p>
 <p>Sending outputs to the user interface: The server section sends the output variables back to the user interface section of the app. Again, this happens automatically and in real-time, using reactive programming techniques.</p>
 <p>Displaying outputs to the user: The user interface section receives the output variables from the server section and displays them to the user. This might involve rendering the output as a plot, table, or text string, depending on the specific output format of the app. The output elements in the user interface are reactive, meaning they update in real-time as the input variables are changed by the user.</p>
 </div>
-<div id="shiny-ui-structures" class="section level2" number="6.5">
+<div id="shiny-ui-structures" class="section level2" number="7.5">
 <h2>
-<span class="header-section-number">6.5</span> shiny UI structures<a class="anchor" aria-label="anchor" href="#shiny-ui-structures"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.5</span> shiny UI structures<a class="anchor" aria-label="anchor" href="#shiny-ui-structures"><i class="fas fa-link"></i></a>
 </h2>
 <div class="inline-figure"><img src="img/shinystructure1.png" width="100%"></div>
 <p>Now, we discuss an overview of the structure of the user interface (UI) section in Shiny, specifically focusing on the use of sidebarPanel, mainPanel, tabsetPanel, inputWidgets, and actionButton.</p>
@@ -681,14 +688,14 @@ At this moment, I just introduced Shiny using KWCS data.</p>
 <p>tabsetPanel(): Organizes the UI into multiple tabs, with different content displayed in each tab.</p>
 <p>actionButton(): Creates a button widget that the user can click to trigger an action in the app.</p>
 </div>
-<div id="input-and-ouput" class="section level2" number="6.6">
+<div id="input-and-ouput" class="section level2" number="7.6">
 <h2>
-<span class="header-section-number">6.6</span> Input and ouput<a class="anchor" aria-label="anchor" href="#input-and-ouput"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.6</span> Input and ouput<a class="anchor" aria-label="anchor" href="#input-and-ouput"><i class="fas fa-link"></i></a>
 </h2>
 <p>The first code chunk defines the user interface (UI) for a Shiny app. The UI consists of a text input box labeled “What is your outcome?” with a default value of “Sleep problem”, and a verbatim text output labeled “myoutput”.</p>
 <p>The second code chunk defines the server-side logic for the Shiny app. Specifically, it creates a reactive expression that renders the text entered in the input box as the output.</p>
 <p>The third code chunk loads a data file named “kwcs6th.rds” as a data frame called “dat1” using the readRDS() function from the tidyverse package.</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html">fluidPage</a></span><span class="op">(</span></span>
 <span>  <span class="co"># Create input text box</span></span>
 <span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/textInput.html">textInput</a></span><span class="op">(</span><span class="st">"myquestion"</span>, <span class="st">"What is your outcome:"</span>, value <span class="op">=</span> <span class="st">"Sleep problem"</span><span class="op">)</span>,</span>
@@ -696,7 +703,7 @@ At this moment, I just introduced Shiny using KWCS data.</p>
 <span>  <span class="co"># Create output</span></span>
 <span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/textOutput.html">verbatimTextOutput</a></span><span class="op">(</span><span class="st">"myoutput"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define server</span></span>
 <span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="co"># Define reactive expression for output</span></span>
@@ -704,7 +711,7 @@ At this moment, I just introduced Shiny using KWCS data.</p>
 <span>    <span class="va">input</span><span class="op">$</span><span class="va">myquestion</span></span>
 <span>  <span class="op">}</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="va">dat1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"data/kwcs6th.rds"</span><span class="op">)</span></span>
 <span><span class="va">dat1</span> <span class="op">=</span> <span class="va">dat1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -715,7 +722,7 @@ At this moment, I just introduced Shiny using KWCS data.</p>
 </blockquote>
 <p>This code creates a dropdown menu for selecting the strata variable, and a table output object named “tableoutput1”.</p>
 <p>The server function subsets the data to the selected strata variable using the input$strata variable and creates a table of the frequency of each category in the selected variable. The addmargins() function is used to add a row and column to the table with the totals.</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html">fluidPage</a></span><span class="op">(</span></span>
 <span></span>
 <span>  <span class="co"># Create output</span></span>
@@ -723,7 +730,7 @@ At this moment, I just introduced Shiny using KWCS data.</p>
 <span> </span>
 <span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/renderTable.html">tableOutput</a></span><span class="op">(</span><span class="st">"tableoutput1"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="co"># Define reactive expression for output</span></span>
 <span>  <span class="va">output</span><span class="op">$</span><span class="va">myoutput</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/renderPrint.html">renderPrint</a></span><span class="op">(</span><span class="op">{</span></span>
@@ -735,7 +742,7 @@ At this moment, I just introduced Shiny using KWCS data.</p>
 <span>      <span class="fu"><a href="https://rdrr.io/r/stats/addmargins.html">addmargins</a></span><span class="op">(</span><span class="op">)</span> </span>
 <span>  <span class="op">}</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="va">dat1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"data/kwcs6th.rds"</span><span class="op">)</span></span>
 <span></span>
@@ -743,7 +750,7 @@ At this moment, I just introduced Shiny using KWCS data.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="st">"sleepgp"</span>, <span class="st">"wwa1gp"</span>, <span class="st">"shortReturn"</span>,<span class="st">"shiftWork"</span> , <span class="st">"njob"</span>, <span class="st">"sexgp"</span>,  <span class="st">"edugp"</span>, <span class="st">"empgp"</span>, <span class="st">"AGE"</span>,<span class="st">"satisfaction"</span><span class="op">)</span></span>
 <span><span class="va">gg</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dat1</span><span class="op">)</span></span></code></pre></div>
 <p>if the selected variable is numeric, the table() function may not be the most suitable way to summarize the data. Instead, you can use the summarize() function from the tidyverse package to calculate the mean and standard deviation of the selected variable.</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="co"># Define reactive expression for output</span></span>
 <span></span>
@@ -762,9 +769,9 @@ At this moment, I just introduced Shiny using KWCS data.</p>
 <div class="inline-figure"><img src="img/shiny1gif.gif" width="100%"></div>
 <p>This code shows a basic example of a Shiny app, and you can build on this foundation to create more complex apps with additional features.
 For example, you could add more input widgets to allow the user to select different subsets of data or change the analysis parameters, or you could add more output elements to display different types of visualizations or summary statistics.</p>
-<div id="outputs-from-input" class="section level3" number="6.6.1">
+<div id="outputs-from-input" class="section level3" number="7.6.1">
 <h3>
-<span class="header-section-number">6.6.1</span> outputs from input<a class="anchor" aria-label="anchor" href="#outputs-from-input"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.6.1</span> outputs from input<a class="anchor" aria-label="anchor" href="#outputs-from-input"><i class="fas fa-link"></i></a>
 </h3>
 <p>It’s important to use the correct typeOutput function in the user interface section for the type of output being displayed in the app, depending on which type of render function is used to generate the output in the server section.</p>
 <p>For example, renderPlot() generates a plot output and should be paired with plotOutput() in the UI section, while renderTable() generates a table output and should be paired with tableOutput(). It’s also worth noting that renderText() can only handle character strings, while renderPrint() can handle any printed output.</p>
@@ -805,15 +812,15 @@ important examples are shown below</p>
 </tbody>
 </table></div>
 </div>
-<div id="tab-pannels" class="section level3" number="6.6.2">
+<div id="tab-pannels" class="section level3" number="7.6.2">
 <h3>
-<span class="header-section-number">6.6.2</span> Tab pannels<a class="anchor" aria-label="anchor" href="#tab-pannels"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.6.2</span> Tab pannels<a class="anchor" aria-label="anchor" href="#tab-pannels"><i class="fas fa-link"></i></a>
 </h3>
 <blockquote>
 <p>Tab pannel</p>
 </blockquote>
 <p>The code defines the user interface (UI) for a Shiny app that contains a tabsetPanel with two tabPanels named “Summary Table” and “Table 1”. The UI includes two tabs, but neither tab has any content or input widgets</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html">fluidPage</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/tabsetPanel.html">tabsetPanel</a></span><span class="op">(</span></span>
 <span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/tabPanel.html">tabPanel</a></span><span class="op">(</span><span class="st">"Summary Table"</span><span class="op">)</span>,</span>
@@ -823,7 +830,7 @@ important examples are shown below</p>
 <div class="inline-figure"><img src="img/tab1.gif"></div>
 <p>Now, the “Summary Table” tabPanel includes a selectInput widget called “smry” and a tableOutput widget called “tableoutput1”, which are defined as outputs for the server function.</p>
 <div class="inline-figure"><img src="img/tab2.gif"></div>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html">fluidPage</a></span><span class="op">(</span></span>
 <span>  </span>
 <span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/tabsetPanel.html">tabsetPanel</a></span><span class="op">(</span></span>
@@ -842,7 +849,7 @@ important examples are shown below</p>
 <p>Multiple input and Table 1</p>
 </blockquote>
 <p>Remind following code of Table 1. We will use following code in shiny</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stratas</span>  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"sleepgp"</span><span class="op">)</span></span>
 <span><span class="va">catVars</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"wwa1gp"</span>, <span class="st">"shortReturn"</span>,<span class="st">"shiftWork"</span> , <span class="st">"njob"</span>, <span class="st">"sexgp"</span>,  <span class="st">"edugp"</span>, <span class="st">"empgp"</span><span class="op">)</span></span>
 <span><span class="va">conVars</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AGE"</span>,<span class="st">"satisfaction"</span><span class="op">)</span></span>
@@ -850,7 +857,7 @@ important examples are shown below</p>
 <span><span class="va">tab1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/htmlTable.html">htmlTable</a></span><span class="op">(</span>align <span class="op">=</span><span class="st">"l"</span><span class="op">)</span> </span></code></pre></div>
 <p>for ui, this app has two tabs: one for the Summary Table and one for the Table 1 summary. In the Summary Table tab, the user can select one or more variables from a dropdown menu called “smry”, and the app generates a summary table that shows summary statistics for the selected variables. F
 In the Table 1 tab, the user can select a strata variable from a dropdown menu called “stratas”, one or more categorical variables from a dropdown menu called “catVars”, and one or more continuous variables from a dropdown menu called “conVars”. The app then generates a Table 1 summary for the selected variables stratified by the selected strata variable.</p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html">fluidPage</a></span><span class="op">(</span></span>
 <span>  </span>
 <span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/tabsetPanel.html">tabsetPanel</a></span><span class="op">(</span></span>
@@ -884,7 +891,7 @@ In the Table 1 tab, the user can select a strata variable from a dropdown menu c
 <span>             </span>
 <span>    <span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>The server component of the app includes reactive expressions that update the dropdown menus dynamically based on the user’s selections, as well as the “tabf” function that generates the Table 1 summary based on the selected variables and strata variable. The resulting Table 1 summary is output in an HTML table format using the “htmlTable” function from the “htmlTable” package.</p>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="co"># Define reactive expression for output</span></span>
 <span>  </span>
@@ -908,7 +915,7 @@ In the Table 1 tab, the user can select a strata variable from a dropdown menu c
 <span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/observe.html">observe</a></span><span class="op">(</span><span class="op">{</span></span>
 <span>    <span class="va">char</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dat1</span><span class="op">)</span><span class="op">[</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">dat1</span>, <span class="va">is.character</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
 <span>    <span class="va">choices</span> <span class="op">&lt;-</span> <span class="va">char</span><span class="op">[</span><span class="va">char</span><span class="op">!=</span><span class="fu">selectedstrata</span><span class="op">(</span><span class="op">)</span><span class="op">]</span></span>
-<span>     <span class="fu"><a href="https://dreamrs.github.io/shinyWidgets/reference/updatePickerInput.html">updatePickerInput</a></span><span class="op">(</span><span class="va">session</span>, <span class="st">"catVars"</span>, choices <span class="op">=</span> <span class="va">choices</span>, selected <span class="op">=</span> <span class="st">"None"</span><span class="op">)</span></span>
+<span>     <span class="fu">updatePickerInput</span><span class="op">(</span><span class="va">session</span>, <span class="st">"catVars"</span>, choices <span class="op">=</span> <span class="va">choices</span>, selected <span class="op">=</span> <span class="st">"None"</span><span class="op">)</span></span>
 <span>  <span class="op">}</span><span class="op">)</span></span>
 <span>  </span>
 <span>  </span>
@@ -921,7 +928,7 @@ In the Table 1 tab, the user can select a strata variable from a dropdown menu c
 </blockquote>
 <p>In the Summary Table tab, the sidebarLayout function is used to create a layout with a sidebar panel and a main panel. The selectInput function for the “smry” variable is placed in the sidebar panel, and the tableOutput function is placed in the main panel. This allows the user to select the variables to summarize in the sidebar, while the resulting table is displayed in the main panel.</p>
 <div class="inline-figure"><img src="img/tab4.gif"></div>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html">fluidPage</a></span><span class="op">(</span></span>
 <span>  </span>
 <span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/tabsetPanel.html">tabsetPanel</a></span><span class="op">(</span></span>
@@ -965,17 +972,17 @@ In the Table 1 tab, the user can select a strata variable from a dropdown menu c
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
-<div id="picker-input-and-more" class="section level2" number="6.7">
+<div id="picker-input-and-more" class="section level2" number="7.7">
 <h2>
-<span class="header-section-number">6.7</span> Picker Input and more<a class="anchor" aria-label="anchor" href="#picker-input-and-more"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.7</span> Picker Input and more<a class="anchor" aria-label="anchor" href="#picker-input-and-more"><i class="fas fa-link"></i></a>
 </h2>
 <p>Yes, you can add the installation and library loading code for the shinyWidgets package in the global environment of your Shiny app.</p>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/dreamRs/shinyWidgets">"shinyWidgets"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"shinyWidgets"</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dreamRs/shinyWidgets">shinyWidgets</a></span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="img/pickerinput.gif" width="100%"></div>
 <p>The pickerInput function creates a dropdown menu with checkboxes for selecting multiple continuous variables. The choices argument specifies the available options for selection, and selected specifies the default selections. The options argument specifies the options for the picker input widget. Here, we’ve used pickerOptions to enable an actions box that allows the user to select/deselect all options at once.</p>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html">fluidPage</a></span><span class="op">(</span></span>
 <span>  </span>
 <span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/tabsetPanel.html">tabsetPanel</a></span><span class="op">(</span></span>
@@ -1027,7 +1034,7 @@ In the Table 1 tab, the user can select a strata variable from a dropdown menu c
 inputId: the ID of the pickerInput widget to update
 choices: a character vector of new choices for the pickerInput widget
 selected: a character vector of selected choices for the pickerInput widget</p>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="co"># Define reactive expression for output</span></span>
 <span>  </span>
@@ -1060,7 +1067,7 @@ selected: a character vector of selected choices for the pickerInput widget</p>
 <span>  </span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>In global, We have also defined the myPickerOptions list, which is used to customize the options for the pickerInput widget.</p>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="va">dat1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"data/kwcs6th.rds"</span><span class="op">)</span></span>
 <span></span>
@@ -1091,13 +1098,13 @@ selected: a character vector of selected choices for the pickerInput widget</p>
 <span>  search <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="logistic-regression-model" class="section level2" number="6.8">
+<div id="logistic-regression-model" class="section level2" number="7.8">
 <h2>
-<span class="header-section-number">6.8</span> Logistic Regression model<a class="anchor" aria-label="anchor" href="#logistic-regression-model"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.8</span> Logistic Regression model<a class="anchor" aria-label="anchor" href="#logistic-regression-model"><i class="fas fa-link"></i></a>
 </h2>
 <p>We have created three pickerInput widgets to select the dependent variable, independent variable(s), and reference categories for categorical variables. The options argument for the pickerInput widgets is set to myPickerOptions, which customizes the appearance of the dropdown menus.
 We have also created an action button with label “Analysis Start” that the user can click to run the logistic regression model.</p>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html">fluidPage</a></span><span class="op">(</span></span>
 <span>  </span>
 <span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/tabsetPanel.html">tabsetPanel</a></span><span class="op">(</span></span>
@@ -1168,7 +1175,7 @@ We have also created an action button with label “Analysis Start” that the u
 First, We define the reactive expression RC, which gets the unique values of the dependent variable to use as the reference value for the logistic regression model. We then create an output called RefsChoice that uses a pickerInput widget to allow the user to select the reference category for categorical variables.</p>
 <p>Next, We define the reactive expression SelectedDependent which retrieves the value of the dependent variable selected by the user. We then create an observer that updates the choices available for the independent variable dropdown based on the selected dependent variable.</p>
 <p>We create two output elements: formular and mod1. The formular output generates a string that displays the logistic regression model formula based on the user’s input. The mod1 output uses the glm function to fit a logistic regression model and generate the summary output using oddsTabf.</p>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="co"># Define reactive expression for output</span></span>
 <span>  </span>
@@ -1252,7 +1259,7 @@ First, We define the reactive expression RC, which gets the unique values of the
 <span>  </span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>Let’s focuse on <code>observeEvent</code> function</p>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/observeEvent.html">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">submit</span>, <span class="op">{</span></span>
 <span>    <span class="va">output</span><span class="op">$</span><span class="va">mod1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/renderUI.html">renderUI</a></span><span class="op">(</span><span class="op">{</span></span>
 <span>      <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/validate.html">validate</a></span><span class="op">(</span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/validate.html">need</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">Independent</span>, <span class="st">"Select independent variable"</span><span class="op">)</span><span class="op">)</span></span>
@@ -1266,7 +1273,7 @@ First, We define the reactive expression RC, which gets the unique values of the
 <p>The <code>observeEvent</code> function listens for a click on the “Analysis Start” button (<code>input$submit</code>) and then executes the logistic regression code within the <code>output$mod1</code> render function to generate the odds ratio table. Once the table is generated, it will be displayed on the UI.</p>
 <div class="inline-figure"><img src="img/obsesrveEvent.png" width="100%"></div>
 <p>The global is same as we made.</p>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="va">dat1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"data/kwcs6th.rds"</span><span class="op">)</span></span>
 <span></span>
@@ -1297,16 +1304,16 @@ First, We define the reactive expression RC, which gets the unique values of the
 <span>  search <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="quiz" class="section level2" number="6.9">
+<div id="quiz-1" class="section level2" number="7.9">
 <h2>
-<span class="header-section-number">6.9</span> Quiz<a class="anchor" aria-label="anchor" href="#quiz"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.9</span> Quiz<a class="anchor" aria-label="anchor" href="#quiz-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>Make a new tab of logistic plot model. Make a app displaying ggplot output of odds ratio with 95% confidence interval. You can use following code of OR and 95% CI plot. You should modify the code, and add that into server, and modify the UI, too. Good Luck!</p>
 <div class="inline-figure"><img src="img/logisticplot.gif" width="90%"></div>
 <blockquote>
 <p>for ggplot of OR with 95%CI</p>
 </blockquote>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mod1</span> <span class="op">=</span> <span class="va">dat1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">.</span>,family<span class="op">=</span><span class="st">"binomial"</span>,formula <span class="op">=</span> <span class="va">sleepgp</span> <span class="op">==</span> <span class="st">"1.sleep disturbance"</span>  </span>
 <span>      <span class="op">~</span> <span class="va">wwa1gp</span><span class="op">)</span></span>
@@ -1325,28 +1332,28 @@ First, We define the reactive expression RC, which gets the unique values of the
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="reivew-of-r-visualization-for-statistical-results.html"><span class="header-section-number">5</span> Reivew of R visualization for statistical results</a></div>
-<div class="next"><a href="parts.html"><span class="header-section-number">7</span> Parts</a></div>
+<div class="prev"><a href="reivew-of-r-visualization-for-statistical-results.html"><span class="header-section-number">6</span> Reivew of R visualization for statistical results</a></div>
+<div class="next"><a href="parts.html"><span class="header-section-number">8</span> Parts</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#shiny"><span class="header-section-number">6</span> Shiny</a></li>
-<li><a class="nav-link" href="#kwcs-data-preparation"><span class="header-section-number">6.1</span> KWCS data preparation</a></li>
-<li><a class="nav-link" href="#remind-table-1-for-kwcs"><span class="header-section-number">6.2</span> remind Table 1 for KWCS</a></li>
+<li><a class="nav-link" href="#shiny"><span class="header-section-number">7</span> Shiny</a></li>
+<li><a class="nav-link" href="#kwcs-data-preparation"><span class="header-section-number">7.1</span> KWCS data preparation</a></li>
+<li><a class="nav-link" href="#remind-table-1-for-kwcs"><span class="header-section-number">7.2</span> remind Table 1 for KWCS</a></li>
 <li>
-<a class="nav-link" href="#introduction-shiny"><span class="header-section-number">6.3</span> Introduction shiny</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#basic-structure-of-shiny"><span class="header-section-number">6.3.1</span> basic structure of shiny</a></li></ul>
+<a class="nav-link" href="#introduction-shiny"><span class="header-section-number">7.3</span> Introduction shiny</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#basic-structure-of-shiny"><span class="header-section-number">7.3.1</span> basic structure of shiny</a></li></ul>
 </li>
-<li><a class="nav-link" href="#communication-between-ui-server"><span class="header-section-number">6.4</span> communication between ui, server</a></li>
-<li><a class="nav-link" href="#shiny-ui-structures"><span class="header-section-number">6.5</span> shiny UI structures</a></li>
+<li><a class="nav-link" href="#communication-between-ui-server"><span class="header-section-number">7.4</span> communication between ui, server</a></li>
+<li><a class="nav-link" href="#shiny-ui-structures"><span class="header-section-number">7.5</span> shiny UI structures</a></li>
 <li>
-<a class="nav-link" href="#input-and-ouput"><span class="header-section-number">6.6</span> Input and ouput</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#outputs-from-input"><span class="header-section-number">6.6.1</span> outputs from input</a></li>
-<li><a class="nav-link" href="#tab-pannels"><span class="header-section-number">6.6.2</span> Tab pannels</a></li>
+<a class="nav-link" href="#input-and-ouput"><span class="header-section-number">7.6</span> Input and ouput</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#outputs-from-input"><span class="header-section-number">7.6.1</span> outputs from input</a></li>
+<li><a class="nav-link" href="#tab-pannels"><span class="header-section-number">7.6.2</span> Tab pannels</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#picker-input-and-more"><span class="header-section-number">6.7</span> Picker Input and more</a></li>
-<li><a class="nav-link" href="#logistic-regression-model"><span class="header-section-number">6.8</span> Logistic Regression model</a></li>
-<li><a class="nav-link" href="#quiz"><span class="header-section-number">6.9</span> Quiz</a></li>
+<li><a class="nav-link" href="#picker-input-and-more"><span class="header-section-number">7.7</span> Picker Input and more</a></li>
+<li><a class="nav-link" href="#logistic-regression-model"><span class="header-section-number">7.8</span> Logistic Regression model</a></li>
+<li><a class="nav-link" href="#quiz-1"><span class="header-section-number">7.9</span> Quiz</a></li>
 </ul>
 
       <div class="book-extra">
@@ -1364,7 +1371,7 @@ First, We define the reactive expression RC, which gets the unique values of the
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Dashbord for Public Health with R</strong>" was written by jinha yoon. It was last built on 2023-04-06.</p>
+    <p>"<strong>Dashbord for Public Health with R</strong>" was written by jinha yoon. It was last built on 2023-04-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
