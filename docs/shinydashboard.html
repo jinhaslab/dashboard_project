@@ -4,13 +4,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 9 Parts | Dashbord for Public Health with R</title>
+<title>Chapter 8 shinydashboard | Dashbord for Public Health with R</title>
 <meta name="author" content="jinha yoon">
 <meta name="generator" content="bookdown 0.33 with bs4_book()">
-<meta property="og:title" content="Chapter 9 Parts | Dashbord for Public Health with R">
+<meta property="og:title" content="Chapter 8 shinydashboard | Dashbord for Public Health with R">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 9 Parts | Dashbord for Public Health with R">
+<meta name="twitter:title" content="Chapter 8 shinydashboard | Dashbord for Public Health with R">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -49,9 +49,9 @@
     }
   </style>
 <link rel="stylesheet" href="style.css">
-<meta name="description" content="You can add parts to organize one or more book chapters together. Parts can be inserted at the top of an .Rmd file, before the first-level chapter heading in that same file. Add a numbered part: #...">
-<meta property="og:description" content="You can add parts to organize one or more book chapters together. Parts can be inserted at the top of an .Rmd file, before the first-level chapter heading in that same file. Add a numbered part: #...">
-<meta name="twitter:description" content="You can add parts to organize one or more book chapters together. Parts can be inserted at the top of an .Rmd file, before the first-level chapter heading in that same file. Add a numbered part: #...">
+<meta name="description" content="Shinydashboard is a package built on top of Shiny that provides a set of functions for creating dashboards. A dashboard is a type of web application that displays a set of metrics or KPIs (key...">
+<meta property="og:description" content="Shinydashboard is a package built on top of Shiny that provides a set of functions for creating dashboards. A dashboard is a type of web application that displays a set of metrics or KPIs (key...">
+<meta name="twitter:description" content="Shinydashboard is a package built on top of Shiny that provides a set of functions for creating dashboards. A dashboard is a type of web application that displays a set of metrics or KPIs (key...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -72,51 +72,59 @@
 </form>
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
-<li class="book-part">I Basic Setting for Dashboard</li>
-<li><a class="" href="rstudio-setting-cloud.html"><span class="header-section-number">2</span> Rstudio setting (Cloud)</a></li>
-<li><a class="" href="rstudio-chatgpt-addin.html"><span class="header-section-number">3</span> Rstudio ChatGPT addin</a></li>
-<li><a class="" href="flexdashboard.html"><span class="header-section-number">4</span> Flexdashboard</a></li>
-<li><a class="" href="flexdashboard-with-datatable.html"><span class="header-section-number">5</span> Flexdashboard with DataTable</a></li>
-<li class="book-part">Review of Data visualization</li>
-<li><a class="" href="reivew-of-r-visualization-for-statistical-results.html"><span class="header-section-number">6</span> Reivew of R visualization for statistical results</a></li>
-<li class="book-part">Interractive dashboard</li>
-<li><a class="" href="shiny.html"><span class="header-section-number">7</span> Shiny</a></li>
-<li><a class="" href="shiny-for-questionnaire-input.html"><span class="header-section-number">8</span> Shiny for questionnaire input</a></li>
-<li><a class="active" href="parts.html"><span class="header-section-number">9</span> Parts</a></li>
-<li><a class="" href="footnotes-and-citations.html"><span class="header-section-number">10</span> Footnotes and citations</a></li>
-<li><a class="" href="blocks.html"><span class="header-section-number">11</span> Blocks</a></li>
-<li><a class="" href="sharing-your-book.html"><span class="header-section-number">12</span> Sharing your book</a></li>
-<li><a class="" href="references.html">References</a></li>
-</ul>
+        <ul class="book-toc list-unstyled"><li><a class="" href="index.html"><span class="header-section-number">Chapter 8</span> shinydashboard</a></li></ul>
 
         <div class="book-extra">
           <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="parts" class="section level1" number="9">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="shinydashboard" class="section level1" number="8">
 <h1>
-<span class="header-section-number">9</span> Parts<a class="anchor" aria-label="anchor" href="#parts"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8</span> shinydashboard<a class="anchor" aria-label="anchor" href="#shinydashboard"><i class="fas fa-link"></i></a>
 </h1>
-<p>You can add parts to organize one or more book chapters together. Parts can be inserted at the top of an .Rmd file, before the first-level chapter heading in that same file.</p>
-<p>Add a numbered part: <code># (PART) Act one {-}</code> (followed by <code># A chapter</code>)</p>
-<p>Add an unnumbered part: <code># (PART\*) Act one {-}</code> (followed by <code># A chapter</code>)</p>
-<p>Add an appendix as a special kind of un-numbered part: <code># (APPENDIX) Other stuff {-}</code> (followed by <code># A chapter</code>). Chapters in an appendix are prepended with letters instead of numbers.</p>
+<p>Shinydashboard is a package built on top of Shiny that provides a set of functions for creating dashboards. A dashboard is a type of web application that displays a set of metrics or KPIs (key performance indicators) in a visually appealing way. Shinydashboard provides a set of pre-designed UI elements, such as boxes, headers, and tabs, that can be combined to create a polished and professional-looking dashboard.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ui</span> <span class="op">=</span> <span class="fu">fluidPage</span><span class="op">(</span></span>
+<span>  <span class="fu">tabsetPanel</span><span class="op">(</span></span>
+<span>    <span class="fu">tabPanel</span><span class="op">(</span><span class="st">"Questionnaire"</span>, </span>
+<span>             <span class="fu">fluidRow</span><span class="op">(</span></span>
+<span>               <span class="fu">br</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>              <span class="fu">column</span><span class="op">(</span><span class="fl">12</span>, <span class="st">"PHQ-9"</span>, </span>
+<span>                     <span class="fu">fluidRow</span><span class="op">(</span></span>
+<span>                     <span class="fu">column</span><span class="op">(</span><span class="fl">5</span>, <span class="st">"Questionnaire"</span><span class="op">)</span>, </span>
+<span>                     <span class="fu">column</span><span class="op">(</span><span class="fl">7</span>, <span class="st">"Scores"</span><span class="op">)</span></span>
+<span>                     <span class="op">)</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>             <span class="fu">fluidRow</span><span class="op">(</span></span>
+<span>              <span class="fu">column</span><span class="op">(</span><span class="fl">12</span>, <span class="st">""</span>,</span>
+<span>               <span class="fu">fluidRow</span><span class="op">(</span></span>
+<span>                       <span class="fu">column</span><span class="op">(</span><span class="fl">5</span>, <span class="st">"Little interest or pleasure in doing things"</span><span class="op">)</span>, </span>
+<span>                       <span class="fu">column</span><span class="op">(</span><span class="fl">6</span>, <span class="fu">radioButtons</span><span class="op">(</span><span class="st">"q1"</span>, <span class="st">""</span>,</span>
+<span>                                              choiceNames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Not at all'</span>,</span>
+<span>                                                              <span class="st">'Several'</span>,</span>
+<span>                                                              <span class="st">'More than half'</span>,</span>
+<span>                                                              <span class="st">'Nearly every'</span></span>
+<span>                                              <span class="op">)</span>, </span>
+<span>                                              choiceValues <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>                                              inline <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span>                     <span class="op">)</span></span>
+<span>              <span class="op">)</span><span class="op">)</span></span>
+<span>             <span class="op">)</span>, </span>
+<span>    <span class="fu">tabPanel</span><span class="op">(</span><span class="st">"Results"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="shiny-for-questionnaire-input.html"><span class="header-section-number">8</span> Shiny for questionnaire input</a></div>
-<div class="next"><a href="footnotes-and-citations.html"><span class="header-section-number">10</span> Footnotes and citations</a></div>
+<div class="empty"></div>
+<div class="empty"></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#parts"><span class="header-section-number">9</span> Parts</a></li></ul>
+      <div id="book-on-this-page"></div>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/903-parts.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/903-parts.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+          
         </ul>
 </div>
     </nav>
@@ -128,7 +136,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Dashbord for Public Health with R</strong>" was written by jinha yoon. It was last built on 2023-04-26.</p>
+    <p>"<strong>Dashbord for Public Health with R</strong>" was written by jinha yoon. It was last built on 2023-04-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -136,34 +144,6 @@
   </div>
 
 </div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
-for (let popover of popovers) {
-  const div = document.createElement('div');
-  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
-  div.innerHTML = popover.getAttribute('data-content');
-
-  var has_math = div.querySelector("span.math");
-  if (has_math) {
-    document.body.appendChild(div);
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
-    MathJax.Hub.Queue(function() {
-      popover.setAttribute('data-content', div.innerHTML);
-      document.body.removeChild(div);
-    })
-  }
-}
-</script>
+</footer>
 </body>
 </html>

@@ -59,6 +59,7 @@ tab-pannels
 picker-input-and-more
 logistic-regression-model
 quiz-1
+shiny-for-questionnaire-input
 parts
 footnotes-and-citations
 footnotes
