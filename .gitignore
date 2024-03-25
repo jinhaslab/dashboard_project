@@ -19,7 +19,7 @@ etc_script/
 *.Rproj
 *.RData
 *.Rhistory
-*.Rmd
+*.qmd
 /animation
 /images
 /.Rproj.user
