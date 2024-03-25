@@ -27,3 +27,5 @@ etc_script/
 *.sh
 *.bib
 *.tex
+
+/.quarto/
