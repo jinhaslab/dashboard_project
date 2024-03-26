@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>dashboard project - 6&nbsp; Shiny</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./0451-shiny.html" rel="next">
+<link href="./0251-flexdashboard_datatable.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar docked">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./0401-shiny.html">SHINY</a></li><li class="breadcrumb-item"><a href="./0401-shiny.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Shiny</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">dashboard project</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text">SETTING &amp; BASIC</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0101-Rstudio_cloud.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Rstudio setting (Cloud)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0103-DataVisualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">visualization for statistical results</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text">FLEXDASHBOARD</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0201-flexdashboard.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Flexdashboard</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0251-flexdashboard_datatable.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Flexdashboard with DataTable</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">SHINY</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0401-shiny.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Shiny</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0451-shiny.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Shiny for questionnaire of PHQ-9</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">VI. hi</span></span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#getting-started-with-shiny" id="toc-getting-started-with-shiny" class="nav-link active" data-scroll-target="#getting-started-with-shiny"><span class="header-section-number">6.1</span> Getting Started with Shiny</a>
+  <ul class="collapse">
+  <li><a href="#official-documentation" id="toc-official-documentation" class="nav-link" data-scroll-target="#official-documentation"><span class="header-section-number">6.1.1</span> Official Documentation</a></li>
+  <li><a href="#shiny-gallery" id="toc-shiny-gallery" class="nav-link" data-scroll-target="#shiny-gallery"><span class="header-section-number">6.1.2</span> shiny gallery</a></li>
+  <li><a href="#just-try-that" id="toc-just-try-that" class="nav-link" data-scroll-target="#just-try-that"><span class="header-section-number">6.1.3</span> just try that!!!</a></li>
+  </ul></li>
+  <li><a href="#kwcs-data-preparation" id="toc-kwcs-data-preparation" class="nav-link" data-scroll-target="#kwcs-data-preparation"><span class="header-section-number">6.2</span> KWCS data preparation</a></li>
+  <li><a href="#remind-table-1-for-kwcs" id="toc-remind-table-1-for-kwcs" class="nav-link" data-scroll-target="#remind-table-1-for-kwcs"><span class="header-section-number">6.3</span> remind Table 1 for KWCS</a>
+  <ul class="collapse">
+  <li><a href="#basic-structure-of-shiny" id="toc-basic-structure-of-shiny" class="nav-link" data-scroll-target="#basic-structure-of-shiny"><span class="header-section-number">6.3.1</span> basic structure of shiny</a></li>
+  </ul></li>
+  <li><a href="#communication-between-ui-server" id="toc-communication-between-ui-server" class="nav-link" data-scroll-target="#communication-between-ui-server"><span class="header-section-number">6.4</span> communication between ui, server</a></li>
+  <li><a href="#shiny-ui-structures" id="toc-shiny-ui-structures" class="nav-link" data-scroll-target="#shiny-ui-structures"><span class="header-section-number">6.5</span> shiny UI structures</a></li>
+  <li><a href="#input-and-ouput" id="toc-input-and-ouput" class="nav-link" data-scroll-target="#input-and-ouput"><span class="header-section-number">6.6</span> Input and ouput</a>
+  <ul class="collapse">
+  <li><a href="#outputs-from-input" id="toc-outputs-from-input" class="nav-link" data-scroll-target="#outputs-from-input"><span class="header-section-number">6.6.1</span> outputs from input</a></li>
+  <li><a href="#tab-pannels" id="toc-tab-pannels" class="nav-link" data-scroll-target="#tab-pannels"><span class="header-section-number">6.6.2</span> Tab pannels</a></li>
+  </ul></li>
+  <li><a href="#picker-input-and-more" id="toc-picker-input-and-more" class="nav-link" data-scroll-target="#picker-input-and-more"><span class="header-section-number">6.7</span> Picker Input and more</a></li>
+  <li><a href="#logistic-regression-model" id="toc-logistic-regression-model" class="nav-link" data-scroll-target="#logistic-regression-model"><span class="header-section-number">6.8</span> Logistic Regression model</a></li>
+  <li><a href="#quiz" id="toc-quiz" class="nav-link" data-scroll-target="#quiz"><span class="header-section-number">6.9</span> Quiz</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Shiny</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="getting-started-with-shiny" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="getting-started-with-shiny"><span class="header-section-number">6.1</span> Getting Started with Shiny</h2>
+<p>Shiny is an R package that allows for the building of interactive web applications straight from R. Whether you are a seasoned data scientist or a beginner in data analysis, Shiny brings your R data analysis to the interactive web, enabling users to interact with your data and analysis in real-time.</p>
+<section id="official-documentation" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="official-documentation"><span class="header-section-number">6.1.1</span> Official Documentation</h3>
+<p>he best place to start learning about Shiny is the official Shiny website, maintained by RStudio. The official documentation provides a thorough introduction to Shiny, tutorials for beginners, articles on more advanced topics, and a gallery of Shiny applications to inspire your projects.</p>
+<p>You can access the official Shiny documentation at <a href="https://www.rstudio.com/products/shiny/"> shiny website </a></p>
+<p>This website is a valuable resource for anyone looking to create Shiny applications. It covers:</p>
+<ul>
+<li><strong>Getting Started</strong>: A guide for your first steps in Shiny, including installation and writing your first app.</li>
+<li><strong>Articles</strong>: In-depth articles covering specific aspects of Shiny, such as reactive programming, modules, and testing.</li>
+<li><strong>Gallery</strong>: A collection of exemplary Shiny applications that showcase what’s possible with Shiny. These examples can serve as inspiration and learning tools for your own projects.</li>
+<li><strong>Reference</strong>: A comprehensive reference section for Shiny functions and their usage.</li>
+</ul>
+<p><img src="img/shinybasic1.gif" alt="shiny web site" width="100%"></p>
+</section>
+<section id="shiny-gallery" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="shiny-gallery"><span class="header-section-number">6.1.2</span> shiny gallery</h3>
+<p>The <a href="https://shiny.rstudio.com/gallery/">Shiny Gallery</a> is a fantastic resource for anyone looking to explore the capabilities of Shiny apps and find inspiration for their own projects. This gallery showcases a wide range of applications created with Shiny, demonstrating the versatility and power of the framework. Each example in the gallery includes both the actual Shiny application for you to interact with and the source code behind it. This setup allows you to not only see the app in action but also to review the code to understand how it was built.</p>
+<p>Whether you are new to Shiny or looking to expand your skills, the Shiny Gallery is a valuable resource for learning and inspiration. You can explore various applications, see different ways of handling user input and data visualization, and get ideas for your own Shiny projects.</p>
+<p>For a direct exploration of these examples, visit the <a href="https://shiny.rstudio.com/gallery/">Shiny Gallery</a>.</p>
+<p><img src="img/shinygallery.gif" alt="shiny gallery" width="100%"></p>
+</section>
+<section id="just-try-that" class="level3" data-number="6.1.3">
+<h3 data-number="6.1.3" class="anchored" data-anchor-id="just-try-that"><span class="header-section-number">6.1.3</span> just try that!!!</h3>
+<blockquote class="blockquote">
+<p>Required Libraries</p>
+</blockquote>
+<p>Before we start, ensure that the Shiny package is installed and loaded. Shiny is required to build and run our web application.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"shiny"</span>)) <span class="fu">install.packages</span>(<span class="st">"shiny"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>and the example code is following</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># app.R file</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(datasets)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Global variables</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">names</span>(iris), <span class="st">"Species"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># User Interface</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">pageWithSidebar</span>(</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">headerPanel</span>(<span class="st">'Iris k-means clustering'</span>),</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sidebarPanel</span>(</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">selectInput</span>(<span class="st">'xcol'</span>, <span class="st">'X Variable'</span>, vars),</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">selectInput</span>(<span class="st">'ycol'</span>, <span class="st">'Y Variable'</span>, vars, <span class="at">selected =</span> vars[[<span class="dv">2</span>]]),</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">numericInput</span>(<span class="st">'clusters'</span>, <span class="st">'Cluster count'</span>, <span class="dv">3</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">9</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mainPanel</span>(</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plotOutput</span>(<span class="st">'plot1'</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Server logic</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Combine the selected variables into a new data frame</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  selectedData <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    iris[, <span class="fu">c</span>(input<span class="sc">$</span>xcol, input<span class="sc">$</span>ycol)]</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  clusters <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kmeans</span>(<span class="fu">selectedData</span>(), input<span class="sc">$</span>clusters)</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>plot1 <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">palette</span>(<span class="fu">c</span>(<span class="st">"#E41A1C"</span>, <span class="st">"#377EB8"</span>, <span class="st">"#4DAF4A"</span>, <span class="st">"#984EA3"</span>,</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>      <span class="st">"#FF7F00"</span>, <span class="st">"#FFFF33"</span>, <span class="st">"#A65628"</span>, <span class="st">"#F781BF"</span>, <span class="st">"#999999"</span>))</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="fl">5.1</span>, <span class="fl">4.1</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(<span class="fu">selectedData</span>(),</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>         <span class="at">col =</span> <span class="fu">clusters</span>()<span class="sc">$</span>cluster,</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>         <span class="at">pch =</span> <span class="dv">20</span>, <span class="at">cex =</span> <span class="dv">3</span>)</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">points</span>(<span class="fu">clusters</span>()<span class="sc">$</span>centers, <span class="at">pch =</span> <span class="dv">4</span>, <span class="at">cex =</span> <span class="dv">4</span>, <span class="at">lwd =</span> <span class="dv">4</span>)</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the application</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In this exercise, you will create a Shiny application that allows for interactive k-means clustering analysis of the Iris dataset. You will write the code in a single file, app.R, and then run the application to explore how different variables and the number of clusters affect the clustering outcome.</p>
+<p>Step-by-Step Instructions</p>
+<ul>
+<li><p>Open RStudio: Start by opening RStudio, your integrated development environment for R.</p></li>
+<li><p>Create a New Script: Go to File &gt; New File &gt; R Script to open a new script file.</p></li>
+<li><p>Copy the Shiny App Code: Copy the following Shiny application code into your new R script. This code combines both the user interface and server logic into one compact script.</p></li>
+<li><p>Save the Script as app.R: Save the script by clicking File &gt; Save As. Name the file app.R and choose a location on your computer where you want to save it.</p></li>
+<li><p>Run the Shiny App: With app.R open in RStudio, click the “Run App” button in the top right corner of the script editor. This will start the Shiny application and open it in a new window or tab in your default web browser.</p></li>
+</ul>
+<p><img src="img/shinyapprun.gif" alt="shiny app run!" width="100%"></p>
+</section>
+</section>
+<section id="kwcs-data-preparation" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="kwcs-data-preparation"><span class="header-section-number">6.2</span> KWCS data preparation</h2>
+<p>Prior to start about shiny, I will review the tabf code. That code will download the kwcsData6th.rds file from the GitHub repository and save it as data/kwcs6th.rds on your local machine. Then, it will use the readRDS function to load the data into R as an object named dat1.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"tidyverse"</span>)) <span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"htmlTable"</span>)) <span class="fu">install.packages</span>(<span class="st">"htmlTable"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"broom"</span>)) <span class="fu">install.packages</span>(<span class="st">"broom"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"devtools"</span>)) <span class="fu">install.packages</span>(<span class="st">"devtools"</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(devtools)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"tabf"</span>)) <span class="fu">install_github</span>(<span class="st">"jinhaslab/tabf"</span>, <span class="at">force =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tabf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># data download</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>url <span class="ot">=</span><span class="st">"https://github.com/jinhaslab/opendata/raw/3006e12f54bd2abd3cd1aac9cda807ef8e614a42/kwcs/kwcsData6th.rds"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(url, <span class="st">"data/kwcs6th.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dat1 <span class="ot">=</span> <span class="fu">readRDS</span>(<span class="st">"data/kwcs6th.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dat1 <span class="ot">=</span> dat1 <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">"sleepgp"</span>, <span class="st">"wwa1gp"</span>, <span class="st">"shortReturn"</span>,<span class="st">"shiftWork"</span> , <span class="st">"njob"</span>, <span class="st">"sexgp"</span>,  <span class="st">"edugp"</span>, <span class="st">"empgp"</span>, <span class="st">"AGE"</span>,<span class="st">"satisfaction"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(labelled)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>dat1 <span class="ot">=</span> <span class="fu">remove_labels</span>(dat1) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This code uses the %&gt;% operator from the dplyr package to filter the columns of the dat1 data frame. The select function is used to specify the columns to keep in the filtered data frame.</p>
+<p>The selected columns are:</p>
+<ul>
+<li>variables
+<ul>
+<li>“sleepgp”: Sleep status group</li>
+<li>“wwa1gp”: Weekly working hours group</li>
+<li>“shortReturn”: Whether the respondent has a short return time from work or not</li>
+<li>“shiftWork”: Whether the respondent works shifts or not</li>
+<li>“njob”: Number of jobs</li>
+<li>“sexgp”: Sex group</li>
+<li>“edugp”: Education level group</li>
+<li>“empgp”: Employment group</li>
+<li>“AGE”: Age</li>
+<li>“satisfaction”: Work satisfaction</li>
+</ul></li>
+</ul>
+<p>After the data frame has been filtered, only the specified columns will remain in the data frame, and all other columns will be dropped. This can be useful for simplifying your data set and focusing your analysis on specific variables.</p>
+</section>
+<section id="remind-table-1-for-kwcs" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="remind-table-1-for-kwcs"><span class="header-section-number">6.3</span> remind Table 1 for KWCS</h2>
+<p>Code is specifying that the variables should be stratified by the single variable “sleepgp”, and that the categorical variables are “wwa1gp”, “shortReturn”, “shiftWork”, “njob”, “sexgp”, “edugp”, and “empgp”, while the continuous variables are “AGE” and “satisfaction”. The function “tabf” is likely a custom function that generates the Table 1 summary based on these inputs. Finally, the “htmlTable” function is being used to output the results in an HTML table format, which can be easily viewed in a web browser or other software that can render HTML tables.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>stratas  <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"sleepgp"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>catVars <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"wwa1gp"</span>, <span class="st">"shortReturn"</span>,<span class="st">"shiftWork"</span> , <span class="st">"njob"</span>, <span class="st">"sexgp"</span>,  <span class="st">"edugp"</span>, <span class="st">"empgp"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>conVars <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"AGE"</span>,<span class="st">"satisfaction"</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>tab1 <span class="ot">=</span> <span class="fu">tabf</span>(<span class="at">dat1=</span>dat1, <span class="at">stratas =</span> stratas, <span class="at">catVars =</span> catVars, <span class="at">conVars =</span> conVars)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>tab1 <span class="sc">%&gt;%</span> <span class="fu">htmlTable</span>(<span class="at">align =</span><span class="st">"l"</span>, <span class="at">rnames=</span><span class="cn">FALSE</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="gmisc_table table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">variables</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">values</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">0.non distrubance</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">1.sleep disturbance</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">AGE</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">46.8±12.4</td>
+<td style="text-align: left;">49.7±11.9</td>
+<td style="text-align: left;">&lt;0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">wwa1gp</td>
+<td style="text-align: left;">Never</td>
+<td style="text-align: left;">12222 (94.7%)</td>
+<td style="text-align: left;">684 (5.3%)</td>
+<td style="text-align: left;">&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Rarely</td>
+<td style="text-align: left;">12316 (94.5%)</td>
+<td style="text-align: left;">714 (5.5%)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Sometimes</td>
+<td style="text-align: left;">9112 (90.3%)</td>
+<td style="text-align: left;">981 (9.7%)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Often</td>
+<td style="text-align: left;">3456 (82.8%)</td>
+<td style="text-align: left;">717 (17.2%)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Always</td>
+<td style="text-align: left;">634 (70.0%)</td>
+<td style="text-align: left;">272 (30.0%)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">satisfaction</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">2.1±0.5</td>
+<td style="text-align: left;">2.4±0.6</td>
+<td style="text-align: left;">&lt;0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">shortReturn</td>
+<td style="text-align: left;">non short return</td>
+<td style="text-align: left;">36183 (92.5%)</td>
+<td style="text-align: left;">2927 (7.5%)</td>
+<td style="text-align: left;">&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">short return</td>
+<td style="text-align: left;">1557 (77.9%)</td>
+<td style="text-align: left;">441 (22.1%)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">shiftWork</td>
+<td style="text-align: left;">non shift work</td>
+<td style="text-align: left;">35056 (91.9%)</td>
+<td style="text-align: left;">3073 (8.1%)</td>
+<td style="text-align: left;">&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">shift work</td>
+<td style="text-align: left;">2684 (90.1%)</td>
+<td style="text-align: left;">295 (9.9%)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">njob</td>
+<td style="text-align: left;">one-job</td>
+<td style="text-align: left;">37471 (91.9%)</td>
+<td style="text-align: left;">3317 (8.1%)</td>
+<td style="text-align: left;">&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">njob</td>
+<td style="text-align: left;">269 (84.1%)</td>
+<td style="text-align: left;">51 (15.9%)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sexgp</td>
+<td style="text-align: left;">Men</td>
+<td style="text-align: left;">17892 (93.1%)</td>
+<td style="text-align: left;">1327 (6.9%)</td>
+<td style="text-align: left;">&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Women</td>
+<td style="text-align: left;">19848 (90.7%)</td>
+<td style="text-align: left;">2041 (9.3%)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">edugp</td>
+<td style="text-align: left;">university or more</td>
+<td style="text-align: left;">19597 (92.9%)</td>
+<td style="text-align: left;">1502 (7.1%)</td>
+<td style="text-align: left;">&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">high school</td>
+<td style="text-align: left;">14943 (91.9%)</td>
+<td style="text-align: left;">1318 (8.1%)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">middle school or below</td>
+<td style="text-align: left;">3200 (85.4%)</td>
+<td style="text-align: left;">548 (14.6%)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">empgp</td>
+<td style="text-align: left;">paid-worker</td>
+<td style="text-align: left;">25786 (92.4%)</td>
+<td style="text-align: left;">2122 (7.6%)</td>
+<td style="text-align: left;">&lt;0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">employer/self-employer</td>
+<td style="text-align: left;">2539 (91.7%)</td>
+<td style="text-align: left;">229 (8.3%)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">own-account worker</td>
+<td style="text-align: left;">8359 (90.5%)</td>
+<td style="text-align: left;">880 (9.5%)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; border-bottom: 2px solid grey;"></td>
+<td style="text-align: left; border-bottom: 2px solid grey;">unpaind family work</td>
+<td style="text-align: left; border-bottom: 2px solid grey;">1056 (88.5%)</td>
+<td style="text-align: left; border-bottom: 2px solid grey;">137 (11.5%)</td>
+<td style="text-align: left; border-bottom: 2px solid grey;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<section id="basic-structure-of-shiny" class="level3" data-number="6.3.1">
+<h3 data-number="6.3.1" class="anchored" data-anchor-id="basic-structure-of-shiny"><span class="header-section-number">6.3.1</span> basic structure of shiny</h3>
+<p>This code defines the UI and server components of a Shiny app and then runs the app using the shinyApp() function.</p>
+<p>In the ui component, you define the user interface of the app using R code. This typically includes elements like input controls (e.g.&nbsp;sliders, text boxes, dropdown menus) and output displays (e.g.&nbsp;plots, tables, text).</p>
+<p>In the server component, you define the server-side logic of the app. This code processes user inputs, performs calculations, and generates output for the UI to display. In the server function, you typically define reactive expressions and use Shiny’s reactive programming features to create dynamic behavior in the app.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define UI</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># User interface components go here</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Define server</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Server-side logic and output generation go here</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the app</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>seperate file of shiny</p>
+</blockquote>
+<p>you can separate the UI, server, and global code into separate files in a Shiny app. This can make your code easier to organize and maintain, especially for larger apps.</p>
+<p>Here’s an example of how you can structure your code into separate files:</p>
+<ol type="1">
+<li>ui.R: This file contains the code for the user interface of the app.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define UI</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># User interface components go here</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li>server.R: This file contains the server-side logic and output generation of the app.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define server</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Server-side logic and output generation go here</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="3" type="1">
+<li>global.R: This file contains any global code that needs to be shared across the app, such as data loading or library imports.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Global code goes here</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>dat1 <span class="ot">=</span> <span class="fu">readRDS</span>(<span class="st">"data/kwcs6th.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="4" type="1">
+<li>run the app</li>
+</ol>
+<p><img src="img/shinybasic1.png" width="100%"></p>
+</section>
+</section>
+<section id="communication-between-ui-server" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="communication-between-ui-server"><span class="header-section-number">6.4</span> communication between ui, server</h2>
+<p>The user interface section of a Shiny app receives user input variables and sends them to the server section for processing. The server section accepts the input variables from the user interface, applies the necessary processing and rendering steps, generates output variables, and sends them back to the user interface. Finally, the user interface receives the output variables from the server section and displays them to the user</p>
+<p><img src="img/shinyinputoutput1.png" width="100%"></p>
+<p>User input: The user interacts with input widgets defined in the user interface section of the app. These input widgets can take a variety of forms, such as text boxes, sliders, and buttons.</p>
+<p>Input variables: When the user interacts with an input widget, an input variable is generated. This variable contains the data entered by the user, such as the text typed into a text box or the value selected from a dropdown menu.</p>
+<p>Sending inputs to the server: The user interface section sends the input variables to the server section of the app. This happens automatically and in real-time, using reactive programming techniques.</p>
+<p>Processing input variables: The server section receives the input variables from the user interface and processes them as needed. This might involve performing calculations, filtering data, or running complex algorithms.</p>
+<p>Rendering output: Once the input variables have been processed, the server section generates output variables. These variables contain the data that will be displayed to the user, such as a plot, a table, or a text string. The server section also applies any necessary formatting or styling to the output variables.</p>
+<p>Sending outputs to the user interface: The server section sends the output variables back to the user interface section of the app. Again, this happens automatically and in real-time, using reactive programming techniques.</p>
+<p>Displaying outputs to the user: The user interface section receives the output variables from the server section and displays them to the user. This might involve rendering the output as a plot, table, or text string, depending on the specific output format of the app. The output elements in the user interface are reactive, meaning they update in real-time as the input variables are changed by the user.</p>
+</section>
+<section id="shiny-ui-structures" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="shiny-ui-structures"><span class="header-section-number">6.5</span> shiny UI structures</h2>
+<p><img src="img/shinystructure1.png" width="100%"></p>
+<p>Now, we discuss an overview of the structure of the user interface (UI) section in Shiny, specifically focusing on the use of sidebarPanel, mainPanel, tabsetPanel, inputWidgets, and actionButton.</p>
+<p>sidebarLayout(): Creates a two-panel layout with a sidebar on the left and a main panel on the right.</p>
+<p>sidebarPanel(): Defines the content for the sidebar panel, which typically contains input widgets, such as sliders, dropdown menus, or text input boxes.</p>
+<p>mainPanel(): Defines the content for the main panel, which typically contains output elements, such as tables, plots, or text output.</p>
+<p>tabsetPanel(): Organizes the UI into multiple tabs, with different content displayed in each tab.</p>
+<p>actionButton(): Creates a button widget that the user can click to trigger an action in the app.</p>
+</section>
+<section id="input-and-ouput" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="input-and-ouput"><span class="header-section-number">6.6</span> Input and ouput</h2>
+<p>The first code chunk defines the user interface (UI) for a Shiny app. The UI consists of a text input box labeled “What is your outcome?” with a default value of “Sleep problem”, and a verbatim text output labeled “myoutput”.</p>
+<p>The second code chunk defines the server-side logic for the Shiny app. Specifically, it creates a reactive expression that renders the text entered in the input box as the output.</p>
+<p>The third code chunk loads a data file named “kwcs6th.rds” as a data frame called “dat1” using the readRDS() function from the tidyverse package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create input text box</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">textInput</span>(<span class="st">"myquestion"</span>, <span class="st">"What is your outcome:"</span>, <span class="at">value =</span> <span class="st">"Sleep problem"</span>),</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create output</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">verbatimTextOutput</span>(<span class="st">"myoutput"</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define server</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Define reactive expression for output</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>myoutput <span class="ot">&lt;-</span> <span class="fu">renderPrint</span>({</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    input<span class="sc">$</span>myquestion</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>dat1 <span class="ot">=</span> <span class="fu">readRDS</span>(<span class="st">"data/kwcs6th.rds"</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>dat1 <span class="ot">=</span> dat1 <span class="sc">%&gt;%</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">"sleepgp"</span>, <span class="st">"wwa1gp"</span>, <span class="st">"shortReturn"</span>,<span class="st">"shiftWork"</span> , <span class="st">"njob"</span>, <span class="st">"sexgp"</span>,  <span class="st">"edugp"</span>, <span class="st">"empgp"</span>, <span class="st">"AGE"</span>,<span class="st">"satisfaction"</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>gg <span class="ot">=</span> <span class="fu">names</span>(dat1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>Input and server feedback</p>
+</blockquote>
+<p>This code creates a dropdown menu for selecting the strata variable, and a table output object named “tableoutput1”.</p>
+<p>The server function subsets the data to the selected strata variable using the input$strata variable and creates a table of the frequency of each category in the selected variable. The addmargins() function is used to add a row and column to the table with the totals.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create output</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">selectInput</span>(<span class="st">"smry"</span>, <span class="st">"Select variables of summary:"</span>, <span class="at">choices =</span> gg, <span class="at">selected =</span> <span class="fu">c</span>(<span class="st">"sleepgp"</span>)), </span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">tableOutput</span>(<span class="st">"tableoutput1"</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Define reactive expression for output</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>myoutput <span class="ot">&lt;-</span> <span class="fu">renderPrint</span>({</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    input<span class="sc">$</span>myquestion</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  selected_smry <span class="ot">&lt;-</span> <span class="fu">reactive</span>({input<span class="sc">$</span>smry})</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>tableoutput1 <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    dat1 <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">all_of</span>(<span class="fu">selected_smry</span>())) <span class="sc">%&gt;%</span> <span class="fu">table</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">addmargins</span>() </span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>dat1 <span class="ot">=</span> <span class="fu">readRDS</span>(<span class="st">"data/kwcs6th.rds"</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>dat1 <span class="ot">=</span> dat1 <span class="sc">%&gt;%</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">"sleepgp"</span>, <span class="st">"wwa1gp"</span>, <span class="st">"shortReturn"</span>,<span class="st">"shiftWork"</span> , <span class="st">"njob"</span>, <span class="st">"sexgp"</span>,  <span class="st">"edugp"</span>, <span class="st">"empgp"</span>, <span class="st">"AGE"</span>,<span class="st">"satisfaction"</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>gg <span class="ot">=</span> <span class="fu">names</span>(dat1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>if the selected variable is numeric, the table() function may not be the most suitable way to summarize the data. Instead, you can use the summarize() function from the tidyverse package to calculate the mean and standard deviation of the selected variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Define reactive expression for output</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  selected_smry <span class="ot">&lt;-</span> <span class="fu">reactive</span>({input<span class="sc">$</span>smry})</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>tableoutput1 <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">is.numeric</span>(dat1 <span class="sc">%&gt;%</span> <span class="fu">pull</span>(<span class="fu">selected_smry</span>()))){</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>      dat1 <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">mean=</span><span class="fu">mean</span>(<span class="sc">!!</span><span class="fu">sym</span>(<span class="fu">selected_smry</span>())), </span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">sd=</span><span class="fu">sd</span>(<span class="sc">!!</span><span class="fu">sym</span>(<span class="fu">selected_smry</span>())))</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>      dat1 <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">all_of</span>(<span class="fu">selected_smry</span>())) <span class="sc">%&gt;%</span> <span class="fu">table</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">addmargins</span>() </span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="img/shiny1gif.gif" width="100%"></p>
+<p>This code shows a basic example of a Shiny app, and you can build on this foundation to create more complex apps with additional features. For example, you could add more input widgets to allow the user to select different subsets of data or change the analysis parameters, or you could add more output elements to display different types of visualizations or summary statistics.</p>
+<section id="outputs-from-input" class="level3" data-number="6.6.1">
+<h3 data-number="6.6.1" class="anchored" data-anchor-id="outputs-from-input"><span class="header-section-number">6.6.1</span> outputs from input</h3>
+<p>It’s important to use the correct typeOutput function in the user interface section for the type of output being displayed in the app, depending on which type of render function is used to generate the output in the server section.</p>
+<p>For example, renderPlot() generates a plot output and should be paired with plotOutput() in the UI section, while renderTable() generates a table output and should be paired with tableOutput(). It’s also worth noting that renderText() can only handle character strings, while renderPrint() can handle any printed output.</p>
+<p>Data tables are a special type of table output that allow users to page through the data or sort it, and are displayed using dataTableOutput(). important examples are shown below</p>
+<table class="table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 30%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Server rendering</th>
+<th>assignment</th>
+<th>UI Output function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>renderText()</code></td>
+<td><code>output$prediction</code></td>
+<td><code>textOutput("prediction")</code></td>
+</tr>
+<tr class="even">
+<td><code>renderPrint()</code></td>
+<td><code>output$model</code></td>
+<td><code>textOutput("model")</code></td>
+</tr>
+<tr class="odd">
+<td><code>renderPlot()</code></td>
+<td><code>output$plot1</code></td>
+<td><code>plotOutput("plot1")</code></td>
+</tr>
+<tr class="even">
+<td><code>renderTable()</code></td>
+<td><code>output$table1</code></td>
+<td><code>tableOutput("table1")</code></td>
+</tr>
+<tr class="odd">
+<td><code>renderDataTable()</code></td>
+<td><code>output$dt</code></td>
+<td><code>dataTableOutput("dt")</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="tab-pannels" class="level3" data-number="6.6.2">
+<h3 data-number="6.6.2" class="anchored" data-anchor-id="tab-pannels"><span class="header-section-number">6.6.2</span> Tab pannels</h3>
+<blockquote class="blockquote">
+<p>Tab pannel</p>
+</blockquote>
+<p>The code defines the user interface (UI) for a Shiny app that contains a tabsetPanel with two tabPanels named “Summary Table” and “Table 1”. The UI includes two tabs, but neither tab has any content or input widgets</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabsetPanel</span>(</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="st">"Summary Table"</span>),</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="st">"Table 1"</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="img/tab1.gif"></p>
+<p>Now, the “Summary Table” tabPanel includes a selectInput widget called “smry” and a tableOutput widget called “tableoutput1”, which are defined as outputs for the server function.</p>
+<p><img src="img/tab2.gif"></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabsetPanel</span>(</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="st">"Summary Table"</span>,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create output</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">selectInput</span>(<span class="st">"smry"</span>, <span class="st">"Select variables of summary:"</span>, <span class="at">choices =</span> gg, <span class="at">selected =</span> <span class="fu">c</span>(<span class="st">"sleepgp"</span>)), </span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tableOutput</span>(<span class="st">"tableoutput1"</span>)</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  )), </span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabPanel</span>(<span class="st">"Table 1"</span>)</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>Multiple input and Table 1</p>
+</blockquote>
+<p>Remind following code of Table 1. We will use following code in shiny</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>stratas  <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"sleepgp"</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>catVars <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"wwa1gp"</span>, <span class="st">"shortReturn"</span>,<span class="st">"shiftWork"</span> , <span class="st">"njob"</span>, <span class="st">"sexgp"</span>,  <span class="st">"edugp"</span>, <span class="st">"empgp"</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>conVars <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"AGE"</span>,<span class="st">"satisfaction"</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>tab1 <span class="ot">=</span> <span class="fu">tabf</span>(<span class="at">dat1=</span>dat1, <span class="at">stratas =</span> stratas, <span class="at">catVars =</span> catVars, <span class="at">conVars =</span> conVars)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>tab1 <span class="sc">%&gt;%</span> <span class="fu">htmlTable</span>(<span class="at">align =</span><span class="st">"l"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>for ui, this app has two tabs: one for the Summary Table and one for the Table 1 summary. In the Summary Table tab, the user can select one or more variables from a dropdown menu called “smry”, and the app generates a summary table that shows summary statistics for the selected variables. F In the Table 1 tab, the user can select a strata variable from a dropdown menu called “stratas”, one or more categorical variables from a dropdown menu called “catVars”, and one or more continuous variables from a dropdown menu called “conVars”. The app then generates a Table 1 summary for the selected variables stratified by the selected strata variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabsetPanel</span>(</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="st">"Summary Table"</span>,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>             <span class="co"># Create output</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>             <span class="fu">selectInput</span>(<span class="st">"smry"</span>, <span class="st">"Select variables of summary:"</span>, </span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>                         <span class="at">choices =</span> gg, <span class="at">selected =</span> <span class="fu">c</span>(<span class="st">"sleepgp"</span>)), </span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>             <span class="fu">tableOutput</span>(<span class="st">"tableoutput1"</span>)</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    ), </span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="st">"Table 1"</span>, </span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>             <span class="co"># Create dropdown for strata variables</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>             <span class="fu">selectInput</span>(<span class="st">"stratas"</span>, <span class="st">"Select strata variable(s):"</span>, </span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>                         <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"None"</span>, <span class="fu">names</span>(dat1)), </span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>                         <span class="at">selected =</span> <span class="st">"sleepgp"</span>, <span class="at">multiple =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>             <span class="co"># Create dropdown for categorical variables</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>             <span class="fu">selectInput</span>(<span class="st">"catVars"</span>, <span class="st">"Select categorical variable(s):"</span>, </span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>                         <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"None"</span>), </span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>                         <span class="at">selected =</span> <span class="st">"wwa1gp"</span>, <span class="at">multiple =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>             <span class="co"># Create dropdown for continuous variables</span></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>             <span class="fu">selectInput</span>(<span class="st">"conVars"</span>, <span class="st">"Select continuous variable(s):"</span>, </span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>                         <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"None"</span>, <span class="fu">names</span>(dat1)[<span class="fu">sapply</span>(dat1, is.numeric)]), </span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>                         <span class="at">selected =</span> <span class="st">"AGE"</span>, <span class="at">multiple =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>             <span class="co"># Output table for Table 1</span></span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>             <span class="fu">uiOutput</span>(<span class="st">"table1"</span>)</span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>    )))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The server component of the app includes reactive expressions that update the dropdown menus dynamically based on the user’s selections, as well as the “tabf” function that generates the Table 1 summary based on the selected variables and strata variable. The resulting Table 1 summary is output in an HTML table format using the “htmlTable” function from the “htmlTable” package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Define reactive expression for output</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  selected_smry <span class="ot">&lt;-</span> <span class="fu">reactive</span>({input<span class="sc">$</span>smry})</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>tableoutput1 <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">is.numeric</span>(dat1 <span class="sc">%&gt;%</span> <span class="fu">pull</span>(<span class="fu">selected_smry</span>()))){</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>      dat1 <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">mean=</span><span class="fu">mean</span>(<span class="sc">!!</span><span class="fu">sym</span>(<span class="fu">selected_smry</span>())), </span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">sd=</span><span class="fu">sd</span>(<span class="sc">!!</span><span class="fu">sym</span>(<span class="fu">selected_smry</span>())))</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>      dat1 <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">all_of</span>(<span class="fu">selected_smry</span>())) <span class="sc">%&gt;%</span> <span class="fu">table</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">addmargins</span>() </span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>  catVars <span class="ot">&lt;-</span> <span class="fu">reactive</span>(input<span class="sc">$</span>catVars)</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>  conVars <span class="ot">&lt;-</span> <span class="fu">reactive</span>(input<span class="sc">$</span>conVars)</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>  selectedstrata <span class="ot">&lt;-</span> <span class="fu">reactive</span>(input<span class="sc">$</span>stratas)</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">observe</span>({</span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>    char <span class="ot">=</span> <span class="fu">names</span>(dat1)[(<span class="fu">sapply</span>(dat1, is.character))]</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>    choices <span class="ot">&lt;-</span> char[char<span class="sc">!=</span><span class="fu">selectedstrata</span>()]</span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>     <span class="fu">updatePickerInput</span>(session, <span class="st">"catVars"</span>, <span class="at">choices =</span> choices, <span class="at">selected =</span> <span class="st">"None"</span>)</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>  tab1 <span class="ot">=</span> <span class="fu">reactive</span>(<span class="fu">tabf</span>(<span class="at">dat1=</span>dat1, <span class="at">stratas =</span> <span class="fu">selectedstrata</span>(), <span class="at">catVars =</span> <span class="fu">catVars</span>(), <span class="at">conVars =</span> <span class="fu">conVars</span>()))</span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>   output<span class="sc">$</span>table1 <span class="ot">=</span> <span class="fu">renderUI</span>(<span class="fu">tab1</span>() <span class="sc">%&gt;%</span> <span class="fu">htmlTable</span>(<span class="at">align =</span><span class="st">"l"</span>))</span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>SidebarLayout</p>
+</blockquote>
+<p>In the Summary Table tab, the sidebarLayout function is used to create a layout with a sidebar panel and a main panel. The selectInput function for the “smry” variable is placed in the sidebar panel, and the tableOutput function is placed in the main panel. This allows the user to select the variables to summarize in the sidebar, while the resulting table is displayed in the main panel.</p>
+<p><img src="img/tab4.gif"></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabsetPanel</span>(</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="st">"Summary Table"</span>,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>             <span class="fu">sidebarLayout</span>(     </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>               <span class="fu">sidebarPanel</span>(</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>             <span class="co"># Create output</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>             <span class="fu">selectInput</span>(<span class="st">"smry"</span>, <span class="st">"Select variables of summary:"</span>, <span class="at">choices =</span> gg, <span class="at">selected =</span> <span class="fu">c</span>(<span class="st">"sleepgp"</span>))</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>             ), </span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>            <span class="fu">mainPanel</span>(</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>              <span class="fu">tableOutput</span>(<span class="st">"tableoutput1"</span>)</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>              )</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    )), </span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="st">"Table 1"</span>, </span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>             <span class="fu">sidebarLayout</span>(</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>               <span class="fu">sidebarPanel</span>(</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>             <span class="co"># Create dropdown for strata variables</span></span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>             <span class="fu">selectInput</span>(<span class="st">"stratas"</span>, <span class="st">"Select strata variable(s):"</span>, </span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>                         <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"None"</span>, <span class="fu">names</span>(dat1)), </span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>                         <span class="at">selected =</span> <span class="st">"sleepgp"</span>, <span class="at">multiple =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>             <span class="co"># Create dropdown for categorical variables</span></span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>             <span class="fu">selectInput</span>(<span class="st">"catVars"</span>, <span class="st">"Select categorical variable(s):"</span>, </span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>                         <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"None"</span>), </span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>                         <span class="at">selected =</span> <span class="st">"wwa1gp"</span>, <span class="at">multiple =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>             <span class="co"># Create dropdown for continuous variables</span></span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>             <span class="fu">selectInput</span>(<span class="st">"conVars"</span>, <span class="st">"Select continuous variable(s):"</span>, </span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>                         <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"None"</span>, <span class="fu">names</span>(dat1)[<span class="fu">sapply</span>(dat1, is.numeric)]), </span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>                         <span class="at">selected =</span> <span class="st">"AGE"</span>, <span class="at">multiple =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>             ),</span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a>             <span class="co"># Output table for Table 1</span></span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a>             <span class="fu">mainPanel</span>(</span>
+<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a>               <span class="fu">uiOutput</span>(<span class="st">"table1"</span>)</span>
+<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>             ))</span>
+<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="picker-input-and-more" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="picker-input-and-more"><span class="header-section-number">6.7</span> Picker Input and more</h2>
+<p>Yes, you can add the installation and library loading code for the shinyWidgets package in the global environment of your Shiny app.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"shinyWidgets"</span>)) <span class="fu">install.packages</span>(<span class="st">"shinyWidgets"</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shinyWidgets)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="img/pickerinput.gif" width="100%"></p>
+<p>The pickerInput function creates a dropdown menu with checkboxes for selecting multiple continuous variables. The choices argument specifies the available options for selection, and selected specifies the default selections. The options argument specifies the options for the picker input widget. Here, we’ve used pickerOptions to enable an actions box that allows the user to select/deselect all options at once.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabsetPanel</span>(</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="st">"Summary Table"</span>,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>             <span class="fu">sidebarLayout</span>(     </span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>               <span class="fu">sidebarPanel</span>(</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>             <span class="co"># Create output</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>             <span class="fu">selectInput</span>(<span class="st">"smry"</span>, <span class="st">"Select variables of summary:"</span>, <span class="at">choices =</span> gg, <span class="at">selected =</span> <span class="fu">c</span>(<span class="st">"sleepgp"</span>))</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>             ), </span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>            <span class="fu">mainPanel</span>(</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>              <span class="fu">tableOutput</span>(<span class="st">"tableoutput1"</span>)</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>              )</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>    )), </span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="st">"Table 1"</span>, </span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>             <span class="fu">sidebarLayout</span>(</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>               <span class="fu">sidebarPanel</span>(</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>             <span class="co"># Create dropdown for strata variables</span></span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">pickerInput</span>(<span class="st">"stratas"</span>, <span class="st">"Select strata variable(s):"</span>, </span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>                         <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"None"</span>, <span class="fu">names</span>(dat1)), </span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>                         <span class="at">selected =</span> <span class="st">"sleepgp"</span>, <span class="at">multiple =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>                         <span class="at">options =</span> myPickerOptions</span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>                         ),</span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>             <span class="co"># Create dropdown for categorical variables</span></span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>             <span class="fu">pickerInput</span>(<span class="st">"catVars"</span>, <span class="st">"Select categorical variable(s):"</span>, </span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>                         <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"None"</span>), </span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>                         <span class="at">selected =</span> <span class="st">"wwa1gp"</span>, <span class="at">multiple =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>                         <span class="at">options =</span> myPickerOptions),</span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>             <span class="co"># Create dropdown for continuous variables</span></span>
+<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a>             <span class="fu">pickerInput</span>(<span class="st">"conVars"</span>, <span class="st">"Select continuous variable(s):"</span>, </span>
+<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a>                         <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"None"</span>, <span class="fu">names</span>(dat1)[<span class="fu">sapply</span>(dat1, is.numeric)]), </span>
+<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a>                         <span class="at">selected =</span> <span class="st">"AGE"</span>, <span class="at">multiple =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a>                         <span class="at">options =</span> myPickerOptions)</span>
+<span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a>             ),</span>
+<span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb26-39"><a href="#cb26-39" aria-hidden="true" tabindex="-1"></a>             <span class="co"># Output table for Table 1</span></span>
+<span id="cb26-40"><a href="#cb26-40" aria-hidden="true" tabindex="-1"></a>             <span class="fu">mainPanel</span>(</span>
+<span id="cb26-41"><a href="#cb26-41" aria-hidden="true" tabindex="-1"></a>               <span class="fu">uiOutput</span>(<span class="st">"table1"</span>)</span>
+<span id="cb26-42"><a href="#cb26-42" aria-hidden="true" tabindex="-1"></a>             ))</span>
+<span id="cb26-43"><a href="#cb26-43" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb26-44"><a href="#cb26-44" aria-hidden="true" tabindex="-1"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The updatePickerInput function is used to dynamically update the dropdown menu options for categorical variables based on the selected strata variable.</p>
+<p><img src="img/pickertalk.png" width="100%"></p>
+<p>The function takes several arguments:</p>
+<p>session: the Shiny session object inputId: the ID of the pickerInput widget to update choices: a character vector of new choices for the pickerInput widget selected: a character vector of selected choices for the pickerInput widget</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Define reactive expression for output</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  selected_smry <span class="ot">&lt;-</span> <span class="fu">reactive</span>({input<span class="sc">$</span>smry})</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>tableoutput1 <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">is.numeric</span>(dat1 <span class="sc">%&gt;%</span> <span class="fu">pull</span>(<span class="fu">selected_smry</span>()))){</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>      dat1 <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">mean=</span><span class="fu">mean</span>(<span class="sc">!!</span><span class="fu">sym</span>(<span class="fu">selected_smry</span>())), </span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">sd=</span><span class="fu">sd</span>(<span class="sc">!!</span><span class="fu">sym</span>(<span class="fu">selected_smry</span>())))</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>      dat1 <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">all_of</span>(<span class="fu">selected_smry</span>())) <span class="sc">%&gt;%</span> <span class="fu">table</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">addmargins</span>() </span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>  catVars <span class="ot">&lt;-</span> <span class="fu">reactive</span>(input<span class="sc">$</span>catVars)</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>  conVars <span class="ot">&lt;-</span> <span class="fu">reactive</span>(input<span class="sc">$</span>conVars)</span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>  selectedstrata <span class="ot">&lt;-</span> <span class="fu">reactive</span>(input<span class="sc">$</span>stratas)</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">observe</span>({</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>    char <span class="ot">=</span> <span class="fu">names</span>(dat1)[(<span class="fu">sapply</span>(dat1, is.character))]</span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>    choices <span class="ot">&lt;-</span> char[char<span class="sc">!=</span><span class="fu">selectedstrata</span>()]</span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>     <span class="fu">updatePickerInput</span>(session, <span class="st">"catVars"</span>, <span class="at">choices =</span> choices, <span class="at">selected =</span> <span class="st">"None"</span>)</span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>  tab1 <span class="ot">=</span> <span class="fu">reactive</span>(<span class="fu">tabf</span>(<span class="at">dat1=</span>dat1, <span class="at">stratas =</span> <span class="fu">selectedstrata</span>(), <span class="at">catVars =</span> <span class="fu">catVars</span>(), <span class="at">conVars =</span> <span class="fu">conVars</span>()))</span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>   output<span class="sc">$</span>table1 <span class="ot">=</span> <span class="fu">renderUI</span>(<span class="fu">tab1</span>() <span class="sc">%&gt;%</span> <span class="fu">htmlTable</span>(<span class="at">align =</span><span class="st">"l"</span>))</span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In global, We have also defined the myPickerOptions list, which is used to customize the options for the pickerInput widget.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>dat1 <span class="ot">=</span> <span class="fu">readRDS</span>(<span class="st">"data/kwcs6th.rds"</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(labelled)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>dat1 <span class="ot">=</span> dat1 <span class="sc">%&gt;%</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">"sleepgp"</span>, <span class="st">"wwa1gp"</span>, <span class="st">"shortReturn"</span>,<span class="st">"shiftWork"</span> , <span class="st">"njob"</span>, <span class="st">"sexgp"</span>,  <span class="st">"edugp"</span>, <span class="st">"empgp"</span>, <span class="st">"AGE"</span>,<span class="st">"satisfaction"</span>)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>dat1 <span class="ot">=</span> <span class="fu">remove_labels</span>(dat1) </span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>gg <span class="ot">=</span> <span class="fu">names</span>(dat1) <span class="sc">%&gt;%</span> <span class="fu">as.list</span>()</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"devtools"</span>)) <span class="fu">install.packages</span>(<span class="st">"devtools"</span>)</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(devtools)</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"tabf"</span>)) <span class="fu">install_github</span>(<span class="st">"jinhaslab/tabf"</span>, <span class="at">force =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tabf)</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"tidyverse"</span>)) <span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"htmlTable"</span>)) <span class="fu">install.packages</span>(<span class="st">"htmlTable"</span>)</span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"broom"</span>)) <span class="fu">install.packages</span>(<span class="st">"broom"</span>)</span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"shinyWidgets"</span>)) <span class="fu">install.packages</span>(<span class="st">"shinyWidgets"</span>)</span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shinyWidgets)</span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>myPickerOptions <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">actions-box</span><span class="st">`</span> <span class="ot">=</span> <span class="cn">TRUE</span>,</span>
+<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">live-search</span><span class="st">`</span> <span class="ot">=</span> <span class="cn">TRUE</span>,</span>
+<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">selected-text-format</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"count &gt; 2"</span>,</span>
+<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">search =</span> <span class="cn">TRUE</span></span>
+<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="logistic-regression-model" class="level2" data-number="6.8">
+<h2 data-number="6.8" class="anchored" data-anchor-id="logistic-regression-model"><span class="header-section-number">6.8</span> Logistic Regression model</h2>
+<p>We have created three pickerInput widgets to select the dependent variable, independent variable(s), and reference categories for categorical variables. The options argument for the pickerInput widgets is set to myPickerOptions, which customizes the appearance of the dropdown menus. We have also created an action button with label “Analysis Start” that the user can click to run the logistic regression model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabsetPanel</span>(</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="st">"Summary Table"</span>,</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>             <span class="fu">sidebarLayout</span>(     </span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>               <span class="fu">sidebarPanel</span>(</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>             <span class="co"># Create output ----------------</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>             <span class="fu">selectInput</span>(<span class="st">"smry"</span>, <span class="st">"Select variables of summary:"</span>, <span class="at">choices =</span> gg, <span class="at">selected =</span> <span class="fu">c</span>(<span class="st">"sleepgp"</span>))</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>             ), </span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>            <span class="fu">mainPanel</span>(</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>              <span class="fu">tableOutput</span>(<span class="st">"tableoutput1"</span>)</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>              )</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>    )), </span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="st">"Table 1"</span>, </span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>             <span class="fu">sidebarLayout</span>(</span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>               <span class="fu">sidebarPanel</span>(</span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>             <span class="co"># Create dropdown for strata variables</span></span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">pickerInput</span>(<span class="st">"stratas"</span>, <span class="st">"Select strata variable(s):"</span>, </span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>                         <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"None"</span>, <span class="fu">names</span>(dat1)), </span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>                         <span class="at">selected =</span> <span class="st">"sleepgp"</span>, <span class="at">multiple =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>                         <span class="at">options =</span> myPickerOptions</span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>                         ),</span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>             <span class="co"># Create dropdown for categorical variables</span></span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a>             <span class="fu">pickerInput</span>(<span class="st">"catVars"</span>, <span class="st">"Select categorical variable(s):"</span>, </span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>                         <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"None"</span>), </span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a>                         <span class="at">selected =</span> <span class="st">"None"</span>, <span class="at">multiple =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a>                         <span class="at">options =</span> myPickerOptions),</span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a>             <span class="co"># Create dropdown for continuous variables</span></span>
+<span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a>             <span class="fu">pickerInput</span>(<span class="st">"conVars"</span>, <span class="st">"Select continuous variable(s):"</span>, </span>
+<span id="cb29-34"><a href="#cb29-34" aria-hidden="true" tabindex="-1"></a>                         <span class="at">choices =</span> <span class="fu">c</span>(<span class="fu">names</span>(dat1)[<span class="fu">sapply</span>(dat1, is.numeric)]), </span>
+<span id="cb29-35"><a href="#cb29-35" aria-hidden="true" tabindex="-1"></a>                         <span class="at">selected =</span> <span class="st">"None"</span>, <span class="at">multiple =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb29-36"><a href="#cb29-36" aria-hidden="true" tabindex="-1"></a>                         <span class="at">options =</span> myPickerOptions)</span>
+<span id="cb29-37"><a href="#cb29-37" aria-hidden="true" tabindex="-1"></a>             ),</span>
+<span id="cb29-38"><a href="#cb29-38" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb29-39"><a href="#cb29-39" aria-hidden="true" tabindex="-1"></a>             <span class="co"># Output table for Table 1</span></span>
+<span id="cb29-40"><a href="#cb29-40" aria-hidden="true" tabindex="-1"></a>             <span class="fu">mainPanel</span>(</span>
+<span id="cb29-41"><a href="#cb29-41" aria-hidden="true" tabindex="-1"></a>               <span class="fu">uiOutput</span>(<span class="st">"table1"</span>)</span>
+<span id="cb29-42"><a href="#cb29-42" aria-hidden="true" tabindex="-1"></a>             ))</span>
+<span id="cb29-43"><a href="#cb29-43" aria-hidden="true" tabindex="-1"></a>    ), </span>
+<span id="cb29-44"><a href="#cb29-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="st">"Logistic Model"</span>,</span>
+<span id="cb29-45"><a href="#cb29-45" aria-hidden="true" tabindex="-1"></a>             <span class="fu">sidebarLayout</span>(</span>
+<span id="cb29-46"><a href="#cb29-46" aria-hidden="true" tabindex="-1"></a>               <span class="fu">sidebarPanel</span>(  </span>
+<span id="cb29-47"><a href="#cb29-47" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">pickerInput</span>(<span class="st">"Dependent"</span>, <span class="st">"Dependent Variable: "</span>, </span>
+<span id="cb29-48"><a href="#cb29-48" aria-hidden="true" tabindex="-1"></a>                             <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"None"</span>, <span class="fu">names</span>(dat1)), </span>
+<span id="cb29-49"><a href="#cb29-49" aria-hidden="true" tabindex="-1"></a>                             <span class="at">selected =</span> <span class="st">"sleepgp"</span>, <span class="at">multiple =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb29-50"><a href="#cb29-50" aria-hidden="true" tabindex="-1"></a>                 ,</span>
+<span id="cb29-51"><a href="#cb29-51" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">uiOutput</span>(<span class="st">"RefsChoice"</span>),</span>
+<span id="cb29-52"><a href="#cb29-52" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">pickerInput</span>(<span class="st">"Independent"</span>, <span class="st">"Independent Variable: "</span>, </span>
+<span id="cb29-53"><a href="#cb29-53" aria-hidden="true" tabindex="-1"></a>                             <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"None"</span>), </span>
+<span id="cb29-54"><a href="#cb29-54" aria-hidden="true" tabindex="-1"></a>                             <span class="at">selected =</span> <span class="fu">c</span>(<span class="st">"wwa1gp"</span>), <span class="at">multiple =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb29-55"><a href="#cb29-55" aria-hidden="true" tabindex="-1"></a>                             <span class="at">options =</span> myPickerOptions)</span>
+<span id="cb29-56"><a href="#cb29-56" aria-hidden="true" tabindex="-1"></a>                 ,</span>
+<span id="cb29-57"><a href="#cb29-57" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">actionButton</span>(<span class="at">inputId =</span> <span class="st">"submit"</span>, <span class="at">label =</span><span class="st">"Analysis Start"</span>),</span>
+<span id="cb29-58"><a href="#cb29-58" aria-hidden="true" tabindex="-1"></a>                 </span>
+<span id="cb29-59"><a href="#cb29-59" aria-hidden="true" tabindex="-1"></a>               ),</span>
+<span id="cb29-60"><a href="#cb29-60" aria-hidden="true" tabindex="-1"></a>               <span class="fu">mainPanel</span>(tags<span class="sc">$</span><span class="fu">h3</span>(<span class="st">"model formular"</span>),</span>
+<span id="cb29-61"><a href="#cb29-61" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">htmlOutput</span>(<span class="st">"formular"</span>), </span>
+<span id="cb29-62"><a href="#cb29-62" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">htmlOutput</span>(<span class="st">"mod1"</span>))</span>
+<span id="cb29-63"><a href="#cb29-63" aria-hidden="true" tabindex="-1"></a>             )</span>
+<span id="cb29-64"><a href="#cb29-64" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb29-65"><a href="#cb29-65" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb29-66"><a href="#cb29-66" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In server setting, First, We define the reactive expression RC, which gets the unique values of the dependent variable to use as the reference value for the logistic regression model. We then create an output called RefsChoice that uses a pickerInput widget to allow the user to select the reference category for categorical variables.</p>
+<p>Next, We define the reactive expression SelectedDependent which retrieves the value of the dependent variable selected by the user. We then create an observer that updates the choices available for the independent variable dropdown based on the selected dependent variable.</p>
+<p>We create two output elements: formular and mod1. The formular output generates a string that displays the logistic regression model formula based on the user’s input. The mod1 output uses the glm function to fit a logistic regression model and generate the summary output using oddsTabf.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Define reactive expression for output</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  selected_smry <span class="ot">&lt;-</span> <span class="fu">reactive</span>({input<span class="sc">$</span>smry})</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>tableoutput1 <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">is.numeric</span>(dat1 <span class="sc">%&gt;%</span> <span class="fu">pull</span>(<span class="fu">selected_smry</span>()))){</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>      dat1 <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">mean=</span><span class="fu">mean</span>(<span class="sc">!!</span><span class="fu">sym</span>(<span class="fu">selected_smry</span>())), </span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">sd=</span><span class="fu">sd</span>(<span class="sc">!!</span><span class="fu">sym</span>(<span class="fu">selected_smry</span>())))</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>      dat1 <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">all_of</span>(<span class="fu">selected_smry</span>())) <span class="sc">%&gt;%</span> <span class="fu">table</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">addmargins</span>() </span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>  catVars <span class="ot">&lt;-</span> <span class="fu">reactive</span>(input<span class="sc">$</span>catVars)</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>  conVars <span class="ot">&lt;-</span> <span class="fu">reactive</span>(input<span class="sc">$</span>conVars)</span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>  selectedstrata <span class="ot">&lt;-</span> <span class="fu">reactive</span>(input<span class="sc">$</span>stratas)</span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">observe</span>({</span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a>    char <span class="ot">=</span> <span class="fu">names</span>(dat1)[(<span class="fu">sapply</span>(dat1, is.character))]</span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>    choices <span class="ot">&lt;-</span> char[char<span class="sc">!=</span><span class="fu">selectedstrata</span>()]</span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>     <span class="fu">updatePickerInput</span>(session, <span class="st">"catVars"</span>, <span class="at">choices =</span> choices, <span class="at">selected =</span> <span class="st">"None"</span>)</span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a>tab1 <span class="ot">=</span> <span class="fu">reactive</span>({</span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.null</span>(<span class="fu">catVars</span>())) {</span>
+<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabf</span>(<span class="at">dat1=</span>dat1, <span class="at">stratas =</span> <span class="fu">selectedstrata</span>(), <span class="at">conVars =</span> <span class="fu">conVars</span>())</span>
+<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (<span class="fu">is.null</span>(<span class="fu">conVars</span>())) {</span>
+<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabf</span>(<span class="at">dat1=</span>dat1, <span class="at">stratas =</span> <span class="fu">selectedstrata</span>(), <span class="at">catVars =</span> <span class="fu">catVars</span>())</span>
+<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabf</span>(<span class="at">dat1=</span>dat1, <span class="at">stratas =</span> <span class="fu">selectedstrata</span>(), <span class="at">catVars =</span> <span class="fu">catVars</span>(), <span class="at">conVars =</span> <span class="fu">conVars</span>())</span>
+<span id="cb30-34"><a href="#cb30-34" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb30-35"><a href="#cb30-35" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb30-36"><a href="#cb30-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-37"><a href="#cb30-37" aria-hidden="true" tabindex="-1"></a>output<span class="sc">$</span>table1 <span class="ot">=</span> <span class="fu">renderUI</span>({</span>
+<span id="cb30-38"><a href="#cb30-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">validate</span>(<span class="fu">need</span>(<span class="fu">catVars</span>(), <span class="st">"Select variables"</span>))</span>
+<span id="cb30-39"><a href="#cb30-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab1</span>() <span class="sc">%&gt;%</span> <span class="fu">htmlTable</span>(<span class="at">align =</span><span class="st">"l"</span>)</span>
+<span id="cb30-40"><a href="#cb30-40" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb30-41"><a href="#cb30-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-42"><a href="#cb30-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-43"><a href="#cb30-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-44"><a href="#cb30-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-45"><a href="#cb30-45" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb30-46"><a href="#cb30-46" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb30-47"><a href="#cb30-47" aria-hidden="true" tabindex="-1"></a>   <span class="co"># logistic regression</span></span>
+<span id="cb30-48"><a href="#cb30-48" aria-hidden="true" tabindex="-1"></a>   <span class="do">## reference value</span></span>
+<span id="cb30-49"><a href="#cb30-49" aria-hidden="true" tabindex="-1"></a>   RC <span class="ot">&lt;-</span>  <span class="fu">reactive</span>({ <span class="fu">validate</span>(</span>
+<span id="cb30-50"><a href="#cb30-50" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">need</span>(input<span class="sc">$</span>Dependent, <span class="st">"Dependent variable"</span>) )</span>
+<span id="cb30-51"><a href="#cb30-51" aria-hidden="true" tabindex="-1"></a>                     dat1 <span class="sc">%&gt;%</span> <span class="fu">select</span>(input<span class="sc">$</span>Dependent) <span class="sc">%&gt;%</span> <span class="fu">unique</span>() <span class="sc">%&gt;%</span> <span class="fu">pull</span>(.)</span>
+<span id="cb30-52"><a href="#cb30-52" aria-hidden="true" tabindex="-1"></a>                     })</span>
+<span id="cb30-53"><a href="#cb30-53" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb30-54"><a href="#cb30-54" aria-hidden="true" tabindex="-1"></a>   output<span class="sc">$</span>RefsChoice <span class="ot">&lt;-</span> <span class="fu">renderUI</span>({</span>
+<span id="cb30-55"><a href="#cb30-55" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">pickerInput</span>(<span class="st">"Refs"</span>, <span class="st">"Odds for:"</span>,</span>
+<span id="cb30-56"><a href="#cb30-56" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">list</span>(<span class="st">`</span><span class="at">odds for</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">RC</span>()))</span>
+<span id="cb30-57"><a href="#cb30-57" aria-hidden="true" tabindex="-1"></a>                      })</span>
+<span id="cb30-58"><a href="#cb30-58" aria-hidden="true" tabindex="-1"></a>   <span class="do">## independent variable</span></span>
+<span id="cb30-59"><a href="#cb30-59" aria-hidden="true" tabindex="-1"></a>   SelectedDependent <span class="ot">&lt;-</span> <span class="fu">reactive</span>(input<span class="sc">$</span>Dependent)</span>
+<span id="cb30-60"><a href="#cb30-60" aria-hidden="true" tabindex="-1"></a>   <span class="fu">observe</span>({</span>
+<span id="cb30-61"><a href="#cb30-61" aria-hidden="true" tabindex="-1"></a>     char2 <span class="ot">=</span> <span class="fu">names</span>(dat1)</span>
+<span id="cb30-62"><a href="#cb30-62" aria-hidden="true" tabindex="-1"></a>     choices2 <span class="ot">&lt;-</span> char2[char2<span class="sc">!=</span><span class="fu">SelectedDependent</span>()]</span>
+<span id="cb30-63"><a href="#cb30-63" aria-hidden="true" tabindex="-1"></a>     <span class="fu">updatePickerInput</span>(session, <span class="st">"Independent"</span>, <span class="at">choices =</span> choices2, <span class="at">selected =</span> <span class="fu">c</span>(<span class="st">"None"</span>), </span>
+<span id="cb30-64"><a href="#cb30-64" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">options =</span> myPickerOptions)</span>
+<span id="cb30-65"><a href="#cb30-65" aria-hidden="true" tabindex="-1"></a>   })</span>
+<span id="cb30-66"><a href="#cb30-66" aria-hidden="true" tabindex="-1"></a>   output<span class="sc">$</span>formular <span class="ot">&lt;-</span> <span class="fu">renderUI</span>({</span>
+<span id="cb30-67"><a href="#cb30-67" aria-hidden="true" tabindex="-1"></a>     form <span class="ot">&lt;-</span> <span class="fu">HTML</span>(<span class="fu">sprintf</span>(<span class="st">"&lt;h3&gt; %s == '%s' &lt;br/&gt; ~ %s &lt;/h3&gt;"</span>,input<span class="sc">$</span>Dependent, input<span class="sc">$</span>Refs  ,<span class="fu">paste0</span>(input<span class="sc">$</span>Independent, <span class="at">collapse=</span><span class="st">" + "</span>)))</span>
+<span id="cb30-68"><a href="#cb30-68" aria-hidden="true" tabindex="-1"></a>   })</span>
+<span id="cb30-69"><a href="#cb30-69" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb30-70"><a href="#cb30-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">observeEvent</span>(input<span class="sc">$</span>submit, {</span>
+<span id="cb30-71"><a href="#cb30-71" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>mod1 <span class="ot">&lt;-</span> <span class="fu">renderUI</span>({</span>
+<span id="cb30-72"><a href="#cb30-72" aria-hidden="true" tabindex="-1"></a>      <span class="fu">validate</span>(<span class="fu">need</span>(input<span class="sc">$</span>Independent, <span class="st">"Select independent variable"</span>))</span>
+<span id="cb30-73"><a href="#cb30-73" aria-hidden="true" tabindex="-1"></a>      f1 <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">"%s == '%s' ~ %s "</span>,</span>
+<span id="cb30-74"><a href="#cb30-74" aria-hidden="true" tabindex="-1"></a>                    input<span class="sc">$</span>Dependent, input<span class="sc">$</span>Refs,</span>
+<span id="cb30-75"><a href="#cb30-75" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">paste0</span>(input<span class="sc">$</span>Independent, <span class="at">collapse=</span><span class="st">" + "</span>))</span>
+<span id="cb30-76"><a href="#cb30-76" aria-hidden="true" tabindex="-1"></a>      mod1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="at">data=</span>dat1, <span class="at">family=</span><span class="fu">binomial</span>(), <span class="fu">as.formula</span>(f1))</span>
+<span id="cb30-77"><a href="#cb30-77" aria-hidden="true" tabindex="-1"></a>      <span class="fu">oddsTabf</span>(mod1)</span>
+<span id="cb30-78"><a href="#cb30-78" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb30-79"><a href="#cb30-79" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb30-80"><a href="#cb30-80" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb30-81"><a href="#cb30-81" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb30-82"><a href="#cb30-82" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s focuse on <code>observeEvent</code> function</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">observeEvent</span>(input<span class="sc">$</span>submit, {</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>mod1 <span class="ot">&lt;-</span> <span class="fu">renderUI</span>({</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">validate</span>(<span class="fu">need</span>(input<span class="sc">$</span>Independent, <span class="st">"Select independent variable"</span>))</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>      f1 <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">"%s == '%s' ~ %s "</span>,</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>                    input<span class="sc">$</span>Dependent, input<span class="sc">$</span>Refs,</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">paste0</span>(input<span class="sc">$</span>Independent, <span class="at">collapse=</span><span class="st">" + "</span>))</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>      mod1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="at">data=</span>dat1, <span class="at">family=</span><span class="fu">binomial</span>(), <span class="fu">as.formula</span>(f1))</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">oddsTabf</span>(mod1)</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>  })</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <code>observeEvent</code> function listens for a click on the “Analysis Start” button (<code>input$submit</code>) and then executes the logistic regression code within the <code>output$mod1</code> render function to generate the odds ratio table. Once the table is generated, it will be displayed on the UI.</p>
+<p><img src="img/obsesrveEvent.png" width="100%"></p>
+<p>The global is same as we made.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>dat1 <span class="ot">=</span> <span class="fu">readRDS</span>(<span class="st">"data/kwcs6th.rds"</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(labelled)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>dat1 <span class="ot">=</span> dat1 <span class="sc">%&gt;%</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">"sleepgp"</span>, <span class="st">"wwa1gp"</span>, <span class="st">"shortReturn"</span>,<span class="st">"shiftWork"</span> , <span class="st">"njob"</span>, <span class="st">"sexgp"</span>,  <span class="st">"edugp"</span>, <span class="st">"empgp"</span>, <span class="st">"AGE"</span>,<span class="st">"satisfaction"</span>)</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>dat1 <span class="ot">=</span> <span class="fu">remove_labels</span>(dat1) </span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>gg <span class="ot">=</span> <span class="fu">names</span>(dat1) <span class="sc">%&gt;%</span> <span class="fu">as.list</span>()</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"devtools"</span>)) <span class="fu">install.packages</span>(<span class="st">"devtools"</span>)</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(devtools)</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"tabf"</span>)) <span class="fu">install_github</span>(<span class="st">"jinhaslab/tabf"</span>, <span class="at">force =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tabf)</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"tidyverse"</span>)) <span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"htmlTable"</span>)) <span class="fu">install.packages</span>(<span class="st">"htmlTable"</span>)</span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"broom"</span>)) <span class="fu">install.packages</span>(<span class="st">"broom"</span>)</span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"shinyWidgets"</span>)) <span class="fu">install.packages</span>(<span class="st">"shinyWidgets"</span>)</span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shinyWidgets)</span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a>myPickerOptions <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">actions-box</span><span class="st">`</span> <span class="ot">=</span> <span class="cn">TRUE</span>,</span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">live-search</span><span class="st">`</span> <span class="ot">=</span> <span class="cn">TRUE</span>,</span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">selected-text-format</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"count &gt; 2"</span>,</span>
+<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">search =</span> <span class="cn">TRUE</span></span>
+<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="quiz" class="level2" data-number="6.9">
+<h2 data-number="6.9" class="anchored" data-anchor-id="quiz"><span class="header-section-number">6.9</span> Quiz</h2>
+<p>Make a new tab of logistic plot model. Make a app displaying ggplot output of odds ratio with 95% confidence interval. You can use following code of OR and 95% CI plot. You should modify the code, and add that into server, and modify the UI, too. Good Luck!</p>
+<p><img src="img/logisticplot.gif" width="90%"></p>
+<blockquote class="blockquote">
+<p>for ggplot of OR with 95%CI</p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">=</span> dat1 <span class="sc">%&gt;%</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glm</span>(<span class="at">data=</span>.,<span class="at">family=</span><span class="st">"binomial"</span>,<span class="at">formula =</span> sleepgp <span class="sc">==</span> <span class="st">"1.sleep disturbance"</span>  </span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>      <span class="sc">~</span> wwa1gp)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fu">oddf0</span>(mod1) <span class="sc">%&gt;%</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span>values, <span class="at">x =</span> or)) <span class="sc">+</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbarh</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> ll, <span class="at">xmax =</span> ul), <span class="at">height =</span> <span class="fl">0.09</span>, <span class="at">color =</span> <span class="st">"#666666"</span>, <span class="at">size=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">15</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">"#444444"</span>)  <span class="sc">+</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"#FF0000"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">cex =</span><span class="fl">0.5</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Odds Ratio and 95% Confidence Interval"</span>) <span class="sc">+</span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family =</span><span class="st">"Times"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>if you want to know about such ggplot code go to <a href="https://jinhaslab.github.io/dspubs_tutorbook/statistical-plot-with-ggplot2.html#odds-ratio-and-95-confidence-interval"> Here </a></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./0251-flexdashboard_datatable.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Flexdashboard with DataTable</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./0451-shiny.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Shiny for questionnaire of PHQ-9</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>dashboard project - 4&nbsp; Flexdashboard</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./0251-flexdashboard_datatable.html" rel="next">
+<link href="./0103-DataVisualization.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar docked">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./0201-flexdashboard.html">FLEXDASHBOARD</a></li><li class="breadcrumb-item"><a href="./0201-flexdashboard.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Flexdashboard</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">dashboard project</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text">SETTING &amp; BASIC</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0101-Rstudio_cloud.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Rstudio setting (Cloud)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0103-DataVisualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">visualization for statistical results</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">FLEXDASHBOARD</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0201-flexdashboard.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Flexdashboard</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0251-flexdashboard_datatable.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Flexdashboard with DataTable</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">SHINY</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0401-shiny.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Shiny</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0451-shiny.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Shiny for questionnaire of PHQ-9</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">VI. hi</span></span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#layout-and-design" id="toc-layout-and-design" class="nav-link active" data-scroll-target="#layout-and-design"><span class="header-section-number">4.1</span> Layout and Design</a>
+  <ul class="collapse">
+  <li><a href="#rows-and-columns-layout" id="toc-rows-and-columns-layout" class="nav-link" data-scroll-target="#rows-and-columns-layout"><span class="header-section-number">4.1.1</span> Rows and columns layout</a></li>
+  <li><a href="#scrolling-option" id="toc-scrolling-option" class="nav-link" data-scroll-target="#scrolling-option"><span class="header-section-number">4.1.2</span> Scrolling option</a></li>
+  <li><a href="#tabsets" id="toc-tabsets" class="nav-link" data-scroll-target="#tabsets"><span class="header-section-number">4.1.3</span> Tabsets</a></li>
+  <li><a href="#scaling-of-size" id="toc-scaling-of-size" class="nav-link" data-scroll-target="#scaling-of-size"><span class="header-section-number">4.1.4</span> Scaling of size</a></li>
+  <li><a href="#multiple-pages" id="toc-multiple-pages" class="nav-link" data-scroll-target="#multiple-pages"><span class="header-section-number">4.1.5</span> Multiple pages</a></li>
+  </ul></li>
+  <li><a href="#visualization" id="toc-visualization" class="nav-link" data-scroll-target="#visualization"><span class="header-section-number">4.2</span> Visualization</a>
+  <ul class="collapse">
+  <li><a href="#html-widgets" id="toc-html-widgets" class="nav-link" data-scroll-target="#html-widgets"><span class="header-section-number">4.2.1</span> HTML widgets</a></li>
+  <li><a href="#data-tables" id="toc-data-tables" class="nav-link" data-scroll-target="#data-tables"><span class="header-section-number">4.2.2</span> Data tables</a></li>
+  <li><a href="#valuebox-and-gauges" id="toc-valuebox-and-gauges" class="nav-link" data-scroll-target="#valuebox-and-gauges"><span class="header-section-number">4.2.3</span> ValueBox and Gauges</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Flexdashboard</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<!-- Load holder style box -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.7/holder.min.js"></script>
+<!-- Load vs style highlight-->
+<p><link rel="stylesheet" href="css/styles/vs.min.css"></p>
+<script src="css/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<!-- Load zero-md -->
+<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2/webcomponents-loader.min.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@1/src/zero-md.min.js"></script>
+<!-- load markdown function -->
+<script src="mdsource/loadmd.js"></script>
+<p>Flexdashboard is a package for creating interactive dashboards in R. It is built on top of the Shiny package, which allows you to turn your R code into a web application. Flexdashboard provides a simple syntax for defining the structure of your dashboard and allows you to add various types of content such as text, plots, tables, and more.</p>
+<p>Here are some key features of Flexdashboard:</p>
+<ol type="1">
+<li>Layout and Design</li>
+</ol>
+<ul>
+<li>Rows and columns layout</li>
+<li>Scrolling option</li>
+<li>Tabsets</li>
+<li>Scaling of size</li>
+<li>Multiple pages</li>
+</ul>
+<ol start="2" type="1">
+<li>Visualization</li>
+</ol>
+<ul>
+<li>HTML widgets</li>
+<li>data tables</li>
+<li>gauges</li>
+</ul>
+<ol start="3" type="1">
+<li>Interactivity</li>
+</ol>
+<ul>
+<li>Integration with Shiny</li>
+<li>Navigation bar</li>
+<li>Input controls</li>
+<li>Reactive outputs</li>
+</ul>
+<ol start="4" type="1">
+<li>Storytelling</li>
+</ol>
+<ul>
+<li>The use of storyboards</li>
+</ul>
+<section id="layout-and-design" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="layout-and-design"><span class="header-section-number">4.1</span> Layout and Design</h2>
+<section id="rows-and-columns-layout" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="rows-and-columns-layout"><span class="header-section-number">4.1.1</span> Rows and columns layout</h3>
+<p>level 2 markdown headers (represented by —) are used to define columns within the dashboard. Each column contains one or more charts, which are stacked vertically within the column.</p>
+<div class="row">
+<div class="col-md-6">
+<script src="https://gist.github.com/jinhaslab/76fd4bbe731558d38c47cd3b1860e389.js"></script>
+</div>
+<div class="col-md-6 nopadding">
+<div height="422px" width="100%">
+<div style="float: left; width: 49%; height:200px">
+<p><img class="holder" data-src="holder.js/100px470?size=28&amp;text=Chart 1"></p>
+</div>
+<div style="margin-left: 51%; margin-down:10px; height:410px">
+<p><img class="holder" data-src="holder.js/100px150?size=28&amp;text=Chart 2"> <img class="holder" data-src="holder.js/100px150?size=28&amp;text=Chart 3"> <img class="holder" data-src="holder.js/100px150?size=28&amp;text=Chart 4"></p>
+</div>
+</div>
+</div>
+</div>
+<p>We can display row-wise by specifying the orientation: rows option. Following show that layout defines two rows, the first of which has a single chart and the second of which has three charts:</p>
+<div class="row">
+<div class="col-md-6">
+<script src="https://gist.github.com/jinhaslab/97642a7c622f5625530d903a38f5df02.js"></script>
+</div>
+<div class="col-md-6 nopadding">
+<div height="550px" width="100%">
+<p><img class="holder" data-src="holder.js/100px227?size=28&amp;text=Chart 1"></p>
+<div style="float: left; width: 32%;">
+<p><img class="holder" data-src="holder.js/100px227?size=14&amp;text=Chart 2"></p>
+</div>
+<div style="float: left; width: 32%; margin-left: 3%;">
+<p><img class="holder" data-src="holder.js/100px227?size=14&amp;text=Chart 3"></p>
+</div>
+<div style="width: 30%; margin-left: 70%;">
+<p><img class="holder" data-src="holder.js/100px227?size=14&amp;text=Chart 4"></p>
+</div>
+</div>
+</div>
+</div>
+</section></section></main></div>
+
+<section id="scrolling-option" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" data-anchor-id="scrolling-option"><span class="header-section-number">4.1.2</span> Scrolling option</h3>
+<p>By default, charts in a flexdashboard are vertically stacked and resized to fit the height of the browser window. However, if you have many charts, this may lead to charts being compressed and difficult to read.</p>
+<p>To address this issue, you can use the vertical_layout option to control the layout of your charts. The vertical_layout option can be set to either fill or scroll.</p>
+<p>When vertical_layout: fill is used, charts will be resized to fill the entire height of the browser window, even if that means compressing the charts. This is the default behavior of flexdashboard.</p>
+<p>When vertical_layout: scroll is used, charts will be displayed at their natural height, and the user will have to scroll down to see all the charts. This is useful when you have many charts and don’t want them to be compressed.</p>
+<p>In the example , the YAML header of the flexdashboard file specified vertical_layout: scroll, which means the charts will be displayed at their natural height and the page will scroll as necessary to accommodate them. This way, all the charts will be displayed clearly, even if there are many of them.</p>
+<div class="row">
+
+<div class="col-md-12">
+<script src="https://gist.github.com/jinhaslab/50f7473f33db407943965a21dd6957e7.js"></script>
+</div>
+<div class="col-md-12">
+<p><img src="img/scrolling.gif" width="100%"></p>
+</div>
+</div></section>
+<section id="tabsets" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" data-anchor-id="tabsets"><span class="header-section-number">4.1.3</span> Tabsets</h3>
+<p>In flexdashboard, you can use the tabset layout to display multiple components within a row or column as tabs. This allows users to switch between the components by clicking on the tab labels. This layout is especially useful when you have several components that provide related information, but only one component is primary and should be seen by all readers.</p>
+<p><img src="img/tabsets.gif"></p>
+<script src="https://gist.github.com/jinhaslab/e6a76b4605bf00a8cc2405f680e62f13.js"></script>
+</section>
+<section id="scaling-of-size" class="level3" data-number="4.1.4">
+<h3 data-number="4.1.4" data-anchor-id="scaling-of-size"><span class="header-section-number">4.1.4</span> Scaling of size</h3>
+<p>The data-width and data-height attributes in flexdashboard allow you to control the relative size of rows, columns, or individual charts. These attributes determine the relative size between charts laid out in the same dimension (horizontal or vertical). By using these attributes, you can customize the sizing behavior of your charts and adjust the size of the charts to suit the nature of the charts and the desired emphasis, visualization types, etc. This way, you can ensure that your charts are displayed at the appropriate size and with the desired level of detail, and that the focus of the dashboard is clear to users.</p>
+<p><img src="img/chartsizing1.gif" width="100%"></p>
+<script src="https://gist.github.com/jinhaslab/659d496b30931cfc630a6b3049db83f9.js"></script>
+<p><img src="img/chartsizing2.gif" width="100%"></p>
+<script src="https://gist.github.com/jinhaslab/cc0557fbd66e6346bf71e46f33a5c825.js"></script>
+</section>
+<section id="multiple-pages" class="level3" data-number="4.1.5">
+<h3 data-number="4.1.5" data-anchor-id="multiple-pages"><span class="header-section-number">4.1.5</span> Multiple pages</h3>
+<p><img src="img/page1.gif" width="100%"></p>
+<script src="https://gist.github.com/jinhaslab/affc9d39daf9a6e8ab7ebf2f5fe147b2.js"></script>
+<p>The code snippet you provided is a simple example of how to create a flexdashboard with two pages. The first line defines the title of the dashboard as “Page Orientation” and the output format as a flexdashboard.</p>
+<p>The first page is defined by the level 1 markdown header Page 1 (=====================================) and containing two charts.</p>
+<p>The second page is defined by the level 1 markdown header Page 2 (=====================================) and includes the attribute data-orientation=rows. This attribute specifies the orientation of the content within the page as rows, which means that the content will be arranged vertically in rows.</p>
+<p>In this simple example, the two pages of the dashboard are defined and their orientation is specified. The first page does not include any content, while the second page is set to display its content in rows.</p>
+</section>
+
+<section id="visualization" class="level2" data-number="4.2">
+<h2 data-number="4.2" data-anchor-id="visualization"><span class="header-section-number">4.2</span> Visualization</h2>
+<section id="html-widgets" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" data-anchor-id="html-widgets"><span class="header-section-number">4.2.1</span> HTML widgets</h3>
+<p>An htmlwidget is an R package that allows R users to create interactive web-based visualizations using popular JavaScript libraries such as d3.js, leaflet, plotly, and more. In the context of the flexdashboard R package, an htmlwidget can be used to add interactive visualizations to a flexdashboard.</p>
+<blockquote class="blockquote">
+<p>Leaflet</p>
+</blockquote>
+<p>Leaflet is a popular open-source JavaScript library for creating interactive maps. It allows developers to create maps that can display various types of geographic data, such as points, lines, and polyggon shapes, as well as more advanced features such as pop-ups, markers, and custom icons. Leaflet is designed to be lightweight, fast, and easy to use, making it a popular choice for creating web maps for a variety of applications.</p>
+<p>The most useufull information are <a href="http://rstudio.github.io/leaflet/">here</a> (http://rstudio.github.io/leaflet/)</p>
+<blockquote class="blockquote">
+<p>Plotly</p>
+</blockquote>
+<p>Plotly is a data visualization library for creating interactive and visually appealing graphics. It supports many types of charts and graphs, including bar charts, line charts, scatter plots, pie charts, and more. Plotly also provides tools for streaming and real-time updating of graphs, as well as for creating dashboards and web-based visualizations. The library is available in Python, R, and JavaScript and can be used in a variety of platforms, including Jupyter notebooks, standalone web applications, and more. Plotly is known for its user-friendly interface and ability to handle large and complex datasets.</p>
+<p>The official Plotly homepage for the R language can be found at <a href="https://plotly.com/r/">here</a>. https://plotly.com/r/</p>
+<blockquote class="blockquote">
+<p>Dygraphs</p>
+</blockquote>
+<p>Dygraphs is a fast, flexible, and interactive JavaScript charting library for R. It is designed to visualize time-series data, but can be used to plot other types of data as well. Dygraphs supports multiple types of charts, including line graphs, area graphs, bar graphs, and more. The library is highly customizable, allowing users to change the appearance of their charts to suit their needs.</p>
+<p>The official homepage for Dygraphs in R can be found at https://rstudio.github.io/dygraphs/.</p>
+<blockquote class="blockquote">
+<p>rbokeh</p>
+</blockquote>
+<p>rbokeh is a package for the R programming language that provides an interface to the Bokeh library for creating interactive visualizations in the web browser. Bokeh is a popular library for creating interactive visualizations in Python, and rbokeh provides a way to use these capabilities in R. With rbokeh, you can create a wide range of visualizations, including scatter plots, line charts, bar charts, and more, and you can easily customize the appearance of your visualizations to suit your needs.</p>
+<p>The official homepage for rbokeh can be found at https://hafen.github.io/rbokeh/.</p>
+<blockquote class="blockquote">
+<p>highcharter</p>
+</blockquote>
+<p>highcharter is an R package that provides a high-level interface to the Highcharts JavaScript library for creating interactive visualizations in the web browser. Highcharts is a popular library for creating interactive charts, and highcharter provides a way to use these capabilities in R. With highcharter, you can create a wide range of visualizations, including bar charts, line charts, scatter plots, and more, and you can easily customize the appearance of your visualizations to suit your needs.</p>
+<p>The official homepage for highcharter can be found at https://jkunst.com/highcharter/.</p>
+<blockquote class="blockquote">
+<p>visNetwork</p>
+</blockquote>
+<p>visNetwork is an R package that provides an interface to the vis.js JavaScript library for creating interactive network visualizations. Network visualizations are used to display relationships between nodes, and visNetwork provides a way to create these types of visualizations in R. With visNetwork, you can create a wide range of network visualizations, including force-directed graphs, hierarchical graphs, and more, and you can easily customize the appearance of your visualizations to suit your needs.</p>
+<p>The official homepage for visNetwork can be found at http://datastorm-open.github.io/visNetwork/.</p>
+<blockquote class="blockquote">
+<p>Detail tutorials for each of these packages can be found elsewhere, soon.</p>
+</blockquote>
+</section>
+<section id="data-tables" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" data-anchor-id="data-tables"><span class="header-section-number">4.2.2</span> Data tables</h3>
+<p>There are several ways to include tabular data within a flexdashboard, including using R functions such as <code>renderTable()</code> or <code>renderDataTable()</code>. These functions allow you to display data from R data frames or other sources as interactive tables within your dashboard. The tables can be sorted, filtered, and paginated, and users can also export the data to various formats, such as CSV or Excel.</p>
+<p>In addition to these R functions, you can also include tabular data within a flexdashboard using HTML tables. This allows you to control the exact layout and styling of your table, and to include custom features such as sorting and filtering.</p>
+<p><img src="img/datatable123.gif" width="100%"></p>
+<script src="https://gist.github.com/jinhaslab/670929077fd85d4559c1da80b9ff0c86.js"></script>
+</section>
+<section id="valuebox-and-gauges" class="level3" data-number="4.2.3">
+<h3 data-number="4.2.3" data-anchor-id="valuebox-and-gauges"><span class="header-section-number">4.2.3</span> ValueBox and Gauges</h3>
+<p>A value box is a simple, single value indicator in a flexdashboard. It’s used to display a single value in a compact format, often with a small accompanying icon or color.</p>
+<p>A gauge is a type of chart used to display a single value within a specified range. It’s used to represent a measurement or value that falls within a defined range, such as the level of a particular resource (e.g., water in a tank) or the progress toward a goal.</p>
+<p>In flexdashboard, both value boxes and gauges can be created using R code and the shiny package. Here is a simple example of how you could create a value box in flexdashboard:</p>
+<p><img src="img/valueboxes.png" width="100%"></p>
+<script src="https://gist.github.com/jinhaslab/80ec7ec5daae2b6b903a780b16fd4615.js"></script>
+<p><img src="img/gauge1.gif" width="100%"></p>
+<script src="https://gist.github.com/jinhaslab/2fb94c16023545ae7c3f94cf968ba110.js"></script>
+<p>Note that the value argument in the valueBox function sets the value displayed in the box, the subtitle argument sets the text displayed beneath the value, and the icon argument sets the icon displayed next to the value.</p>
+<p>In the gauge function, the value argument sets the value to be displayed on the gauge, the min and max arguments set the range of the gauge, the symbol argument sets the units for the value, and the gaugeSector argument sets the color and label of different sections of the gauge.</p>
+
+
+</section>
+</section>
+
+ <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./0103-DataVisualization.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">visualization for statistical results</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./0251-flexdashboard_datatable.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Flexdashboard with DataTable</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+ <!-- /content -->
+
+
+
+</body></html>
