@@ -109,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./0401-shiny.html">SHINY</a></li><li class="breadcrumb-item"><a href="./0451-shiny.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Shiny for questionnaire of PHQ-9</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./0401-shiny.html">SHINY</a></li><li class="breadcrumb-item"><a href="./0451-shiny_phq.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Shiny for questionnaire of PHQ-9</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -203,7 +203,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./0451-shiny.html" class="sidebar-item-text sidebar-link active">
+  <a href="./0451-shiny_phq.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Shiny for questionnaire of PHQ-9</span></span></a>
   </div>
 </li>
@@ -302,6 +302,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 <p><br></p>
+<blockquote class="blockquote">
+<p>Let’s begin by creating a basic template for Shiny applications.</p>
+</blockquote>
+<p>This template will serve as a foundation for us to build upon as we develop interactive web applications using the Shiny package in R. Our starting point will be the essential UI and server components, ensuring a seamless structure to organize our application’s functionality and presentation</p>
+<p><img src="img/shinyphq91.png" width="100%"></p>
+<ul>
+<li><p>ui = fluidPage(…): The ui object defines the user interface of the Shiny app. fluidPage is a layout function that creates a page with fluid layout. Fluid layout means that the layout of your page will adjust to the size of the browser window, so it’s responsive and works well on both desktops and mobile devices.</p></li>
+<li><p>tabsetPanel(…): This function creates a tabbed panel in the user interface, allowing users to switch between different tabs within the application. It’s a good way to organize content that’s divided into different categories or sections.</p></li>
+<li><p>tabPanel(“Questionnaire”): This is the first tab in the tabbed panel. It creates a tab with the title “Questionnaire”. The content of the tab (which is not shown in your snippet) would be defined within this tabPanel function.</p></li>
+<li><p>tabPanel(“Results”): Similarly, this creates a second tab titled “Results”. This tab would typically be used to display the results of the questionnaire or any other outputs or visualizations that your app produces based on the user input.</p></li>
+</ul>
 <blockquote class="blockquote">
 <p>Now, let’s creates a fluid page with a single tab panel containing a questionnaire based on the Patient Health Questionnaire-9 (PHQ-9)</p>
 </blockquote>
@@ -563,30 +574,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>interpre_depression <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">"step"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>), </span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"severity"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Minimal depression"</span>, </span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>                                                 <span class="st">"Mild depression"</span>, </span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>                                                 <span class="st">"Moderate depression"</span>, </span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>                                                 <span class="st">"Moderately severe depression"</span>, </span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>                                                 <span class="st">"Severe depression"</span></span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>                                                 ), </span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"guideline"</span><span class="ot">=</span> <span class="fu">c</span>(<span class="st">"they are not severe enough to interfere with your daily life"</span>, <span class="st">"You may have some moderate symptoms of depression, and they may be interfering with your daily life to some extent."</span>, <span class="st">"You may have some severe symptoms of depression, and they are interfering with your daily life to a significant extent."</span>, <span class="st">"You may have some very severe symptoms of depression, and they are interfering with your daily life to a great extent."</span>, <span class="st">"You may have some extremely severe symptoms of depression, and they are interfering with your daily life to a very great extent."</span>)</span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>                                  ) <span class="sc">%&gt;%</span></span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">guideline2 =</span> <span class="fu">sprintf</span>(<span class="st">"%s!: %s"</span>, severity, guideline))</span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>guide_depression <span class="ot">=</span> <span class="cf">function</span>(i){</span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (i <span class="sc">&lt;</span> <span class="dv">5</span>) {</span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>    interpre_depression <span class="sc">%&gt;%</span> <span class="fu">filter</span>(step <span class="sc">==</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(guideline2) <span class="sc">%&gt;%</span> <span class="fu">as.character</span>()</span>
-<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (i <span class="sc">&lt;</span><span class="dv">10</span>) {</span>
-<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>    interpre_depression <span class="sc">%&gt;%</span> <span class="fu">filter</span>(step <span class="sc">==</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(guideline2) <span class="sc">%&gt;%</span> <span class="fu">as.character</span>()</span>
-<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (i <span class="sc">&lt;</span><span class="dv">15</span>) {</span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>    interpre_depression <span class="sc">%&gt;%</span> <span class="fu">filter</span>(step <span class="sc">==</span><span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(guideline2) <span class="sc">%&gt;%</span> <span class="fu">as.character</span>()</span>
-<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (i <span class="sc">&lt;</span><span class="dv">20</span>) {</span>
-<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>    interpre_depression <span class="sc">%&gt;%</span> <span class="fu">filter</span>(step <span class="sc">==</span><span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(guideline2) <span class="sc">%&gt;%</span> <span class="fu">as.character</span>()</span>
-<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>    interpre_depression <span class="sc">%&gt;%</span> <span class="fu">filter</span>(step <span class="sc">==</span><span class="dv">5</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(guideline2) <span class="sc">%&gt;%</span> <span class="fu">as.character</span>()</span>
-<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>interpre_depression <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>  <span class="st">"step"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>), </span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>  <span class="st">"severity"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Minimal depression"</span>, </span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"Mild depression"</span>, </span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"Moderate depression"</span>, </span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"Moderately severe depression"</span>, </span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"Severe depression"</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>                 ), </span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="st">"guideline"</span><span class="ot">=</span> <span class="fu">c</span>(<span class="st">"they are not severe enough to interfere with your daily life"</span>,</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>               <span class="st">"You may have some moderate symptoms of depression, </span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="st">               and they may be interfering with your daily life to some extent."</span>,</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>               <span class="st">"You may have some severe symptoms of depression, </span></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="st">               and they are interfering with your daily life to a significant extent."</span>,</span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>               <span class="st">"You may have some very severe symptoms of depression, </span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="st">               and they are interfering with your daily life to a great extent."</span>,</span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>               <span class="st">"You may have some extremely severe symptoms of depression, </span></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="st">               and they are interfering with your daily life to a very great extent."</span>)</span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>                                  ) <span class="sc">%&gt;%</span></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">guideline2 =</span> <span class="fu">sprintf</span>(<span class="st">"%s!: %s"</span>, severity, guideline))</span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>guide_depression <span class="ot">=</span> <span class="cf">function</span>(i){</span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (i <span class="sc">&lt;</span> <span class="dv">5</span>) {</span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>    interpre_depression <span class="sc">%&gt;%</span> <span class="fu">filter</span>(step <span class="sc">==</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(guideline2) <span class="sc">%&gt;%</span> <span class="fu">as.character</span>()</span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (i <span class="sc">&lt;</span><span class="dv">10</span>) {</span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>    interpre_depression <span class="sc">%&gt;%</span> <span class="fu">filter</span>(step <span class="sc">==</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(guideline2) <span class="sc">%&gt;%</span> <span class="fu">as.character</span>()</span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (i <span class="sc">&lt;</span><span class="dv">15</span>) {</span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>    interpre_depression <span class="sc">%&gt;%</span> <span class="fu">filter</span>(step <span class="sc">==</span><span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(guideline2) <span class="sc">%&gt;%</span> <span class="fu">as.character</span>()</span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (i <span class="sc">&lt;</span><span class="dv">20</span>) {</span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>    interpre_depression <span class="sc">%&gt;%</span> <span class="fu">filter</span>(step <span class="sc">==</span><span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(guideline2) <span class="sc">%&gt;%</span> <span class="fu">as.character</span>()</span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>    interpre_depression <span class="sc">%&gt;%</span> <span class="fu">filter</span>(step <span class="sc">==</span><span class="dv">5</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(guideline2) <span class="sc">%&gt;%</span> <span class="fu">as.character</span>()</span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
