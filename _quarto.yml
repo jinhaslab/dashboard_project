@@ -28,7 +28,12 @@ book:
         - 0401-shiny.qmd
         - 0451-shiny_phq.qmd
         - 0461-shiny_html.qmd
-    - part: "VI. hi"
+    - part: "Map visualization"
+      chapters: 
+        - 0510-maps.qmd
+        - 0520-leaflet_maps_korea.qmd
+        - 0530-leaflet_maps_shiny.qmd
+    
 
         
     - references.qmd
