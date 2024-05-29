@@ -33,7 +33,9 @@ book:
         - 0510-maps.qmd
         - 0520-leaflet_maps_korea.qmd
         - 0530-leaflet_maps_shiny.qmd
-    
+    - part : "Prediction Model App"
+      chapters: 
+        - 0610-prediction_model.qmd
 
         
     - references.qmd

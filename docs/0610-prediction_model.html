@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>dashboard project - 12&nbsp; Prediction Model in shiny</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./0530-leaflet_maps_shiny.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar docked">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./0610-prediction_model.html">Prediction Model App</a></li><li class="breadcrumb-item"><a href="./0610-prediction_model.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Prediction Model in shiny</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">dashboard project</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text">SETTING &amp; BASIC</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0101-Rstudio_cloud.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Rstudio setting (Cloud)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0103-DataVisualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">visualization for statistical results</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text">FLEXDASHBOARD</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0201-flexdashboard.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Flexdashboard</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0251-flexdashboard_datatable.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Flexdashboard with DataTable</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">SHINY</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0401-shiny.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Shiny</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0451-shiny_phq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Shiny for questionnaire of PHQ-9</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0461-shiny_html.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Shiny and HTML and javascript</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">Map visualization</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0510-maps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Map display</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0520-leaflet_maps_korea.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Visualizing Korean Death Rate Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0530-leaflet_maps_shiny.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">shiny and leaflet for korea death rate</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Prediction Model App</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0610-prediction_model.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Prediction Model in shiny</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview-of-predictive-modeling" id="toc-overview-of-predictive-modeling" class="nav-link active" data-scroll-target="#overview-of-predictive-modeling"><span class="header-section-number">12.1</span> Overview of Predictive Modeling</a></li>
+  <li><a href="#predicting-risk-scores-with-the-cox-model" id="toc-predicting-risk-scores-with-the-cox-model" class="nav-link" data-scroll-target="#predicting-risk-scores-with-the-cox-model"><span class="header-section-number">12.2</span> Predicting Risk Scores with the Cox Model</a></li>
+  <li><a href="#interactive-prediction-application" id="toc-interactive-prediction-application" class="nav-link" data-scroll-target="#interactive-prediction-application"><span class="header-section-number">12.3</span> Interactive Prediction Application</a></li>
+  <li><a href="#customizing-visualization" id="toc-customizing-visualization" class="nav-link" data-scroll-target="#customizing-visualization"><span class="header-section-number">12.4</span> customizing visualization</a></li>
+  <li><a href="#quize-life-style-modification" id="toc-quize-life-style-modification" class="nav-link" data-scroll-target="#quize-life-style-modification"><span class="header-section-number">12.5</span> Quize: Life Style Modification</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Prediction Model in shiny</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="overview-of-predictive-modeling" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="overview-of-predictive-modeling"><span class="header-section-number">12.1</span> Overview of Predictive Modeling</h2>
+<p>Predictive modeling is a statistical technique used to predict future outcomes based on historical data. It involves building models that capture relationships between explanatory variables and the target variable. Common techniques include regression, classification, clustering, and survival analysis.</p>
+<p>1 Introduction Key Packages</p>
+<p>Key packages for this tutorial include:</p>
+<ul>
+<li>tidyverse: A collection of packages for data manipulation and visualization (e.g., ggplot2, dplyr, tidyr, readr, purrr).</li>
+<li>survival: For survival analysis, including Cox proportional hazards models.</li>
+<li>survminer: For visualizing survival analysis results.</li>
+<li>shiny: For creating interactive web applications.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"tidyverse"</span>)) <span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"survival"</span>)) <span class="fu">install.packages</span>(<span class="st">"survival"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"survminer"</span>)) <span class="fu">install.packages</span>(<span class="st">"survminer"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"shiny"</span>)) <span class="fu">install.packages</span>(<span class="st">"shiny"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survminer)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li>Simulating Data for CVD Prediction</li>
+</ol>
+<blockquote class="blockquote">
+<p>Simulating Demographic and Behavioral Data</p>
+</blockquote>
+<p>We’ll create a simulated dataset with demographic (age, gender) and behavioral (exercise, smoking, alcohol consumption) factors:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span>n,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">sample</span>(<span class="dv">30</span><span class="sc">:</span><span class="dv">80</span>, n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">gender =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"male"</span>, <span class="st">"female"</span>), n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">exercise =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"none"</span>, <span class="st">"light"</span>, <span class="st">"moderate"</span>, <span class="st">"heavy"</span>), n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">smoking =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"never"</span>, <span class="st">"former"</span>, <span class="st">"current"</span>), n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">alcohol =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"none"</span>, <span class="st">"light"</span>, <span class="st">"moderate"</span>, <span class="st">"heavy"</span>), n, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>Creating Survival Data</p>
+</blockquote>
+<p>Simulate survival data (follow-up time and event occurrence):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">time =</span> <span class="fu">rexp</span>(n, <span class="fl">0.05</span>),  <span class="co"># Follow-up time</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">status =</span> <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, n, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.7</span>, <span class="fl">0.3</span>))  <span class="co"># CVD occurrence</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>Processing and Cleaning Simulated Data</p>
+</blockquote>
+<p>Convert categorical variables to factors:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">gender =</span> <span class="fu">as.factor</span>(gender),</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">exercise =</span> <span class="fu">as.factor</span>(exercise),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">smoking =</span> <span class="fu">as.factor</span>(smoking),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">alcohol =</span> <span class="fu">as.factor</span>(alcohol)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>Building the Cox Proportional Hazards Model</p>
+</blockquote>
+<p>Fitting the Cox Model with Simulated Data Fit a Cox proportional hazards model using the simulated data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>cox_model <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> age <span class="sc">+</span> gender <span class="sc">+</span> exercise <span class="sc">+</span> smoking <span class="sc">+</span> alcohol, <span class="at">data =</span> data)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cox_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(time, status) ~ age + gender + exercise + 
+    smoking + alcohol, data = data)
+
+  n= 1000, number of events= 293 
+
+                      coef exp(coef)  se(coef)      z Pr(&gt;|z|)
+age               0.006087  1.006106  0.004139  1.471    0.141
+gendermale       -0.120248  0.886700  0.117578 -1.023    0.306
+exerciselight     0.073738  1.076525  0.168718  0.437    0.662
+exercisemoderate -0.164903  0.847976  0.169206 -0.975    0.330
+exercisenone      0.154417  1.166977  0.164182  0.941    0.347
+smokingformer     0.131496  1.140533  0.144001  0.913    0.361
+smokingnever      0.145439  1.156548  0.149134  0.975    0.329
+alcohollight      0.057187  1.058853  0.165244  0.346    0.729
+alcoholmoderate   0.198341  1.219378  0.165085  1.201    0.230
+alcoholnone      -0.040702  0.960115  0.174962 -0.233    0.816
+
+                 exp(coef) exp(-coef) lower .95 upper .95
+age                 1.0061     0.9939    0.9980     1.014
+gendermale          0.8867     1.1278    0.7042     1.117
+exerciselight       1.0765     0.9289    0.7734     1.498
+exercisemoderate    0.8480     1.1793    0.6086     1.181
+exercisenone        1.1670     0.8569    0.8459     1.610
+smokingformer       1.1405     0.8768    0.8601     1.512
+smokingnever        1.1565     0.8646    0.8634     1.549
+alcohollight        1.0589     0.9444    0.7659     1.464
+alcoholmoderate     1.2194     0.8201    0.8823     1.685
+alcoholnone         0.9601     1.0415    0.6814     1.353
+
+Concordance= 0.549  (se = 0.019 )
+Likelihood ratio test= 9.63  on 10 df,   p=0.5
+Wald test            = 9.56  on 10 df,   p=0.5
+Score (logrank) test = 9.59  on 10 df,   p=0.5</code></pre>
+</div>
+</div>
+<ul>
+<li><p>Interpreting Model Outputs</p>
+<ul>
+<li>The model summary provides coefficients, hazard ratios, and statistical significance for each predictor. Interpret these to understand the effect of each variable on CVD risk.</li>
+</ul></li>
+<li><p>Validating the Model</p>
+<ul>
+<li>Split the data into training and test sets, fit the model on the training set, and validate it on the test set. Use metrics like concordance index to evaluate model performance.</li>
+</ul></li>
+</ul>
+</section>
+<section id="predicting-risk-scores-with-the-cox-model" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="predicting-risk-scores-with-the-cox-model"><span class="header-section-number">12.2</span> Predicting Risk Scores with the Cox Model</h2>
+<blockquote class="blockquote">
+<p>Using the predict Function</p>
+</blockquote>
+<p>The predict function in R is used to generate predictions from a model object. When working with a Cox proportional hazards model (created using coxph), the predict function can be used to compute various types of predictions. In this case, we’re interested in calculating the risk score for new data using the type = “risk” parameter.</p>
+<p><strong>Simulate New Data</strong></p>
+<p>Next, we’ll simulate some new data for which we want to predict the risk scores.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>new_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">60</span>),</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">gender =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"male"</span>, <span class="st">"female"</span>), <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"male"</span>, <span class="st">"female"</span>)),</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">exercise =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"moderate"</span>, <span class="st">"light"</span>), <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"none"</span>, <span class="st">"light"</span>, <span class="st">"moderate"</span>, <span class="st">"heavy"</span>)),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">smoking =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"current"</span>, <span class="st">"never"</span>), <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"never"</span>, <span class="st">"former"</span>, <span class="st">"current"</span>)),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">alcohol =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"moderate"</span>, <span class="st">"none"</span>), <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"none"</span>, <span class="st">"light"</span>, <span class="st">"moderate"</span>, <span class="st">"heavy"</span>))</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Predict Risk Scores</strong></p>
+<p>Now, we’ll use the predict function to calculate the risk scores for the new data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>risk_scores <span class="ot">&lt;-</span> <span class="fu">predict</span>(cox_model, <span class="at">newdata =</span> new_data, <span class="at">type =</span> <span class="st">"risk"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(risk_scores)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        1         2 
+0.8906075 1.2340542 </code></pre>
+</div>
+</div>
+<ul>
+<li><p>The predict function calculates the risk score for each observation in new_data, indicating relative risk compared to the baseline. Higher scores mean higher risk.</p>
+<ul>
+<li>cox_model: This is the Cox proportional hazards model object created using the coxph function.</li>
+<li>newdata: This is a data frame or tibble containing new observations for which we want to make predictions. The variables in newdata should match those used in the model.</li>
+<li>type = “risk”: This specifies that we want to calculate the risk score for the new data.</li>
+</ul></li>
+</ul>
+<p>The risk_scores object contains the predicted risk scores for each observation in new_data. These scores indicate the relative risk of experiencing the event (in this case, CVD) compared to the baseline. Higher scores suggest a higher risk.</p>
+</section>
+<section id="interactive-prediction-application" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="interactive-prediction-application"><span class="header-section-number">12.3</span> Interactive Prediction Application</h2>
+<p><strong>Designing the User Interface</strong></p>
+<p>The User Interface (UI) is the part of the Shiny application that the user interacts with. It includes input controls (such as sliders, dropdown menus, and buttons) and output displays (such as text, tables, and plots).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ui.R</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">titlePanel</span>(<span class="st">"CVD Prediction using Cox Proportional Hazards Model"</span>),  <span class="co"># Application title</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sidebarLayout</span>(</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sidebarPanel</span>(  <span class="co"># Inputs placed in a sidebar</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">selectInput</span>(<span class="st">"gender"</span>, <span class="st">"Gender:"</span>, <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"male"</span>, <span class="st">"female"</span>)),  <span class="co"># Dropdown menu for gender</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sliderInput</span>(<span class="st">"age"</span>, <span class="st">"Age:"</span>, <span class="at">min =</span> <span class="dv">30</span>, <span class="at">max =</span> <span class="dv">80</span>, <span class="at">value =</span> <span class="dv">50</span>),  <span class="co"># Slider for age selection</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">selectInput</span>(<span class="st">"exercise"</span>, <span class="st">"Exercise Level:"</span>, <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"none"</span>, <span class="st">"light"</span>, <span class="st">"moderate"</span>, <span class="st">"heavy"</span>)),  <span class="co"># Dropdown menu for exercise level</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">selectInput</span>(<span class="st">"smoking"</span>, <span class="st">"Smoking Status:"</span>, <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"never"</span>, <span class="st">"former"</span>, <span class="st">"current"</span>)),  <span class="co"># Dropdown menu for smoking status</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">selectInput</span>(<span class="st">"alcohol"</span>, <span class="st">"Alcohol Consumption:"</span>, <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"none"</span>, <span class="st">"light"</span>, <span class="st">"moderate"</span>, <span class="st">"heavy"</span>)),  <span class="co"># Dropdown menu for alcohol consumption</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">actionButton</span>(<span class="st">"predict"</span>, <span class="st">"Predict"</span>)  <span class="co"># Button to trigger prediction</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mainPanel</span>(  <span class="co"># Outputs displayed in the main panel</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">textOutput</span>(<span class="st">"prediction"</span>)  <span class="co"># Text output to display the prediction result</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Explanation of UI Components</p>
+<ul>
+<li><code>titlePanel()</code>
+<ul>
+<li>Sets the title of the application.</li>
+</ul></li>
+<li><code>sidebarLayout()</code>
+<ul>
+<li>Defines a layout with a sidebar for inputs and a main panel for outputs.</li>
+</ul></li>
+<li><code>sidebarPanel()</code>
+<ul>
+<li><p>Contains the input controls.</p></li>
+<li><p><code>selectInput("gender", "Gender:", choices = c("male", "female"))</code></p>
+<ul>
+<li>A dropdown menu for selecting gender. The input ID is <code>gender</code>.</li>
+</ul></li>
+<li><p><code>sliderInput("age", "Age:", min = 30, max = 80, value = 50)</code></p>
+<ul>
+<li>A slider for selecting age. The input ID is <code>age</code>.</li>
+</ul></li>
+<li><p><code>selectInput("exercise", "Exercise Level:", choices = c("none", "light", "moderate", "heavy"))</code></p>
+<ul>
+<li>A dropdown menu for selecting exercise level. The input ID is <code>exercise</code>.</li>
+</ul></li>
+<li><p><code>selectInput("smoking", "Smoking Status:", choices = c("never", "former", "current"))</code></p>
+<ul>
+<li>A dropdown menu for selecting smoking status. The input ID is <code>smoking</code>.</li>
+</ul></li>
+<li><p><code>selectInput("alcohol", "Alcohol Consumption:", choices = c("none", "light", "moderate", "heavy"))</code></p>
+<ul>
+<li>A dropdown menu for selecting alcohol consumption level. The input ID is <code>alcohol</code>.</li>
+</ul></li>
+<li><p><code>actionButton("predict", "Predict")</code></p>
+<ul>
+<li>A button to trigger the prediction. The input ID is <code>predict</code>.</li>
+</ul></li>
+</ul></li>
+<li><code>mainPanel()</code>
+<ul>
+<li><p>Contains the output displays.</p></li>
+<li><p><code>textOutput("prediction")</code></p>
+<ul>
+<li>A text output to display the prediction result. The output ID is <code>prediction</code>.</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><strong>2. Implementing Server Logic</strong></p>
+<p>The Server logic is where the application processes user inputs and generates outputs. It contains the reactive expressions and event observers that define how the application responds to user inputs.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># server.R</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">observeEvent</span>(input<span class="sc">$</span>predict, {  <span class="co"># Reacts to the "predict" button click</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create a new data frame with the user inputs</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    new_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">age =</span> input<span class="sc">$</span>age,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">gender =</span> <span class="fu">factor</span>(input<span class="sc">$</span>gender, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"male"</span>, <span class="st">"female"</span>)),</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">exercise =</span> <span class="fu">factor</span>(input<span class="sc">$</span>exercise, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"none"</span>, <span class="st">"light"</span>, <span class="st">"moderate"</span>, <span class="st">"heavy"</span>)),</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">smoking =</span> <span class="fu">factor</span>(input<span class="sc">$</span>smoking, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"never"</span>, <span class="st">"former"</span>, <span class="st">"current"</span>)),</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">alcohol =</span> <span class="fu">factor</span>(input<span class="sc">$</span>alcohol, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"none"</span>, <span class="st">"light"</span>, <span class="st">"moderate"</span>, <span class="st">"heavy"</span>))</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Predict the risk score using the Cox model</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    risk_score <span class="ot">&lt;-</span> <span class="fu">predict</span>(cox_model, <span class="at">newdata =</span> new_data, <span class="at">type =</span> <span class="st">"risk"</span>)</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Render the prediction result as text</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>prediction <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>      <span class="fu">paste</span>(<span class="st">"Predicted 10-year CVD Risk:"</span>, <span class="fu">round</span>(risk_score, <span class="dv">2</span>))</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Explanation of Server Components</p>
+<ul>
+<li><code>server &lt;- function(input, output)</code>
+<ul>
+<li>Defines the server logic. It takes <code>input</code> and <code>output</code> as arguments.</li>
+</ul></li>
+<li><code>observeEvent(input$predict, {...})</code>
+<ul>
+<li>A reactive expression that triggers when the “predict” button is clicked.</li>
+</ul></li>
+<li><code>new_data &lt;- tibble(...)</code>
+<ul>
+<li>Creates a new data frame with the user inputs.</li>
+</ul></li>
+</ul>
+<p><strong>Code for global.R</strong></p>
+<p>Here’s the content of global.R:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># global.R</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Check and install required packages</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"tidyverse"</span>)) <span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"survival"</span>)) <span class="fu">install.packages</span>(<span class="st">"survival"</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"survminer"</span>)) <span class="fu">install.packages</span>(<span class="st">"survminer"</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"shiny"</span>)) <span class="fu">install.packages</span>(<span class="st">"shiny"</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Load required packages</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survminer)</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Data simulation (reuse the previous code for data simulation and model fitting)</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span>n,</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">sample</span>(<span class="dv">30</span><span class="sc">:</span><span class="dv">80</span>, n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">gender =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"male"</span>, <span class="st">"female"</span>), n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">exercise =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"none"</span>, <span class="st">"light"</span>, <span class="st">"moderate"</span>, <span class="st">"heavy"</span>), n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">smoking =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"never"</span>, <span class="st">"former"</span>, <span class="st">"current"</span>), n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">alcohol =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"none"</span>, <span class="st">"light"</span>, <span class="st">"moderate"</span>, <span class="st">"heavy"</span>), n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="fu">rexp</span>(n, <span class="fl">0.05</span>),  <span class="co"># Follow-up time</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">status =</span> <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, n, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.7</span>, <span class="fl">0.3</span>))  <span class="co"># CVD occurrence</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">gender =</span> <span class="fu">as.factor</span>(gender),</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">exercise =</span> <span class="fu">as.factor</span>(exercise),</span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">smoking =</span> <span class="fu">as.factor</span>(smoking),</span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">alcohol =</span> <span class="fu">as.factor</span>(alcohol)</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>cox_model <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> age <span class="sc">+</span> gender <span class="sc">+</span> exercise <span class="sc">+</span> smoking <span class="sc">+</span> alcohol, <span class="at">data =</span> data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Connecting User Inputs to Model Predictions</strong></p>
+<p>The observeEvent function ensures that the prediction is updated every time the user clicks the “predict” button. The new data frame new_data is created using the user inputs, and the risk score is calculated using the predict function. The result is then displayed in the textOutput element with the ID “prediction”.</p>
+<p><img src="img/prediction_cvd.gif" width="100%"> shiny apps </p>
+</section>
+<section id="customizing-visualization" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="customizing-visualization"><span class="header-section-number">12.4</span> customizing visualization</h2>
+<p><strong>Gauge and servival cruve</strong></p>
+<p>A gauge is a circular chart with a needle or pointer that indicates a specific value on a scale. It’s a simple yet effective way to display numeric data, making it particularly well-suited for tasks like risk assessment, where it’s used to visualize risk scores or probabilities.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a> output<span class="sc">$</span>prediction_gauge <span class="ot">&lt;-</span> <span class="fu">renderGauge</span>({</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">gauge</span>(prediction, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">2</span>, <span class="at">symbol =</span> <span class="st">''</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    })</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><p>renderGauge({ … }):</p>
+<ul>
+<li>This function is from the shiny package. It instructs Shiny to create a gauge chart and display it within the prediction_gauge output element.</li>
+</ul></li>
+<li><p>gauge(prediction, min = 0, max = 2, symbol = ’’):</p>
+<ul>
+<li><p>This is the core function call to create the gauge. Let’s look at the arguments:</p>
+<ul>
+<li>prediction: This is the numeric value that you want to display on the gauge. It represents the current reading or measurement.</li>
+<li>min = 0: This sets the minimum value for the gauge scale.</li>
+<li>max = 2: This sets the maximum value for the gauge scale.</li>
+<li>symbol = ’’: This removes any default symbol (like a percentage sign) that might appear next to the value.</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><strong>in UI for gauge”</strong></p>
+<p>In this example, renderGauge generates the gauge chart and assigns it to output$prediction_gauge in server. Shiny then takes this chart and inserts it into the gaugeOutput(“prediction_gauge”) placeholder in your UI</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gaugeOutput</span>(<span class="st">"prediction_gauge"</span>),</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Before using this code, ensure that you’ve loaded the following R packages in your Shiny app (usually in the global.R file or at the beginning of server.R):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(flexdashboard)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>survival curve</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># in server</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>baseline_survival <span class="ot">&lt;-</span> <span class="fu">survfit</span>(cox_model, <span class="at">newdata =</span> new_data)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>output<span class="sc">$</span>survival_plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggsurvplot</span>(baseline_survival, <span class="at">data =</span> data, <span class="at">conf.int =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">risk.table =</span> <span class="cn">TRUE</span>, <span class="at">xlab =</span> <span class="st">"Time"</span>, <span class="at">ylab =</span> <span class="st">"Survival Probability"</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    })</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#in ui</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotOutput</span>(<span class="st">"survival_plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This code generates a Kaplan-Meier survival curve based on your Cox proportional hazards model (cox_model) and the user’s inputted data (new_data). The resulting plot visualizes the estimated probability of survival over time for an individual with the specified characteristics. Before using this code, ensure that you’ve loaded the following R packages in your Shiny app (usually in the global.R file or at the beginning of server.R</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># in global</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)    <span class="co"># For survival analysis functions</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survminer)   <span class="co"># For plotting survival curves (ggsurvplot function)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>Results</p>
+</blockquote>
+<p><img src="img/prediction_cvd_2.gif" width="100%"></p>
+</section>
+<section id="quize-life-style-modification" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="quize-life-style-modification"><span class="header-section-number">12.5</span> Quize: Life Style Modification</h2>
+<p>Let’s enhance your Shiny app to display two gauges: one for the baseline risk (current lifestyle) and another for the future risk (modified lifestyle). Here’s how you can adapt your code to achieve this:</p>
+<p><img src="img/prediction_cvd_3.gif" width="100%"></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./0530-leaflet_maps_shiny.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">shiny and leaflet for korea death rate</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
