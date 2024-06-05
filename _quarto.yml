@@ -36,6 +36,11 @@ book:
     - part : "Prediction Model App"
       chapters: 
         - 0610-prediction_model.qmd
+        - 0650-change_point_model.qmd
+        
+    - part : "Google data"
+      chapters: 
+        - 0710-Google_model.qmd
 
         
     - references.qmd

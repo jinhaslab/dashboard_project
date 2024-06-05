@@ -145,5 +145,47 @@
     "title": "12  Prediction Model in shiny",
     "section": "12.5 Quize: Life Style Modification",
     "text": "12.5 Quize: Life Style Modification\nLet’s enhance your Shiny app to display two gauges: one for the baseline risk (current lifestyle) and another for the future risk (modified lifestyle). Here’s how you can adapt your code to achieve this:"
+  },
+  {
+    "objectID": "0710-Google_model.html",
+    "href": "0710-Google_model.html",
+    "title": "13  Google Tackout",
+    "section": "",
+    "text": "Google Takeout\n\nLet’s download the map data recorded by Google. * following steps + https://takeout.google.com + deselect All + select Location History + export + go to gmail and check activity, and back to takeout.google.com + click download with option google-drive + check Takeout folder in google-drive\n \n\n\n\n\ntakeout googlecom"
+  },
+  {
+    "objectID": "0710-Google_model.html#data-visualization",
+    "href": "0710-Google_model.html#data-visualization",
+    "title": "14  Google Tackout",
+    "section": "14.1 Data Visualization",
+    "text": "14.1 Data Visualization\n\nif(!require(jsonlite)) install.packages('jsonlite')\nif(!require(ggmap))    install.packages('ggmap')\nif(!require(ggplot2))  install.packages('ggplot2')\nlibrary(jsonlite)\nlibrary(ggmap)\nlibrary(ggplot2)\nlibrary(tidyverse)\n\nThe download path is set as shown below. We’ll extract the location data, set the latitude and longitude, and plot the points accordingly.\n\nmap_data = fromJSON(\"data/Takeout/Location History/Location History.json\")\n\nNext, we’ll process the data to generate latitude and longitude values, and we’ll keep only 50,000 records.\n\n#map_data$locations\n\nlocations = map_data$locations\nloc_dat1 =  locations %&gt;%\n  mutate(lat = latitudeE7/1e7, \n         lng = longitudeE7/1e7) %&gt;%\n  mutate(year = str_sub(timestampMs, 1, 2), \n         month= str_sub(timestampMs, 3, 4))\n\nloc_dat_sample = loc_dat1 %&gt;%\n  slice(1:50000)\n\nLet’s load the Google map. An API key is required to use Google Maps, and the process to obtain an API key was explained in previous video.\n\nkey&lt;-read.csv('security/gapi.csv')\nregister_google(key = key[1,2])\nmap &lt;- get_map(\n  location = c(lon = 127.024612, lat = 37.532600), \n  zoom = 10, \n  source = 'google', \n  maptype = \"roadmap\"  # Use a valid Google Maps map type such as \"terrain\", \"satellite\", \"roadmap\", etc.\n)\n\nNow that we’ve downloaded the map, let’s plot our locations on it. We’ll color the points by month. For example, in July, the data shows visits to the National Health Insurance Service for big data analysis, while other months show visits to various factories.\n\nggmap(map) + \n  geom_point(data = loc_dat_sample, \n             aes(x = lng, y = lat, color = month), alpha = 0.5) +\n  theme(legend.position = 'right') +\n  labs(\n    x = 'longitute', \n    y = 'latitude', \n    title = \"Location history of me\"\n  )"
+  },
+  {
+    "objectID": "0710-Google_model.html#google-api",
+    "href": "0710-Google_model.html#google-api",
+    "title": "14  Google Tackout",
+    "section": "14.2 google API",
+    "text": "14.2 google API\n\n\nTo use Google Maps, we need to utilize the Geocoding API.\n\n구글 map API\n\n\nhttps://cloud.google.com/maps-platform/\nclick get start\nAPI library and View all of Maps\nMaps Static API → Enable\nCredentials → API key\ncopy and paste Key\n\n\n\n\n\ngoogle map api 1"
+  },
+  {
+    "objectID": "0650-change_point_model.html#trying-out-hypothetical-threshold-values",
+    "href": "0650-change_point_model.html#trying-out-hypothetical-threshold-values",
+    "title": "13  Change Point finding",
+    "section": "13.1 Trying Out Hypothetical Threshold Values",
+    "text": "13.1 Trying Out Hypothetical Threshold Values\nIt looks like there might be a threshold between 1 and 5. Let’s calculate the expected matrix (outdata) for some hypothetical values. We’ll get the intercept, beta for before threshold, and its p-value, beta for post threshold and its p-value, and the AIC value for each threshold. First, let’s try thresholds at 1 and 5:\n\ncpdose &lt;- ifelse(dose -1 &gt;0, dose -1, 0)\ncpm &lt;- glm(resp ~ dose + cpdose)\nsummary(cpm)$aic\n\n[1] -92.20184\n\n\n\ncpdose &lt;- ifelse(dose -5 &gt;0, dose -5, 0)\ncpm &lt;- glm(resp ~ dose + cpdose)\nsummary(cpm)$aic\n\n[1] -86.9744\n\n\nWhich assumption improves model fit? It turns out the threshold at 1 is better. We should also compare it with thresholds like 2 and 2.5. Let’s perform repeated analysis for this.\nWe created a function for the above model:\n\nthr_fun &lt;- function(thres){\ncpdose &lt;- ifelse(dose - thres &gt;0, dose - thres, 0)\ncpm    &lt;- glm(resp ~ dose + cpdose)\naic    &lt;- summary(cpm)$aic\ndata.frame(\n  'threshold' = thres,\n  'aic'       = aic)\n}\n\nLet’s set the range to test:\n\n# 이게 어떤 의미 일까요?\ndose[which(dose == 1):which(dose == 5)]\n\n [1] 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8\n[20] 2.9 3.0 3.1 3.2 3.3 3.4 3.5 3.6 3.7 3.8 3.9 4.0 4.1 4.2 4.3 4.4 4.5 4.6 4.7\n[39] 4.8 4.9 5.0\n\n\nNow, we’ll run the analysis repeatedly:\n\nsimul_list &lt;- list()\nsimul_list &lt;- lapply(dose[which(dose ==1):which(dose ==5)],                     thr_fun\n                     )\n\nNext, let’s combine the results into a data frame:\n\nsimul_dat &lt;- do.call(rbind, simul_list)\n\nLet’s plot the results:\n\nlibrary(ggplot2)\nopt.thres &lt;- simul_dat$threshold[which.min(simul_dat$aic)]\n\nsimul_dat %&gt;%\n  ggplot(aes(x = threshold, y = aic)) +\n  geom_line() +\n  geom_vline(xintercept = opt.thres) +\n  geom_text(x = opt.thres + 0.8, y = -90, color = 'red', \n            label = paste0(round(opt.thres, 3), '점에서 최소 AIC를 보입니다.' )) +\n  theme_minimal()\n\n\n\n\nIt shows that the optimal threshold is at 2.1.\n\nthres = 2.1\nf_cpdose &lt;- ifelse(dose - thres &gt;0, dose - thres, 0)\nf_cpm    &lt;- glm(resp ~ dose + f_cpdose)\n\n\nprepwlm &lt;- predict(f_cpm)\nscaleFUN &lt;- function(x) sprintf(\"%.2f\", x)\ncohort %&gt;%\n  ggplot(aes(x= dose, y = resp)) +\n  geom_point() +\n  theme_minimal() +\n  scale_y_continuous(labels = scaleFUN) +\n  geom_line(aes(y = prepwlm), color ='red')"
+  },
+  {
+    "objectID": "0650-change_point_model.html#quiz",
+    "href": "0650-change_point_model.html#quiz",
+    "title": "13  Change Point finding",
+    "section": "13.2 Quiz",
+    "text": "13.2 Quiz\nAssume there is a change point between doses of 6 and 10. Perform a repeated analysis to find the change point that results in the lowest AIC value. Please submit your code."
+  },
+  {
+    "objectID": "0650-change_point_model.html#quiz-for-shiny-app-for-threshold",
+    "href": "0650-change_point_model.html#quiz-for-shiny-app-for-threshold",
+    "title": "13  Change Point finding",
+    "section": "13.3 Quiz for Shiny app for threshold",
+    "text": "13.3 Quiz for Shiny app for threshold\n\nfor global\n\n# Load required libraries\nlibrary(shiny)\nlibrary(ggplot2)\n\n# Generate sample data\nset.seed(0)\ndose &lt;- seq(0, 10, 0.1)\npb &lt;- c(rnorm(50, 0, 0.001), rnorm(30, 0, 0.01), rnorm(10, 0.1, 0.05), rnorm(11, -0.1, 0.05))\nresp &lt;- 1 / (1 + exp(-(dose - 5))) + rnorm(length(dose), 0, 0.1) + pb\ncohort &lt;- data.frame(dose, resp, pb)\n\nfor UI\n\n# Define UI\nui &lt;- fluidPage(\n  titlePanel(\"Find Optimal Threshold using Piecewise Regression\"),\n  sidebarLayout(\n    sidebarPanel(\n      sliderInput(\"range\", \"Select Dose Range:\", \n                  min = 0, max = 10, value = c(1, 5), step = 0.1),\n      actionButton(\"run\", \"Run Analysis\")\n    ),\n    mainPanel(\n      plotOutput(\"initialPlot\"),\n      plotOutput(\"aicPlot\"),\n      plotOutput(\"thresholdPlot\")\n    )\n  )\n)\n\nfor server\n\n# Define server logic\nserver &lt;- function(input, output) {\n  thr_fun &lt;- function(thres) {\n    cpdose &lt;- ifelse(dose - thres &gt; 0, dose - thres, 0)\n    cpm &lt;- glm(resp ~ dose + cpdose)\n    aic &lt;- summary(cpm)$aic\n    data.frame('threshold' = thres, 'aic' = aic)\n  }\n  \n  analyze &lt;- eventReactive(input$run, {\n    range &lt;- seq(input$range[1], input$range[2], by = 0.1)\n    simul_list &lt;- lapply(range, thr_fun)\n    simul_dat &lt;- do.call(rbind, simul_list)\n    simul_dat\n  })\n  \n  output$initialPlot &lt;- renderPlot({\n    ggplot(cohort, aes(x = dose, y = resp)) +\n      geom_point() +\n      labs(title = \"Scatter Plot of Dose vs Response\", x = \"Dose\", y = \"Response\") +\n      theme_minimal()\n  })\n  \n  output$aicPlot &lt;- renderPlot({\n    simul_dat &lt;- analyze()\n    opt.thres &lt;- simul_dat$threshold[which.min(simul_dat$aic)]\n    \n    ggplot(simul_dat, aes(x = threshold, y = aic)) +\n      geom_line() +\n      geom_vline(xintercept = opt.thres, color = 'blue') +\n      geom_text(x = opt.thres + 0.2, y = min(simul_dat$aic), color = 'red', \n                label = paste0(\"Optimal Threshold: \", round(opt.thres, 2))) +\n      labs(title = \"AIC Values for Different Thresholds\", x = \"Threshold\", y = \"AIC\") +\n      theme_minimal()\n  })\n  \n  output$thresholdPlot &lt;- renderPlot({\n    # Quiz\n    # fill the code\n    \n  })\n}"
   }
 ]
