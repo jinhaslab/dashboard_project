@@ -41,6 +41,11 @@ book:
     - part : "Google data"
       chapters: 
         - 0710-Google_model.qmd
+        
+    - part : "VectorDB"
+      chapters: 
+        - 0810-VectorDB1.qmd
+        - 0830-VectorDB2_shiny.qmd
 
         
     - references.qmd
